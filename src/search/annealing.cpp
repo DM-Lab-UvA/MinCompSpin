@@ -18,14 +18,13 @@ Model MCMSearch::simulated_annealing(Data& data, Model* init_model){
         this->model_in = *init_model;
         this->model_out = *init_model;
     }
+    // Clear from previous search
+    this->log_evidence_trajectory.clear();
+    this->exhaustive = false;
 
     // Make a hard copy of the initial partition
     std::vector<__uint128_t> partition = this->model_out.partition;
     this->model_out.log_ev = this->get_log_ev(partition);
-
-    // Clear from previous search
-    this->log_evidence_trajectory.clear();
-    this->exhaustive = false;
 
     // Initialize a struct containing the SA settings
     SA_settings settings(this->SA_T0, this->model_out.partition);

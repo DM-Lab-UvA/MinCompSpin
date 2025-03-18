@@ -276,7 +276,7 @@ TEST(search, sim_annealing) {
     EXPECT_EQ(mcm_out.get_best_log_ev_per_icc()[1], 0);
     EXPECT_FLOAT_EQ(mcm_out.get_best_log_ev_per_icc()[2], -23.324842793537613);
     EXPECT_TRUE(mcm_out.optimized);
-
+    
     // Wrong number of variables in the initial model
     mcm_in = Model(4, "independent");
     try {
