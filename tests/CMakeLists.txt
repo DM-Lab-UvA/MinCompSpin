@@ -26,7 +26,10 @@ add_executable(testing
               data/dataset.cpp
               data/processing.cpp
               data/evidence.cpp
-              model/model.cpp
+              basis/independence.cpp
+              basis/basis.cpp
+              basis/gauge_transform.cpp
+              model/mcm.cpp
               search/search.cpp
               utilities/histogram.cpp)
 

@@ -1,6 +1,6 @@
-#include "model/model.h"
+#include "model/mcm.h"
 
-Model::Model(int n) {
+MCM::MCM(int n) {
     // Check if the given number of variables is valid
     if (n < 1){
         throw std::invalid_argument("The number of variables should be a non-zero positive number.");
@@ -19,7 +19,7 @@ Model::Model(int n) {
     this->log_ev = -DBL_MAX;
 }
 
-Model::Model(int n, std::vector<__uint128_t> partition){
+MCM::MCM(int n, std::vector<__uint128_t> partition){
     // Check if the given number of variables is valid
     if (n < 1){
         throw std::invalid_argument("The number of variables should be a non-zero positive number.");
@@ -33,7 +33,7 @@ Model::Model(int n, std::vector<__uint128_t> partition){
 
     this->partition.assign(n, 0);
     this->n_comp = 0;
-    __uint128_t all_vars = (1 << n) -1;
+    __uint128_t all_vars = ((__uint128_t)1 << n) -1;
     __uint128_t assigned_vars = 0;
     int partition_size = partition.size();
     for (int i = 0; i < partition_size; i++){
@@ -61,7 +61,7 @@ Model::Model(int n, std::vector<__uint128_t> partition){
     this->log_ev = -DBL_MAX;
 }
 
-Model::Model(int n, std::string partition){
+MCM::MCM(int n, std::string partition){
     // Check if the given number of variables is valid
     if (n < 1){
         throw std::invalid_argument("The number of variables should be a non-zero positive number.");
@@ -87,7 +87,7 @@ Model::Model(int n, std::string partition){
         for(int i = 0; i < n; i++){
             if (this->partition[i]){this->n_comp++;}
         }
-        place_empty_component_last(this->partition);
+        place_empty_entries_last(this->partition);
     }
     else {
         throw std::invalid_argument("Invalid partition type. Options are 'independent', 'complete' or 'random'.");
@@ -97,7 +97,7 @@ Model::Model(int n, std::string partition){
     this->log_ev = -DBL_MAX;
 }
 
-void Model::set_starting_partition(std::vector<__uint128_t>& partition){
+void MCM::set_starting_partition(std::vector<__uint128_t>& partition){
     // Check if the partition size is valid
     if (partition.size() > this->n){
         throw std::invalid_argument("The given partition contains more than n components.");
@@ -143,7 +143,7 @@ void Model::set_starting_partition(std::vector<__uint128_t>& partition){
     } 
 }
 
-double Model::get_best_log_ev(){
+double MCM::get_best_log_ev(){
     // Check if a search for the best MCM has been done
     if (!this->optimized){
         throw std::runtime_error("No search has been ran yet.");
@@ -151,10 +151,23 @@ double Model::get_best_log_ev(){
     return this->log_ev;
 }
 
-std::vector<double>& Model::get_best_log_ev_per_icc(){
+std::vector<double>& MCM::get_best_log_ev_per_icc(){
     // Check if a search for the best MCM has been done
     if (!this->optimized){
         throw std::runtime_error("No search has been ran yet.");
     }
-        return this->log_ev_per_icc;
+    return this->log_ev_per_icc;
+}
+
+void MCM::print_info(){
+    // Check if a search for the best MCM has been done
+    if (!this->optimized){
+        throw std::runtime_error("No search has been ran yet.");
+    }
+    std::cout << "MCM contains " << this->rank << " variables divided into " << this->n_comp << " components" << std::endl;
+    std::cout << "Total log-evidence: " << this->log_ev << std::endl;
+
+    for (int i = 0; i < this->n_comp; ++i){
+        std::cout << "Component " << i << " : \t" << int_to_string(this->partition[i], n) << "\t Size: " << bit_count(this->partition[i]) << "\t Log-evidence: " << this->log_ev_per_icc[i] << '\n';
+    }
 }

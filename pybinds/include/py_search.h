@@ -6,7 +6,7 @@
 
 #include "search/search.h"
 #include "py_dataset.h"
-#include "py_model.h"
+#include "py_mcm.h"
 #include "py_partition.h"
 
 namespace py = pybind11;
@@ -15,14 +15,14 @@ class PyMCMSearch {
 public:
     PyMCMSearch() : searcher() {};
 
-    PyModel get_model_in();
-    PyModel get_model_out();
+    PyMCM get_mcm_in();
+    PyMCM get_mcm_out();
 
     // Search methods
-    PyModel exhaustive_search(PyData& pydata);
-    PyModel greedy_search(PyData& pydata, PyModel* pymodel = nullptr);
-    PyModel divide_and_conquer(PyData& pydata, PyModel* pymodel = nullptr);
-    PyModel simulated_annealing(PyData& pydata, PyModel* pymodel = nullptr);
+    PyMCM exhaustive_search(PyData& pydata);
+    PyMCM greedy_search(PyData& pydata, PyMCM* pymcm = nullptr);
+    PyMCM divide_and_conquer(PyData& pydata, PyMCM* pymcm = nullptr);
+    PyMCM simulated_annealing(PyData& pydata, PyMCM* pymcm = nullptr);
 
     // Setters and getters for the simulated annealing settings
     void set_SA_max_iter(int n_iter) {this->searcher.set_SA_max_iter(n_iter);};

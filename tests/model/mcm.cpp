@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../../include/model/model.h"
+#include "../../include/model/mcm.h"
 
 TEST(model, init_n) {
     // Declare variable
@@ -8,7 +8,7 @@ TEST(model, init_n) {
     // Invalid number of variables
     n = 0;
     try {
-        Model mcm(n);
+        MCM mcm(n);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -18,7 +18,7 @@ TEST(model, init_n) {
     // Too many variables
     n = 129;
     try {
-        Model mcm(n);
+        MCM mcm(n);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -27,7 +27,7 @@ TEST(model, init_n) {
 
     // Valid number of variables
     n = 2;
-    Model mcm(n);
+    MCM mcm(n);
     std::vector<__uint128_t> partition = {1,2};
 
     EXPECT_EQ(mcm.n, n);
@@ -45,7 +45,7 @@ TEST(model, init_partition) {
     // Invalid number of variables
     n = 0;
     try {
-        Model mcm(n, partition);
+        MCM mcm(n, partition);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -55,7 +55,7 @@ TEST(model, init_partition) {
     // Too many variables
     n = 129;
     try {
-        Model mcm(n);
+        MCM mcm(n);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -65,7 +65,7 @@ TEST(model, init_partition) {
     // Valid partition
     partition = {4,1,2};
     n = 3;
-    Model mcm(n, partition);
+    MCM mcm(n, partition);
     
     EXPECT_EQ(mcm.n, n);
     EXPECT_EQ(mcm.n_comp, 3);
@@ -76,7 +76,7 @@ TEST(model, init_partition) {
     // Valid partition with additional empty components
     n = 4;
     partition = {0, 0, 0, 12, 0, 0, 0, 0, 3};
-    mcm = Model(n, partition);
+    mcm = MCM(n, partition);
     EXPECT_EQ(mcm.n, n);
     EXPECT_EQ(mcm.n_comp, 2);
     EXPECT_EQ(mcm.rank, n);
@@ -89,7 +89,7 @@ TEST(model, init_partition) {
     n = 3;
     partition = {8, 0, 0};
     try {
-        mcm = Model(n, partition);
+        mcm = MCM(n, partition);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -99,7 +99,7 @@ TEST(model, init_partition) {
     // Same variable in two different components
     partition = {1, 1, 2};
     try {
-        mcm = Model(n, partition);
+        mcm = MCM(n, partition);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -108,7 +108,7 @@ TEST(model, init_partition) {
     
     // Partition with fewer variables
     partition = {1,4};
-    mcm = Model(n, partition);
+    mcm = MCM(n, partition);
     exp_partition = {1,4,0};
 
     EXPECT_EQ(mcm.n, n);
@@ -125,7 +125,7 @@ TEST(model, init_string){
     // Invalid number of variables
     n = 0;
     try {
-        Model mcm(n, partition);
+        MCM mcm(n, partition);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -135,7 +135,7 @@ TEST(model, init_string){
     // Too many variables
     n = 129;
     try {
-        Model mcm(n);
+        MCM mcm(n);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -146,7 +146,7 @@ TEST(model, init_string){
     n = 2;
     partition = "invalid_partition_type";
     try {
-        Model mcm(n, partition);
+        MCM mcm(n, partition);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
@@ -156,7 +156,7 @@ TEST(model, init_string){
     // Independent model
     n = 5;
     partition = "independent";
-    Model mcm(n, partition);
+    MCM mcm(n, partition);
 
     std::vector<__uint128_t> exp_partition = {1,2,4,8,16};
     EXPECT_EQ(mcm.n, n);
@@ -168,7 +168,7 @@ TEST(model, init_string){
 
     // Complete model
     partition = "complete";
-    mcm = Model(n, partition);
+    mcm = MCM(n, partition);
 
     exp_partition = {31, 0, 0, 0, 0};
     EXPECT_EQ(mcm.n_comp, 1);
@@ -180,7 +180,7 @@ TEST(model, init_string){
     // Random partition (checked from generate_random_partition)
     srand(0);
     partition = "random";
-    mcm = Model(n, partition);
+    mcm = MCM(n, partition);
 
     exp_partition = {18,5,8,0,0};
     EXPECT_EQ(mcm.n_comp, 3);
@@ -193,14 +193,14 @@ TEST(model, init_string){
 TEST(model, get_partition){
     // Create model without partition
     int n = 4;
-    Model mcm(n);
+    MCM mcm(n);
     std::vector<__uint128_t> partition = mcm.get_partition();
     std::vector<__uint128_t> exp_partition = {1,2,4,8};
 
     EXPECT_EQ(partition, exp_partition);
 
     // After init with partition
-    mcm = Model(n, "complete");
+    mcm = MCM(n, "complete");
     exp_partition = {15,0,0,0};
     partition = mcm.get_partition();
 
@@ -215,7 +215,7 @@ TEST(model, set_partition){
     // Partition with too many components
     n = 3;
     partition = {1,2,4,0};
-    Model mcm(n);
+    MCM mcm(n);
 
     try {
         mcm.set_starting_partition(partition);
@@ -300,7 +300,7 @@ TEST(model, get_best_ev){
     // Create model
     int n = 6;
     std::string partition = "independent";
-    Model mcm(n, partition);
+    MCM mcm(n, partition);
 
     // No search has been ran -> best_ev should be inaccesible
     try {
