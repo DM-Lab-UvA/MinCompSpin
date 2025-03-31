@@ -1,7 +1,7 @@
 #pragma once
 
 #include "data/dataset.h"
-#include "model/model.h"
+#include "model/mcm.h"
 #include "search/annealing.h"
 
 #include "utilities/miscellaneous.h"
@@ -17,20 +17,20 @@ public:
     MCMSearch();
 
     /**
-     * Return the initial model.
+     * Return the initial mcm.
      */
-    Model get_model_in();
+    MCM get_mcm_in();
 
     /**
-     * Return the final model.
+     * Return the final mcm.
      */
-    Model get_model_out();
+    MCM get_mcm_out();
 
     // Search methods
-    Model exhaustive_search(Data& data);
-    Model greedy_search(Data& data, Model* init_model = nullptr);
-    Model divide_and_conquer(Data& data, Model* init_model = nullptr);
-    Model simulated_annealing(Data& data, Model* init_model = nullptr);
+    MCM exhaustive_search(Data& data);
+    MCM greedy_search(Data& data, MCM* init_mcm = nullptr);
+    MCM divide_and_conquer(Data& data, MCM* init_mcm = nullptr);
+    MCM simulated_annealing(Data& data, MCM* init_mcm = nullptr);
 
     // Setters and getters for the simulated annealing settings
     void set_SA_max_iter(int n_iter);
@@ -45,8 +45,8 @@ public:
 
 
 private:
-    Model model_in;
-    Model model_out;
+    MCM mcm_in;
+    MCM mcm_out;
     Data* data = nullptr;
     
     std::string log_file;
@@ -63,11 +63,16 @@ private:
 
     bool exhaustive;
 
+    // Divide and conquer function
     int division(int move_from, int move_to);
 
-    int merge_partition(std::vector<__uint128_t>& partition, SA_settings& settings);
-    int split_partition(std::vector<__uint128_t>& partition, SA_settings& settings);
-    int switch_partition(std::vector<__uint128_t>& partition, SA_settings& settings);
+    // Simulated annealing functions
+    int merge_partition(MCM& mcm, SA_settings& settings);
+    int split_partition(MCM& mcm, SA_settings& settings);
+    int switch_partition(MCM& mcm, SA_settings& settings);
+
+    // Greedy merging function
+    void hierarchical_merging();
 
     double get_log_ev(std::vector<__uint128_t> partition);
     double get_log_ev_icc(__uint128_t component);

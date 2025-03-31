@@ -4,7 +4,7 @@
 * Constructors *
 ***************/
 
-MCMSearch::MCMSearch() : model_in(1), model_out(1) {
+MCMSearch::MCMSearch() : mcm_in(1), mcm_out(1) {
     // Set default settings for SA
     this->SA_max_iter = 50000;
     this->SA_T0 = 100;
@@ -15,23 +15,23 @@ MCMSearch::MCMSearch() : model_in(1), model_out(1) {
 * Public methods *
 *****************/
 
-Model MCMSearch::get_model_in() {
+MCM MCMSearch::get_mcm_in() {
     // Check if a search has occured
     if (! this->log_evidence_trajectory.size()){
         throw std::runtime_error("No search has been ran yet.");
     }
     if (this->exhaustive){
-        throw std::runtime_error("Exhaustive search does not have an initial model.");
+        throw std::runtime_error("Exhaustive search does not have an initial MCM.");
     }
-    return this->model_in;
+    return this->mcm_in;
 }
 
-Model MCMSearch::get_model_out() {
+MCM MCMSearch::get_mcm_out() {
     // Check if a search has occured
     if (! this->log_evidence_trajectory.size()){
         throw std::runtime_error("No search has been ran yet.");
     }
-    return this->model_out;
+    return this->mcm_out;
 }
 
 void MCMSearch::set_SA_max_iter(int n_iter) {

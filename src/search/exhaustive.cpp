@@ -1,12 +1,12 @@
 #include "search/search.h"
 #include "search/exhaustive.h"
 
-Model MCMSearch::exhaustive_search(Data& data) {
+MCM MCMSearch::exhaustive_search(Data& data) {
     // Clear from previous search
     this->log_evidence_trajectory.clear();
-    // Initialize a model object to store the result
+    // Initialize an mcm object to store the result
     int n = data.n;
-    this->model_out = Model(n);
+    this->mcm_out = MCM(n);
     this->data = &data;
 
     // Indicate that this is an exhaustive search
@@ -36,11 +36,11 @@ Model MCMSearch::exhaustive_search(Data& data) {
         log_evidence = this->get_log_ev(partition);
 
         // Check if this is the new best log evidence
-        if (log_evidence > this->model_out.log_ev){
+        if (log_evidence > this->mcm_out.log_ev){
             // Update the current best
-            this->model_out.log_ev = log_evidence;
+            this->mcm_out.log_ev = log_evidence;
             // Make a hard copy of current partition to store
-            this->model_out.partition = partition;
+            this->mcm_out.partition = partition;
         }
 
         this->log_evidence_trajectory.push_back(log_evidence);
@@ -54,19 +54,19 @@ Model MCMSearch::exhaustive_search(Data& data) {
         std::fill(partition.begin(), partition.end(), 0);
     }
     // Calculate the log ev per icc
-    this->model_out.log_ev_per_icc.assign(n, 0);
+    this->mcm_out.log_ev_per_icc.assign(n, 0);
 
-    this->model_out.n_comp = 0;
+    this->mcm_out.n_comp = 0;
     for (int i = 0; i < n; i++){
-        if (this->model_out.partition[i]){
-            this->model_out.log_ev_per_icc[i] = this->get_log_ev_icc(this->model_out.partition[i]);
-            this->model_out.n_comp++;
+        if (this->mcm_out.partition[i]){
+            this->mcm_out.log_ev_per_icc[i] = this->get_log_ev_icc(this->mcm_out.partition[i]);
+            this->mcm_out.n_comp++;
         }
     }
     // Indicate that the search has been done
-    this->model_out.optimized = true;
+    this->mcm_out.optimized = true;
     
-    return this->model_out;
+    return this->mcm_out;
 }
 
 int generate_next_partition(int* a, int* b, int n){

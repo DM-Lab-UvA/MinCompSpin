@@ -2,60 +2,57 @@
 #include "search/div_and_conq.h"
 #include "utilities/miscellaneous.h"
 
-Model MCMSearch::divide_and_conquer(Data& data, Model* init_model){
+MCM MCMSearch::divide_and_conquer(Data& data, MCM* init_mcm){
     int n = data.n;
     this->data = &data;
-    // Initialize a model to store the result
-    if(!init_model){
-        // Default initial model is the complete one
-        this->model_in = Model(n, "complete");
-        this->model_out = Model(n, "complete");
+    // Initialize an mcm to store the result
+    if(!init_mcm){
+        // Default initial mcm is the complete one
+        this->mcm_in = MCM(n, "complete");
+        this->mcm_out = MCM(n, "complete");
     }
     else{
-        // Check if the number of variables in the data and the model match
-        if (n != init_model->n) {
-            throw std::invalid_argument("Number of variables in the data doesn't match the number of variables in the given model.");
+        // Check if the number of variables in the data and the mcm match
+        if (n != init_mcm->n) {
+            throw std::invalid_argument("Number of variables in the data doesn't match the number of variables in the given MCM.");
         }
-        this->model_in = *init_model;
-        this->model_out = *init_model;
+        this->mcm_in = *init_mcm;
+        this->mcm_out = *init_mcm;
     }
 
     // Clear from previous search
     this->log_evidence_trajectory.clear();
     this->exhaustive = false;
 
+    // Calculate the log ev
+    this->mcm_out.log_ev_per_icc.assign(n, 0);
+    for (int i = 0; i < this->mcm_out.n_comp; i++){
+        this->mcm_out.log_ev_per_icc[i] = this->get_log_ev_icc(this->mcm_out.partition[i]);
+    }
+    this->mcm_out.log_ev = this->get_log_ev(this->mcm_out.partition);
+
     // Store log_ev of starting point
-    this->log_evidence_trajectory.push_back(this->get_log_ev(this->model_out.partition));
+    this->log_evidence_trajectory.push_back(this->mcm_out.log_ev);
 
     // Start recursive algorithm by moving variables from component 0 to component 1
     division(0, 1);
 
-    // Calculate the log evidence of the best MCM found by the search algorithm
-    this->model_out.log_ev = this->get_log_ev(this->model_out.partition);
-    // Calculate the log ev per icc
-    this->model_out.n_comp = 0;
-    this->model_out.log_ev_per_icc.assign(n, 0);
-    for (int i = 0; i < n; i++){
-        if (this->model_out.partition[i]){
-            this->model_out.n_comp++;
-            this->model_out.log_ev_per_icc[i] = this->get_log_ev_icc(this->model_out.partition[i]);
-        }
-    }
-    place_empty_component_last(this->model_out.partition);
+    place_empty_entries_last(this->mcm_out.partition);
+    place_empty_entries_last(this->mcm_out.log_ev_per_icc);
     // Indicate that the search has been done
-    this->model_out.optimized = true;
+    this->mcm_out.optimized = true;
 
-    return this->model_out;
+    return this->mcm_out;
 }
 
 int MCMSearch::division(int move_from, int move_to){
     // Number of member in the component that we want to split
-    int n_members_1 = bit_count(this->model_out.partition[move_from]);
+    int n_members_1 = bit_count(this->mcm_out.partition[move_from]);
     // If the component contains 1 variable, no further splits are possible
     if (n_members_1 == 1){return move_to;}
 
     // Hard copy of the starting partition
-    std::vector<__uint128_t> partition = this->model_out.partition;
+    std::vector<__uint128_t> partition = this->mcm_out.partition;
 
     // Variables for the difference in evidence before and after split
     double best_evidence_diff = 0;
@@ -109,18 +106,24 @@ int MCMSearch::division(int move_from, int move_to){
             // Update the best difference
             best_evidence_diff = best_evidence_diff_tmp;
             // Update the best MCM
-            this->model_out.partition[move_from] = partition[move_from];
-            this->model_out.partition[move_to] = partition[move_to];
-
-            this->log_evidence_trajectory.push_back(this->get_log_ev(this->model_out.partition));
+            this->mcm_out.partition[move_from] = partition[move_from];
+            this->mcm_out.partition[move_to] = partition[move_to];
         }
         // Update number of members
         n_members_1 -= 1;
     }
     // Stop if no split increased the evidence -> component 'move_to' will be empty in that case
-    if (this->model_out.partition[move_to] == 0){
+    if (this->mcm_out.partition[move_to] == 0){
         return move_to;
     }
+    // Update mcm results
+    this->mcm_out.n_comp++;
+    this->mcm_out.log_ev_per_icc[move_from] = this->get_log_ev_icc(this->mcm_out.partition[move_from]);
+    this->mcm_out.log_ev_per_icc[move_to] = this->get_log_ev_icc(this->mcm_out.partition[move_to]);
+    this->mcm_out.log_ev = this->get_log_ev(this->mcm_out.partition);
+    
+    this->log_evidence_trajectory.push_back(this->mcm_out.log_ev);
+
     // If there was a succesful split, component 'move_to' is no longer empty -> increase the index of the first empty component
     int first_empty = move_to + 1;
     // Continue with a split of the first subpart

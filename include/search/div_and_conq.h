@@ -3,17 +3,6 @@
 #include "search/search.h"
 
 /**
- * Recursive division procedure used during the divide and conquer algorithm.
- * 
- * @param move_from             Index of the component from which variables are moved
- * @param move_to               Index of the component to which variables are moved
- * @param model                 Struct containing the characteristic of the model.
- *                              -'best_mcm[0]' will be updated if a split occurs that increases the evidence.
- * 
- * @return Index of the next empty component
- */
-
-/**
  * Helper function for the division procedure that finds the integer representation of the bitstring with only a 1 in the position of the ith bit set to 1 in component.
  * 
  * @param component             Integer representation of the bitstring representing a component.

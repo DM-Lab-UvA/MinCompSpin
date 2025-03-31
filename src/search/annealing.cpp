@@ -1,33 +1,42 @@
 #include "search/search.h"
 #include "search/annealing.h"
 
-Model MCMSearch::simulated_annealing(Data& data, Model* init_model){
+MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm){
     int n = data.n;
     this->data = &data;
-    // Initialize a model to store the result
-    if(!init_model){
-        // Default initial model is random one
-        this->model_in = Model(n, "random");
-        this->model_out = Model(n, this->model_in.get_partition());
+    // Initialize an mcm to store the result
+    if(!init_mcm){
+        // Default initial mcm is the independent model
+        this->mcm_in = MCM(n, "independent");
+        this->mcm_out = this->mcm_in;
     }
     else{
-        // Check if the number of variables in the data and the model match
-        if (n != init_model->n) {
-            throw std::invalid_argument("Number of variables in the data doesn't match the number of variables in the given model.");
+        // Check if the number of variables in the data and the mcm match
+        if (n != init_mcm->n) {
+            throw std::invalid_argument("Number of variables in the data doesn't match the number of variables in the given MCM.");
         }
-        this->model_in = *init_model;
-        this->model_out = *init_model;
+        this->mcm_in = *init_mcm;
+        this->mcm_out = *init_mcm;
     }
     // Clear from previous search
     this->log_evidence_trajectory.clear();
     this->exhaustive = false;
 
-    // Make a hard copy of the initial partition
-    std::vector<__uint128_t> partition = this->model_out.partition;
-    this->model_out.log_ev = this->get_log_ev(partition);
+    // Create mcm object to store intermediate results
+    MCM mcm_tmp = this->mcm_out;
+
+    // Calculate the log ev
+    mcm_tmp.log_ev_per_icc.assign(n, 0);
+    for (int i = 0; i < mcm_tmp.n_comp; i++){
+        mcm_tmp.log_ev_per_icc[i] = this->get_log_ev_icc(mcm_tmp.partition[i]);
+    }
+    mcm_tmp.log_ev = this->get_log_ev(mcm_tmp.partition);
+
+    // Store log_ev of starting point
+    this->log_evidence_trajectory.push_back(mcm_tmp.log_ev);
 
     // Initialize a struct containing the SA settings
-    SA_settings settings(this->SA_T0, this->model_out.partition);
+    SA_settings settings(this->SA_T0, this->mcm_out.partition);
 
     int x;
     int accepted;
@@ -35,10 +44,10 @@ Model MCMSearch::simulated_annealing(Data& data, Model* init_model){
     int steps_since_improve = 0;
 
     for (int i = 0; i < this->SA_max_iter; i++){
-        if (this->model_out.n_comp == data.n){
+        if (mcm_tmp.n_comp == data.n){
             x = 0;
         }
-        else if (this->model_out.n_comp == 1){
+        else if (mcm_tmp.n_comp == 1){
             x = 1;
         }
         else{
@@ -46,13 +55,13 @@ Model MCMSearch::simulated_annealing(Data& data, Model* init_model){
         }
 
         if (x == 0){
-            accepted = this->merge_partition(partition, settings);
+            accepted = this->merge_partition(mcm_tmp, settings);
         }
         else if (x == 1){
-            accepted = this->split_partition(partition, settings);
+            accepted = this->split_partition(mcm_tmp, settings);
         }
         else{
-            accepted = this->switch_partition(partition, settings);
+            accepted = this->switch_partition(mcm_tmp, settings);
         }
 
         // Update the temperature
@@ -61,40 +70,37 @@ Model MCMSearch::simulated_annealing(Data& data, Model* init_model){
         }
 
         // Update solution if log evidence improved
-        log_ev = this->get_log_ev(partition);
-        if (log_ev > this->model_out.log_ev && fabs(log_ev - this->model_out.log_ev) > settings.epsilon){
-            this->model_out.partition = partition;
-            this->model_out.log_ev = log_ev;
-
+        if (mcm_tmp.log_ev > this->mcm_out.log_ev && fabs(mcm_tmp.log_ev - this->mcm_out.log_ev) > settings.epsilon){ 
+            // Copy the result to the final mcm
+            this->mcm_out.log_ev = mcm_tmp.log_ev;
+            this->mcm_out.log_ev_per_icc = mcm_tmp.log_ev_per_icc;
+            this->mcm_out.partition = mcm_tmp.partition;
+            this->mcm_out.n_comp = mcm_tmp.n_comp;
             steps_since_improve = 0;
-            std::cout << "best log-evidence: " << log_ev << "\t@T = " << settings.temp << "\ti = " << i << std::endl;
+            std::cout << "best log-evidence: " << this->mcm_out.log_ev << "\t@T = " << settings.temp << "\ti = " << i << std::endl;
         }
         else{steps_since_improve++;}
-        this->log_evidence_trajectory.push_back(this->model_out.log_ev);
+        this->log_evidence_trajectory.push_back(this->mcm_out.log_ev);
 
         // Check stopping criteria
         if (steps_since_improve > settings.max_no_improve){
             std::cout << "\n- maximum iterations without improvement reached" << std::endl;
             break;}
     }
-    // Calculate the log ev per icc
-    this->model_out.log_ev_per_icc.assign(n, 0);
-    this->model_out.n_comp = 0;
-    for (int i = 0; i < n; i++){
-        if (this->model_out.partition[i]){
-            this->model_out.log_ev_per_icc[i] = this->get_log_ev_icc(this->model_out.partition[i]);
-            this->model_out.n_comp++;
-        }
-    }
-    place_empty_component_last(this->model_out.partition);
-    // Indicate that the search has been done
-    this->model_out.optimized = true;
 
-    return this->model_out;
+    // Hierarchical merging procedure
+    this->hierarchical_merging();
+
+    place_empty_entries_last(this->mcm_out.partition);
+    place_empty_entries_last(this->mcm_out.log_ev_per_icc);
+    // Indicate that the search has been done
+    this->mcm_out.optimized = true;
+
+    return this->mcm_out;
 }
 
-int MCMSearch::merge_partition(std::vector<__uint128_t>& partition, SA_settings& settings){
-    if (this->model_out.n_comp <= 1){return 2;}
+int MCMSearch::merge_partition(MCM& mcm, SA_settings& settings){
+    if (mcm.n_comp <= 1){return 2;}
 
     __uint128_t ONE = 1;
 
@@ -103,9 +109,9 @@ int MCMSearch::merge_partition(std::vector<__uint128_t>& partition, SA_settings&
     int comp_2 = randomBitIndex(settings.occupied_comp - (ONE << comp_1));
 
     // Calculate the change in evidence when merging
-    __uint128_t merged_comp = partition[comp_1] + partition[comp_2];
+    __uint128_t merged_comp = mcm.partition[comp_1] + mcm.partition[comp_2];
     double merged_log_ev = this->get_log_ev_icc(merged_comp);
-    double diff_log_ev = merged_log_ev - this->get_log_ev_icc(partition[comp_1]) - this->get_log_ev_icc(partition[comp_2]);
+    double diff_log_ev = merged_log_ev - mcm.log_ev_per_icc[comp_1] - mcm.log_ev_per_icc[comp_2];
 
     // Check if new partition is accepted using metropolis acceptance probability
     double p = exp(diff_log_ev / settings.temp);
@@ -113,8 +119,11 @@ int MCMSearch::merge_partition(std::vector<__uint128_t>& partition, SA_settings&
 
     if (p > u){
         // Accept the new partition
-        partition[comp_1] = merged_comp;
-        partition[comp_2] = 0;
+        mcm.partition[comp_1] = merged_comp;
+        mcm.partition[comp_2] = 0;
+        mcm.log_ev_per_icc[comp_1] = merged_log_ev;
+        mcm.log_ev_per_icc[comp_2] = 0;
+        mcm.log_ev += diff_log_ev;
         
         settings.occupied_comp -= (ONE << comp_2);
         if ((settings.occupied_comp2 & (ONE << comp_1)) == 0){
@@ -123,23 +132,22 @@ int MCMSearch::merge_partition(std::vector<__uint128_t>& partition, SA_settings&
         if ((settings.occupied_comp2 & (ONE << comp_2)) == (ONE << comp_2)){
             settings.occupied_comp2 -= (ONE << comp_2);
         }
-        this->model_out.n_comp--;
+        mcm.n_comp--;
 
         return 0;
-
     }
     return 1;
 }
 
-int MCMSearch::split_partition(std::vector<__uint128_t>& partition, SA_settings& settings){
-    if (this->model_out.n_comp == this->data->n){return 2;}
+int MCMSearch::split_partition(MCM& mcm, SA_settings& settings){
+    if (mcm.n_comp == this->data->n){return 2;}
     if (settings.occupied_comp2 == 0){return 2;}
 
     __uint128_t ONE = 1;
 
     // Choose random component containing at least two variables
     int comp_index = randomBitIndex(settings.occupied_comp2);
-    __uint128_t comp = partition[comp_index];
+    __uint128_t comp = mcm.partition[comp_index];
 
     // Make a random split of the component
     __uint128_t mask = random_128_int(this->data->n);
@@ -156,7 +164,7 @@ int MCMSearch::split_partition(std::vector<__uint128_t>& partition, SA_settings&
     // Calculate the change in evidence when splitting
     double log_ev_1 = this->get_log_ev_icc(comp_1);
     double log_ev_2 = this->get_log_ev_icc(comp_2);
-    double diff_log_ev = log_ev_1 + log_ev_2 - this->get_log_ev_icc(comp);
+    double diff_log_ev = log_ev_1 + log_ev_2 - mcm.log_ev_per_icc[comp_index];
 
     // Check if new partition is accepted using metropolis acceptance probability
     double p = exp(diff_log_ev / settings.temp);
@@ -164,11 +172,14 @@ int MCMSearch::split_partition(std::vector<__uint128_t>& partition, SA_settings&
 
     if (p > u){
         // Accept the new partition
-        partition[comp_index] = comp_1;
+        mcm.partition[comp_index] = comp_1;
+        mcm.log_ev_per_icc[comp_index] = log_ev_1;
         // Find the first empty component
         int comp_2_index = 0;
-        while (partition[comp_2_index]){comp_2_index++;}
-        partition[comp_2_index] = comp_2;
+        while (mcm.partition[comp_2_index]){comp_2_index++;}
+        mcm.partition[comp_2_index] = comp_2;
+        mcm.log_ev_per_icc[comp_2_index] = log_ev_2;
+        mcm.log_ev += diff_log_ev;
 
         settings.occupied_comp += (ONE << comp_2_index);
         if (bit_count(comp_1) <= 1){
@@ -177,15 +188,15 @@ int MCMSearch::split_partition(std::vector<__uint128_t>& partition, SA_settings&
         if (bit_count(comp_2) > 1){
             settings.occupied_comp2 += (ONE << comp_2_index);
         }
-        this->model_out.n_comp++;
+        mcm.n_comp++;
 
         return 0;
     }
     return 1;
 }
 
-int MCMSearch::switch_partition(std::vector<__uint128_t>& partition, SA_settings& settings){
-    if (this->model_out.n_comp == 1 || this->model_out.n_comp == this->data->n){return 2;}
+int MCMSearch::switch_partition(MCM& mcm, SA_settings& settings){
+    if (mcm.n_comp == 1 || mcm.n_comp == this->data->n){return 2;}
     if (settings.occupied_comp2 == 0){return 2;}
 
     __uint128_t ONE = 1;
@@ -193,8 +204,8 @@ int MCMSearch::switch_partition(std::vector<__uint128_t>& partition, SA_settings
     // Select two random partitions, the first with at least two variables
     int comp_1_index = randomBitIndex(settings.occupied_comp2);
     int comp_2_index = randomBitIndex(settings.occupied_comp - (ONE << comp_1_index));
-    __uint128_t comp_1 = partition[comp_1_index];
-    __uint128_t comp_2 = partition[comp_2_index];
+    __uint128_t comp_1 = mcm.partition[comp_1_index];
+    __uint128_t comp_2 = mcm.partition[comp_2_index];
 
     // Select random variable from first component
     int var = randomBitIndex(comp_1);
@@ -203,11 +214,9 @@ int MCMSearch::switch_partition(std::vector<__uint128_t>& partition, SA_settings
     __uint128_t new_comp_2 = comp_2 + (ONE << var);
 
     // Calculate the difference in evidence when moving the variable
-    double log_ev_1 = this->get_log_ev_icc(comp_1);
-    double log_ev_2 = this->get_log_ev_icc(comp_2);
-    double new_log_ev_1 = this->get_log_ev_icc(new_comp_1);
-    double new_log_ev_2 = this->get_log_ev_icc(new_comp_2);
-    double diff_log_ev = new_log_ev_1 + new_log_ev_2 - log_ev_1 - log_ev_2;
+    double log_ev_1 = this->get_log_ev_icc(new_comp_1);
+    double log_ev_2 = this->get_log_ev_icc(new_comp_2);
+    double diff_log_ev = log_ev_1 + log_ev_2 - mcm.log_ev_per_icc[comp_1_index] - mcm.log_ev_per_icc[comp_2_index];
 
     // Check if new partition is accepted using metropolis acceptance probability
     double p = exp(diff_log_ev / settings.temp);
@@ -215,8 +224,11 @@ int MCMSearch::switch_partition(std::vector<__uint128_t>& partition, SA_settings
 
     if (p > u){
         // Accept the new partition
-        partition[comp_1_index] = new_comp_1;
-        partition[comp_2_index] = new_comp_2;
+        mcm.partition[comp_1_index] = new_comp_1;
+        mcm.partition[comp_2_index] = new_comp_2;
+        mcm.log_ev_per_icc[comp_1_index] = log_ev_1;
+        mcm.log_ev_per_icc[comp_2_index] = log_ev_2;
+        mcm.log_ev += diff_log_ev;
 
         if (bit_count(new_comp_1) == 1){
             settings.occupied_comp2 -= (ONE << comp_1_index);

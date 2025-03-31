@@ -6,7 +6,7 @@ TEST(search, init_n) {
     MCMSearch searcher = MCMSearch();
 
     try {
-        searcher.get_model_in();
+        searcher.get_mcm_in();
         FAIL() << "Expected std::runtime_error";
     }
     catch(std::runtime_error const & err) {
@@ -14,7 +14,7 @@ TEST(search, init_n) {
     }
 
     try {
-        searcher.get_model_out();
+        searcher.get_mcm_out();
         FAIL() << "Expected std::runtime_error";
     }
     catch(std::runtime_error const & err) {
@@ -76,14 +76,14 @@ TEST(search, exhaustive){
     searcher.exhaustive_search(data);
 
     try {
-        searcher.get_model_in();
+        searcher.get_mcm_in();
         FAIL() << "Expected std::runtime_error";
     }
     catch(std::runtime_error const & err) {
-        EXPECT_EQ(err.what(), std::string("Exhaustive search does not have an initial model."));
+        EXPECT_EQ(err.what(), std::string("Exhaustive search does not have an initial MCM."));
     }
 
-    Model mcm = searcher.get_model_out();
+    MCM mcm = searcher.get_mcm_out();
 
     // Expected results
     std::vector<__uint128_t> partition = {7,0,0};
@@ -119,8 +119,8 @@ TEST(search, greedy) {
     MCMSearch searcher = MCMSearch();
 
     searcher.greedy_search(data);
-    Model mcm_in = searcher.get_model_in();
-    Model mcm_out = searcher.get_model_out();
+    MCM mcm_in = searcher.get_mcm_in();
+    MCM mcm_out = searcher.get_mcm_out();
 
     // Expected results
     std::vector<__uint128_t> indep_partition = {1,2,4};
@@ -151,21 +151,21 @@ TEST(search, greedy) {
     EXPECT_EQ(mcm_out.get_best_log_ev_per_icc()[2], 0);
     EXPECT_TRUE(mcm_out.optimized);
 
-    // Wrong number of variables in the initial model
-    mcm_in = Model(4, "independent");
+    // Wrong number of variables in the initial mcm
+    mcm_in = MCM(4, "independent");
     try {
         searcher.greedy_search(data, &mcm_in);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(), std::string("Number of variables in the data doesn't match the number of variables in the given model."));
+        EXPECT_EQ(err.what(), std::string("Number of variables in the data doesn't match the number of variables in the given MCM."));
     }
     
     // Start search from complete model
-    mcm_in = Model(3, "complete");
+    mcm_in = MCM(3, "complete");
     searcher.greedy_search(data, &mcm_in);
-    mcm_out = searcher.get_model_out();
-    Model init_mcm = searcher.get_model_in();
+    mcm_out = searcher.get_mcm_out();
+    MCM init_mcm = searcher.get_mcm_in();
 
     // Expected results
     EXPECT_EQ(mcm_in.n, init_mcm.n);
@@ -192,8 +192,8 @@ TEST(search, div_and_conq) {
     MCMSearch searcher = MCMSearch();
 
     searcher.divide_and_conquer(data);
-    Model mcm_in = searcher.get_model_in();
-    Model mcm_out = searcher.get_model_out();
+    MCM mcm_in = searcher.get_mcm_in();
+    MCM mcm_out = searcher.get_mcm_out();
 
     // Expected results
     std::vector<__uint128_t> complete_partition = {7,0,0};
@@ -216,22 +216,22 @@ TEST(search, div_and_conq) {
     EXPECT_EQ(mcm_out.get_best_log_ev_per_icc()[2], 0);
     EXPECT_TRUE(mcm_out.optimized);
 
-    // Wrong number of variables in the initial model
-    mcm_in = Model(4, "independent");
+    // Wrong number of variables in the initial mcm
+    mcm_in = MCM(4, "independent");
     try {
         searcher.divide_and_conquer(data, &mcm_in);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(), std::string("Number of variables in the data doesn't match the number of variables in the given model."));
+        EXPECT_EQ(err.what(), std::string("Number of variables in the data doesn't match the number of variables in the given MCM."));
     }
 
     
     // Start from independent model
-    mcm_in = Model(n, "independent");
+    mcm_in = MCM(n, "independent");
     searcher.divide_and_conquer(data, &mcm_in);
-    mcm_out = searcher.get_model_out();
-    Model init_mcm = searcher.get_model_in();
+    mcm_out = searcher.get_mcm_out();
+    MCM init_mcm = searcher.get_mcm_in();
 
     std::vector<__uint128_t> indep_partition = {1,2,4};
     evidence_per_icc[0] = data.calc_log_ev_icc(1);
@@ -252,7 +252,6 @@ TEST(search, div_and_conq) {
 }
 
 TEST(search, sim_annealing) {
-    srand(0);
     // Initialize dataset
     int n = 3;
     Data data("../tests/test.dat", 3, 3);
@@ -260,8 +259,8 @@ TEST(search, sim_annealing) {
     MCMSearch searcher = MCMSearch();
 
     searcher.simulated_annealing(data);
-    Model mcm_in = searcher.get_model_in();
-    Model mcm_out = searcher.get_model_out();
+    MCM mcm_in = searcher.get_mcm_in();
+    MCM mcm_out = searcher.get_mcm_out();
 
     // Expected results
     std::vector<__uint128_t> partition = {7,0,0};
@@ -272,19 +271,19 @@ TEST(search, sim_annealing) {
     EXPECT_EQ(partition, mcm_out.partition);
     EXPECT_FLOAT_EQ(mcm_out.get_best_log_ev(), evidence);
     EXPECT_EQ(mcm_out.get_best_log_ev_per_icc().size(), 3);
-    EXPECT_FLOAT_EQ(mcm_out.get_best_log_ev_per_icc()[0], 0);
-    EXPECT_EQ(mcm_out.get_best_log_ev_per_icc()[1], 0);
-    EXPECT_FLOAT_EQ(mcm_out.get_best_log_ev_per_icc()[2], -23.324842793537613);
+    EXPECT_FLOAT_EQ(mcm_out.get_best_log_ev_per_icc()[1], 0);
+    EXPECT_EQ(mcm_out.get_best_log_ev_per_icc()[2], 0);
+    EXPECT_FLOAT_EQ(mcm_out.get_best_log_ev_per_icc()[0], -23.324842793537613);
     EXPECT_TRUE(mcm_out.optimized);
-    
-    // Wrong number of variables in the initial model
-    mcm_in = Model(4, "independent");
+
+    // Wrong number of variables in the initial mcm
+    mcm_in = MCM(4, "independent");
     try {
         searcher.simulated_annealing(data, &mcm_in);
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(), std::string("Number of variables in the data doesn't match the number of variables in the given model."));
+        EXPECT_EQ(err.what(), std::string("Number of variables in the data doesn't match the number of variables in the given MCM."));
     }
 }
 
