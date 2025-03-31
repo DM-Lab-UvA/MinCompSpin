@@ -85,22 +85,6 @@ std::vector<__uint128_t> generate_complete_partition(int n){
     return partition;
 }
 
-void place_empty_component_last(std::vector<__uint128_t>& partition) {
-    int n = partition.size() - 1;
-    for (int i = 0; i < partition.size(); i++){
-        if (! partition[i]){
-            // Empty component --> switch with the last filled component
-            while (! partition[n]){n--;}
-            // Quit when last filled component is located before the first empty component
-            if (n < i){break;}
-            // Switch
-            partition[i] = partition[n];
-            partition[n] = 0;
-            n--;
-        }
-    }
-}
-
 void convert_partition(int* a, std::vector<__uint128_t>& partition, int n){
     __uint128_t element = 1;
     // Loop over all variables

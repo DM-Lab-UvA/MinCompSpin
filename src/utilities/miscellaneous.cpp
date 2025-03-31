@@ -78,3 +78,59 @@ __uint128_t string_to_int(std::string string, int n){
     }
     return integer;
 }
+
+void convert_string_to_vector(std::vector<__uint128_t>& vec, std::string& str, int n, int q){
+    // Set all elements equal to zero
+    std::fill(vec.begin(), vec.end(), 0);
+    // Variable for the integer value of the ith bit
+    __uint128_t element = 1;
+    // Loop over the variables
+    for (int i = 0; i < n; ++i){
+        // Convert value of variable i from string to integer
+        int value = str[i] - '0';
+        // Check if the value is between 0 and q-1
+        if (value > q - 1) {
+            throw std::invalid_argument("Entries in the file should only contain values between 0 and q-1.");
+        }
+        int bit = 0;
+        while (value){
+            // Check if last bit in the binary representation is nonzero
+            if (value & 1){
+                vec[bit] += element;
+            }
+            // Bitshift to the right
+            ++bit;
+            value >>= 1;
+        }
+        // Bitshift to the left to get the decimal value of the next variable
+        element <<= 1;
+    }
+}
+
+void convert_8bit_vec_to_128bit_vec(std::vector<__uint128_t>& vec128, std::vector<uint8_t>& vec8, int n, int q){
+    // Set all elements equal to zero
+    std::fill(vec128.begin(), vec128.end(), 0);
+    // Variable for the integer value of the ith bit
+    __uint128_t element = 1;
+    // Loop over the variables
+    for (int i = 0; i < n; ++i){
+        // Convert value of variable i from string to integer
+        int value = vec8[i];
+        // Check if the value is between 0 and q-1
+        if (value > q - 1) {
+            throw std::invalid_argument("The vector should only contain values between 0 and q-1.");
+        }
+        int bit = 0;
+        while (value){
+            // Check if last bit in the binary representation is nonzero
+            if (value & 1){
+                vec128[bit] += element;
+            }
+            // Bitshift to the right
+            ++bit;
+            value >>= 1;
+        }
+        // Bitshift to the left to get the decimal value of the next variable
+        element <<= 1;
+    }
+}

@@ -40,11 +40,6 @@ std::vector<__uint128_t> generate_independent_partition(int n);
  */
 std::vector<__uint128_t> generate_complete_partition(int n);
 
-
-void place_empty_component_last(std::vector<__uint128_t>& partition);
-
-
-
 /**
  * Converts the partition from a restricted growth string to a vector of n integers representing the components.
  * 
@@ -55,6 +50,28 @@ void place_empty_component_last(std::vector<__uint128_t>& partition);
  * @return void                 Nothing is returned by this function.
  */
 void convert_partition(int* a, std::vector<__uint128_t>& partition, int n);
+
+/**
+ * Place the empty entries in a vector at the end.
+ * 
+ * @param vector                Vector containing elements of type T.
+ */
+template <typename T>
+void place_empty_entries_last(std::vector<T>& vector){
+    int n = vector.size() - 1;
+    for (int i = 0; i < vector.size(); i++){
+        if (! vector[i]){
+            // Empty component --> switch with the last filled component
+            while (! vector[n]){n--;}
+            // Quit when last filled component is located before the first empty component
+            if (n < i){break;}
+            // Switch
+            vector[i] = vector[n];
+            vector[n] = 0;
+            n--;
+        }
+    }
+}
 
 /**
  * Prints the partition as bitstrings of the non-empty components to a file.
