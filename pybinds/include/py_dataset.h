@@ -5,7 +5,7 @@
 #include <pybind11/numpy.h>
 
 #include "data/dataset.h"
-#include "py_model.h"
+#include "py_mcm.h"
 #include "py_partition.h"
 
 namespace py = pybind11;
@@ -21,10 +21,33 @@ public:
      */
     PyData(const std::string& filename, int n_var, int n_states) : data(filename, n_var, n_states) {};
 
-    double calc_log_ev_array(py::array_t<int8_t> partition);
-    double calc_log_ev_model(PyModel& model);
-    py::array calc_log_ev_icc(PyModel& model);
-    py::array calc_log_ev_icc_array(py::array_t<int8_t> partition);
+    double calc_property_array(py::array_t<int8_t> partition, std::string property);
+    double calc_property_mcm(PyMCM& mcm, std::string property);
+    py::array calc_property_icc_array(py::array_t<int8_t> partition, std::string property);
+    py::array calc_property_icc(PyMCM& mcm, std::string property);
+
+    double calc_log_ev_array(py::array_t<int8_t> partition) {return this->calc_property_array(partition, "evidence");};
+    double calc_log_ev_mcm(PyMCM& mcm) {return this->calc_property_mcm(mcm, "evidence");};
+    py::array calc_log_ev_icc_array(py::array_t<int8_t> partition) {return this->calc_property_icc_array(partition, "evidence");};
+    py::array calc_log_ev_icc(PyMCM& mcm) {return this->calc_property_icc(mcm, "evidence");};
+
+    double calc_log_likelihood_array(py::array_t<int8_t> partition) {return this->calc_property_array(partition, "likelihood");};
+    double calc_log_likelihood_mcm(PyMCM& mcm) {return this->calc_property_mcm(mcm, "likelihood");};
+    py::array calc_log_likelihood_icc_array(py::array_t<int8_t> partition) {return this->calc_property_icc_array(partition, "likelihood");};
+    py::array calc_log_likelihood_icc(PyMCM& mcm) {return this->calc_property_icc(mcm, "likelihood");};
+
+    double calc_geom_complexity_array(py::array_t<int8_t> partition) {return this->calc_property_array(partition, "geom_compl");};
+    double calc_geom_complexity_mcm(PyMCM& mcm) {return this->calc_property_mcm(mcm, "geom_compl");};
+    py::array calc_geom_complexity_icc_array(py::array_t<int8_t> partition) {return this->calc_property_icc_array(partition, "geom_compl");};
+    py::array calc_geom_complexity_icc(PyMCM& mcm) {return this->calc_property_icc(mcm, "geom_compl");};
+
+    double calc_param_complexity_array(py::array_t<int8_t> partition) {return this->calc_property_array(partition, "param_compl");};
+    double calc_param_complexity_mcm(PyMCM& mcm) {return this->calc_property_mcm(mcm, "param_compl");};
+    py::array calc_param_complexity_icc_array(py::array_t<int8_t> partition) {return this->calc_property_icc_array(partition, "param_compl");};
+    py::array calc_param_complexity_icc(PyMCM& mcm) {return this->calc_property_icc(mcm, "param_compl");};
+
+    double calc_mdl_array(py::array_t<int8_t> partition) {return this->calc_property_array(partition, "mdl");};
+    double calc_mdl_mcm(PyMCM& mcm) {return this->calc_property_mcm(mcm, "mdl");};
     
     double entropy(int base = -1);
 

@@ -21,7 +21,7 @@ public:
     Data(const std::string& filename, int n_var, int n_states);
 
     /**
-     * Calculates the entropy of the dataset.
+     * Calculate the entropy of the dataset.
      * 
      * @param base                  Base of the logarithm used (default is 2).
      * 
@@ -30,7 +30,7 @@ public:
     double entropy(int base = -1);
 
     /**
-     * Calculates the log evidence of a given component.
+     * Calculate the log evidence of a given component.
      * 
      * @param component             Integer representation of the bitstring representing a component.
      * 
@@ -39,13 +39,76 @@ public:
     double calc_log_ev_icc(__uint128_t component);
 
     /**
-     * Calculates the log evidence of a given partition.
+     * Calculate the log evidence of a given partition.
      * 
      * @param partition             Partition as a vector of n integers representing the components.
      * 
      * @return log_ev               The log evidence of the partition as a double. 
      */    
     double calc_log_ev(std::vector<__uint128_t>& partition);
+
+    /**
+     * Calculate the log likelihood of a given component.
+     * 
+     * @param component             Integer representation of the bitstring representing a component.
+     * 
+     * @return log_likelihood       The log likelihood of the component as a double.
+     */
+    double calc_log_likelihood_icc(__uint128_t component);
+
+    /**
+     * Calculate the log likelihood of a given partition.
+     * 
+     * @param partition             Partition as a vector of n integers representing the components.
+     * 
+     * @return log_likelihood       The log likelihood of the partition as a double.
+     */
+    double calc_log_likelihood(std::vector<__uint128_t>& partition);
+
+    /**
+     * Calculate the parametric complexity of a given component.
+     * 
+     * @param component             Integer representation of the bitstring representing a component.
+     * 
+     * @return param_complexity     The parametric complexity of the component as a double.
+     */
+    double calc_param_complexity_icc(__uint128_t component);
+
+    /**
+     * Calculate the parametric complexity of a given partition.
+     * 
+     * @param partition             Partition as a vector of n integers representing the components.
+     * 
+     * @return param_complexity     The parametric complexity of the partition as a double.
+     */
+    double calc_param_complexity(std::vector<__uint128_t>& partition);
+
+    /**
+     * Calculate the geometric complexity of a given component.
+     * 
+     * @param component             Integer representation of the bitstring representing a component.
+     * 
+     * @return geom_complexity      The geometric complexity of the component as a double.
+     */
+    double calc_geom_complexity_icc(__uint128_t component);
+
+    /**
+     * Calculate the geometric complexity of a given partition.
+     * 
+     * @param partition             Partition as a vector of n integers representing the components.
+     * 
+     * @return geom_complexity      The geometric complexity of the partition as a double.
+     */
+    double calc_geom_complexity(std::vector<__uint128_t>& partition);
+
+    /**
+     * Calculate the Minimum Description Length of a given partition.
+     * 
+     * @param partition             Partition as a vector of n integers representing the components.
+     * 
+     * @return mdl                  The Minimum Description Length of the given partition as a double            
+     */
+    double calc_mdl(std::vector<__uint128_t>& partition);
 
     std::vector<std::pair<std::vector<__uint128_t>, unsigned int>> dataset;
 

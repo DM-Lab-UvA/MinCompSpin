@@ -36,7 +36,7 @@ TEST(data, read_in){
         FAIL() << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(), std::string("The dataset should only contain values between 0 and q-1."));
+        EXPECT_EQ(err.what(), std::string("Entries in the file should only contain values between 0 and q-1."));
     }
 
     // Read in normally
