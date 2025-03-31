@@ -4,6 +4,7 @@
 
 * The code uses C++ 11.
 * CMake v3.26.4+
+* pybind11 v2.12.0+
 
 ## Installation
 
