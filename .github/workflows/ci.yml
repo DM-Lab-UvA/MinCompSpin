@@ -1,0 +1,39 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  
+jobs:
+  build:
+    runs-on: ${{ matrix.os}}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |  
+          sudo apt-get update
+          sudo apt-get install -y g++ cmake python3 python3-pybind11
+
+      - name: Install dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install pybind11
+      
+      - name : Build project
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+
+      
+      - name : Test project
+        run: |
+          cd build
+          ./testing
