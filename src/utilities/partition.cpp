@@ -109,6 +109,12 @@ void print_partition_to_file(std::ofstream& file, std::vector<__uint128_t>& part
     }
 }
 
+void print_partition_details_to_file(std::ofstream& file, MCM& mcm, int N, int q){
+    for (int i = 0; i < mcm.n_comp; ++i){
+        file << "Component " << i << " : \t" << int_to_string(mcm.partition[i], mcm.n) << "\t Size: " << bit_count(mcm.partition[i]) << "\t Log-evidence (q-its/datapoint): " << mcm.log_ev_per_icc[i] / (N * log(q)) << '\n';
+    }
+}
+
 void print_partition_to_terminal(std::vector<__uint128_t>& partition){
     // Number of variables
     int n = partition.size();

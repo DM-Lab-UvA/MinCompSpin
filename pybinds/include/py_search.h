@@ -20,9 +20,9 @@ public:
 
     // Search methods
     PyMCM exhaustive_search(PyData& pydata);
-    PyMCM greedy_search(PyData& pydata, PyMCM* pymcm = nullptr);
-    PyMCM divide_and_conquer(PyData& pydata, PyMCM* pymcm = nullptr);
-    PyMCM simulated_annealing(PyData& pydata, PyMCM* pymcm = nullptr);
+    PyMCM greedy_search(PyData& pydata, PyMCM* pymcm = nullptr, std::string file_name = "");
+    PyMCM divide_and_conquer(PyData& pydata, PyMCM* pymcm = nullptr, std::string file_name = "");
+    PyMCM simulated_annealing(PyData& pydata, PyMCM* pymcm = nullptr, std::string file_name = "");
 
     // Setters and getters for the simulated annealing settings
     void set_SA_max_iter(int n_iter) {this->searcher.set_SA_max_iter(n_iter);};

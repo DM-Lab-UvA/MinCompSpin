@@ -1,7 +1,7 @@
 #include "search/search.h"
 #include "search/annealing.h"
 
-MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm){
+MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_name){
     int n = data.n;
     this->data = &data;
     // Initialize an mcm to store the result
@@ -34,6 +34,37 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm){
 
     // Store log_ev of starting point
     this->log_evidence_trajectory.push_back(mcm_tmp.log_ev);
+
+    // Write the initial partition to the output file
+    if (!file_name.empty()){
+        this->output_file = std::unique_ptr<std::ofstream>(new std::ofstream(file_name));
+        if (! this->output_file->is_open()){
+            std::cerr <<"Error: could not open the given output file.";
+        }
+        *this->output_file << "============================= \n";
+        *this->output_file << "Simulated Annealing Procedure \n";
+        *this->output_file << "============================= \n\n";
+
+        *this->output_file << "Data statistics: \n";
+        *this->output_file << "---------------- \n\n";
+
+        *this->output_file << "Number of variables: " << data.n << "\n";
+        *this->output_file << "Number of states per variable: " << data.q << "\n";
+        *this->output_file << "Number of datapoints: " << data.N << "\n";
+        *this->output_file << "Number of unique datapoint: " << data.N_unique << "\n";
+        *this->output_file << "Entropy of the data: " << data.entropy() << " q-its \n\n";
+
+        *this->output_file << "Initial partition: \n";
+        *this->output_file << "------------------ \n\n";
+
+        *this->output_file << "Log-evidence: " << mcm_tmp.log_ev << " = " << mcm_tmp.log_ev / (data.N * log(data.q)) << " q-its/datapoint \n\n";
+
+        print_partition_details_to_file(*this->output_file, mcm_tmp, data.N, data.q);
+        *this->output_file << "\n";
+
+        *this->output_file << "Start annealing: \n";
+        *this->output_file << "---------------- \n\n";
+    }
 
     // Initialize a struct containing the SA settings
     SA_settings settings(this->SA_T0, this->mcm_out.partition);
@@ -77,14 +108,20 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm){
             this->mcm_out.partition = mcm_tmp.partition;
             this->mcm_out.n_comp = mcm_tmp.n_comp;
             steps_since_improve = 0;
-            std::cout << "best log-evidence: " << this->mcm_out.log_ev << "\t@T = " << settings.temp << "\ti = " << i << std::endl;
+
+            // Write to output file
+            if (this->output_file){
+                *this->output_file << "Iteration " << i << " \t\t Temperature: " << settings.temp << " \t\t Log-evidence (q-its/datapoint): " << this->mcm_out.log_ev / (this->data->N * log(this->data->q)) << "\n";
+            }
         }
         else{steps_since_improve++;}
         this->log_evidence_trajectory.push_back(this->mcm_out.log_ev);
 
         // Check stopping criteria
         if (steps_since_improve > settings.max_no_improve){
-            std::cout << "\n- maximum iterations without improvement reached" << std::endl;
+            if (this->output_file){
+                *this->output_file << "\nMaximum number of iterations without improvement reached \n\n";
+            }
             break;}
     }
 
@@ -95,6 +132,21 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm){
     place_empty_entries_last(this->mcm_out.log_ev_per_icc);
     // Indicate that the search has been done
     this->mcm_out.optimized = true;
+
+    // Write results to the output file
+    if (!file_name.empty()){
+        double max_log_likelihood = data.calc_log_likelihood(this->mcm_out.partition);
+
+        *this->output_file << "\nFinal partition: \n";
+        *this->output_file << "------------------ \n\n";
+
+        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N * log(data.q)) << " q-its/datapoint \n";
+        *this->output_file << "Max-Log-likelihood: " << max_log_likelihood << " = " << max_log_likelihood / (data.N * log(data.q)) << " q-its/datapoint \n\n";
+
+        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N, data.q);
+        *this->output_file << "\n";
+        this->output_file.reset();
+    }
 
     return this->mcm_out;
 }
