@@ -5,6 +5,7 @@ project(MinCompSpin)
 # specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # Optimization flag
 set(CMAKE_CXX_FLAGS "-O3")
 

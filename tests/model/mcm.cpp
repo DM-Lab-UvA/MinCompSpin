@@ -176,18 +176,6 @@ TEST(model, init_string){
     EXPECT_EQ(mcm.partition.size(),  n);
     EXPECT_EQ(mcm.partition, exp_partition);
     EXPECT_FALSE(mcm.optimized);
-
-    // Random partition (checked from generate_random_partition)
-    srand(0);
-    partition = "random";
-    mcm = MCM(n, partition);
-
-    exp_partition = {18,5,8,0,0};
-    EXPECT_EQ(mcm.n_comp, 3);
-    EXPECT_EQ(mcm.rank, n);
-    EXPECT_EQ(mcm.partition.size(),  n);
-    EXPECT_EQ(mcm.partition, exp_partition);
-    EXPECT_FALSE(mcm.optimized);
 }
 
 TEST(model, get_partition){

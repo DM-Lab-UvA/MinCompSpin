@@ -1,5 +1,7 @@
 #pragma once
 
+#include <fstream>
+
 #include "data/dataset.h"
 #include "model/mcm.h"
 #include "search/annealing.h"
@@ -8,6 +10,7 @@
 #include "utilities/partition.h"
 
 #include <random>
+#include <memory>
 
 class MCMSearch {
 public:
@@ -28,9 +31,9 @@ public:
 
     // Search methods
     MCM exhaustive_search(Data& data);
-    MCM greedy_search(Data& data, MCM* init_mcm = nullptr);
-    MCM divide_and_conquer(Data& data, MCM* init_mcm = nullptr);
-    MCM simulated_annealing(Data& data, MCM* init_mcm = nullptr);
+    MCM greedy_search(Data& data, MCM* init_mcm = nullptr, std::string file_name = "");
+    MCM divide_and_conquer(Data& data, MCM* init_mcm = nullptr, std::string file_name = "");
+    MCM simulated_annealing(Data& data, MCM* init_mcm = nullptr, std::string file_name = "");
 
     // Setters and getters for the simulated annealing settings
     void set_SA_max_iter(int n_iter);
@@ -48,8 +51,8 @@ private:
     MCM mcm_in;
     MCM mcm_out;
     Data* data = nullptr;
-    
-    std::string log_file;
+
+    std::unique_ptr<std::ofstream> output_file;
 
     int SA_max_iter;
     int SA_T0;

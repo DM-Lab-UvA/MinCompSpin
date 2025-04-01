@@ -6,6 +6,7 @@
 #include <vector>
 #include <unordered_map>
 #include <map>
+#include <cmath>
 
 #include "data_processing.h"
 
@@ -23,7 +24,7 @@ public:
     /**
      * Calculate the entropy of the dataset.
      * 
-     * @param base                  Base of the logarithm used (default is 2).
+     * @param base                  Base of the logarithm used (default is q).
      * 
      * @return entropy              The entropy of the dataset as a double.
      */

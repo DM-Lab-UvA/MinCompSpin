@@ -1,6 +1,9 @@
 #pragma once
 
-#include <iostream>
+#include <vector>
+#include <string>
+#include <stdexcept>
+#include <cstdint>
 
 /**
  * Calculates the bit count of an integer
@@ -26,7 +29,6 @@ __uint128_t random_128_int(int n);
 std::string int_to_string(__uint128_t integer, int n);
 
 __uint128_t string_to_int(std::string string, int n);
-
 
 /**
  * Converts from a string to log2(q) 128bit integers.
