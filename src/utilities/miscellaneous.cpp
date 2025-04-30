@@ -107,7 +107,7 @@ void convert_string_to_vector(std::vector<__uint128_t>& vec, std::string& str, i
     }
 }
 
-void convert_8bit_vec_to_128bit_vec(std::vector<__uint128_t>& vec128, std::vector<uint8_t>& vec8, int n, int q){
+void convert_8bit_vec_to_128bit_vec(std::vector<__uint128_t>& vec128, const std::vector<uint8_t>& vec8, int n, int q){
     // Set all elements equal to zero
     std::fill(vec128.begin(), vec128.end(), 0);
     // Variable for the integer value of the ith bit
@@ -133,4 +133,49 @@ void convert_8bit_vec_to_128bit_vec(std::vector<__uint128_t>& vec128, std::vecto
         // Bitshift to the left to get the decimal value of the next variable
         element <<= 1;
     }
+}
+
+void convert_8bit_vec_to_128bit_vec_unsafe(std::vector<__uint128_t>& vec128, const std::vector<uint8_t>& vec8, int n, int q){
+    // Set all elements equal to zero
+    std::fill(vec128.begin(), vec128.end(), 0);
+    // Variable for the integer value of the ith bit
+    __uint128_t element = 1;
+    // Loop over the variables
+    for (int i = 0; i < n; ++i){
+        // Convert value of variable i from string to integer
+        int value = vec8[i];
+        int bit = 0;
+        while (value){
+            // Check if last bit in the binary representation is nonzero
+            if (value & 1){
+                vec128[bit] += element;
+            }
+            // Bitshift to the right
+            ++bit;
+            value >>= 1;
+        }
+        // Bitshift to the left to get the decimal value of the next variable
+        element <<= 1;
+    }
+}
+
+std::string convert_128bit_vec_to_string(std::vector<__uint128_t>& vec128, int n){
+    // Create string with n zero entries
+    std::vector<char> state(n, '0');
+
+    int element;
+    // Loop over the variables
+    for (int j = 0; j < n; ++j){
+        element = 1;
+        // Loop over the entries of the vector
+        for (int i = 0; i < vec128.size(); ++i){
+            if (vec128[i] & 1){
+                state[j] += element;
+            }
+            element <<= 1;
+            vec128[i] >>= 1;
+        }
+    }
+    std::string str(state.begin(), state.end());
+    return str;
 }

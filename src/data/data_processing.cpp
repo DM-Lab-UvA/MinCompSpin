@@ -5,7 +5,7 @@ int processing(std::string file, int n, int n_ints, int n_states, std::vector<st
     std::ifstream myfile(file);
 
     // Store dataset as a map of vectors containing n_ints 128bit integers
-    std::map<std::vector<__uint128_t>, unsigned int> dataset;
+    std::unordered_map<std::vector<__uint128_t>, unsigned int, HashVector128> dataset;
 
     // Check if file exists
     if (myfile.fail()){

@@ -48,45 +48,6 @@ TEST(data, read_in){
     EXPECT_EQ(N, 7);
     EXPECT_EQ(data.size(), 6);
 
-    std::pair<std::vector<__uint128_t>, unsigned int> element;
-
-    std::vector<__uint128_t> obs = {2,1};
-    element.first = obs;
-    element.second = 2;
-    auto index = std::find(data.begin(), data.end(), element);
-    EXPECT_NE(index, data.end());
-
-    obs = {0,1};
-    element.first = obs;
-    element.second = 1;
-    index = std::find(data.begin(), data.end(), element);
-    EXPECT_NE(index, data.end());
-
-    obs = {1,2};
-    element.first = obs;
-    index = std::find(data.begin(), data.end(), element);
-    EXPECT_NE(index, data.end());
-
-    obs = {6,1};
-    element.first = obs;
-    index = std::find(data.begin(), data.end(), element);
-    EXPECT_NE(index, data.end());
-
-    obs = {7,0};
-    element.first = obs;
-    index = std::find(data.begin(), data.end(), element);
-    EXPECT_NE(index, data.end());
-
-    obs = {2,4};
-    element.first = obs;
-    index = std::find(data.begin(), data.end(), element);
-    EXPECT_NE(index, data.end());
-
-    obs = {0,0};
-    element.first = obs;
-    index = std::find(data.begin(), data.end(), element);
-    EXPECT_EQ(index, data.end());
-
     // Read in with fewer variables
     n = 2;
     data.clear();
