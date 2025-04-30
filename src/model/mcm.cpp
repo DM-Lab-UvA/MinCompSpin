@@ -171,3 +171,64 @@ void MCM::print_info(){
         std::cout << "Component " << i << " : \t" << int_to_string(this->partition[i], n) << "\t Size: " << bit_count(this->partition[i]) << "\t Log-evidence: " << this->log_ev_per_icc[i] << '\n';
     }
 }
+
+void MCM::generate_samples(int N, const Data& data, const std::string& file_name){
+    // Check the number of variables
+    if (this->n != data.n) {
+        throw std::invalid_argument("Number of variables in the MCM doesn't match the number of variables in the given dataset.");
+    }
+    
+    // Create the output file
+    std::ofstream output_file(file_name);
+    if (!output_file){
+        std::cerr << "Error: Could not open the output file." << std::endl;
+    }
+
+    // Create a random device and use it to generate a random seed
+    std::random_device myRandomDevice;
+    unsigned seed = myRandomDevice();
+
+    // Initialize a default_random_engine with the seed
+    std::default_random_engine generator(seed);
+
+    // Build a distribution of the states in the dataset
+    std::vector<int> weights(data.N_unique);
+
+    int i = 0;
+    for (std::pair<std::vector<__uint128_t>, unsigned int> const& datapoint : data.dataset)
+    {
+        weights[i] = datapoint.second;
+        i++;
+    }
+    std::discrete_distribution<int> distribution(weights.begin(), weights.end());
+
+    int state_index;
+    std::vector<__uint128_t> sample_tmp(data.n_ints);
+    std::vector<__uint128_t> sample(data.n_ints, 0);
+    for (int i = 0; i < N; ++i){
+        for (__uint128_t comp : this->partition){
+            // Generate datapoint from the distribution
+            state_index = distribution(generator);
+            sample_tmp = data.dataset[state_index].first;
+
+            // Extract the part of the datapoint that corresponds to the current component
+            for (int j = 0; j < data.n_ints; ++j){
+                sample[j] += sample_tmp[j] & comp;
+            }
+
+        }
+        // Write the sample to the output file
+        output_file << convert_128bit_vec_to_string(sample, data.n) << '\n';
+        std::fill(sample.begin(), sample.end(), 0);
+    }
+    output_file.close();
+}
+
+Data MCM::generate_data(int N, const Data& data, const std::string& file_name){
+    // Generate the samples
+    this->generate_samples(N, data, file_name);
+    // Create data object from the generated file
+    Data samples = Data(file_name, data.n, data.q);
+
+    return samples;
+}
