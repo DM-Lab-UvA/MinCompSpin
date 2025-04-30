@@ -74,14 +74,8 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
     double log_ev;
     int steps_since_improve = 0;
 
-    double total_merge = 0;
-    double total_split = 0;
-    double total_switch = 0;
-
-    int counter_merge = 0;
-    int counter_split = 0;
-    int counter_switch = 0;
-
+    int counter = 0;
+    std::vector<double> acceptance_rate;
     for (int i = 0; i < this->SA_max_iter; i++){
         if (mcm_tmp.n_comp == data.n){
             x = 0;
@@ -95,37 +89,14 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
 
         if (x == 0){
             accepted = this->merge_partition(mcm_tmp, settings);
-
-            if (accepted == 2){
-                std::cout << "Not merged \n";
-            }
-            else if (accepted == 0){
-                counter_merge++;
-            }
-            total_merge++;
         }
         else if (x == 1){
             accepted = this->split_partition(mcm_tmp, settings);
-
-            if (accepted == 2){
-                std::cout << "Not split \n";
-            }
-            else if (accepted == 0){
-                counter_split++;
-            }
-            total_split++;
         }
         else{
             accepted = this->switch_partition(mcm_tmp, settings);
-        
-            if (accepted == 2){
-                std::cout << "Not switched \n";
-            }
-            else if (accepted == 0){
-                counter_switch++;
-            }
-            total_switch++;
         }
+        counter += accepted;
 
         // Update the temperature
         if (i % this->SA_update_schedule == 0){
@@ -157,21 +128,23 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
             break;
         }
         
+        // Keep track of how the acceptance rate decreases
         if (((i+1) % 1000) == 0){
-            std::cout << "Accepted percentage merges: " << counter_merge << " / " << total_merge << " = " << (counter_merge / total_merge) * 100 << "% \n";
-            std::cout << "Accepted percentage splits: " << counter_split << " / " << total_split << " = " << (counter_split / total_split) * 100 << "% \n";
-            std::cout << "Accepted percentage switches: " << counter_switch << " / " << total_switch << " = " << (counter_switch / total_switch) * 100 << "% \n";
-            std::cout << "Total accepted percentage: " << (counter_merge + counter_split + counter_switch) / 10.0 << "% \n\n";
-
-            counter_merge = 0;
-            counter_split = 0;
-            counter_switch = 0;
-
-            total_merge = 0;
-            total_split = 0;
-            total_switch = 0;
+            acceptance_rate.push_back(counter / 1000.);
+            counter = 0;
         }
     }
+
+    if (this->output_file){
+        *this->output_file << "Acceptance rate over the last 1000 iterations\n";
+        *this->output_file << "---------------------------------------------\n\n";
+
+        for (int i = 0; i < acceptance_rate.size(); ++i){
+            *this->output_file << "iteration " << (i+1)*1000 << "\t" << acceptance_rate[i] << "\n";
+        }
+        *this->output_file << "\n";
+    }
+
 
     // Hierarchical merging procedure
     this->hierarchical_merging();
@@ -200,7 +173,7 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
 }
 
 int MCMSearch::merge_partition(MCM& mcm, SA_settings& settings){
-    if (mcm.n_comp <= 1){return 2;}
+    if (mcm.n_comp <= 1){return 0;}
 
     __uint128_t ONE = 1;
 
@@ -234,14 +207,14 @@ int MCMSearch::merge_partition(MCM& mcm, SA_settings& settings){
         }
         mcm.n_comp--;
 
-        return 0;
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 int MCMSearch::split_partition(MCM& mcm, SA_settings& settings){
-    if (mcm.n_comp == this->data->n){return 2;}
-    if (settings.occupied_comp2 == 0){return 2;}
+    if (mcm.n_comp == this->data->n){return 0;}
+    if (settings.occupied_comp2 == 0){return 0;}
 
     __uint128_t ONE = 1;
 
@@ -290,14 +263,14 @@ int MCMSearch::split_partition(MCM& mcm, SA_settings& settings){
         }
         mcm.n_comp++;
 
-        return 0;
+        return 1;
     }
-    return 1;
+    return 0;
 }
 
 int MCMSearch::switch_partition(MCM& mcm, SA_settings& settings){
-    if (mcm.n_comp == 1 || mcm.n_comp == this->data->n){return 2;}
-    if (settings.occupied_comp2 == 0){return 2;}
+    if (mcm.n_comp == 1 || mcm.n_comp == this->data->n){return 0;}
+    if (settings.occupied_comp2 == 0){return 0;}
 
     __uint128_t ONE = 1;
 
@@ -336,7 +309,7 @@ int MCMSearch::switch_partition(MCM& mcm, SA_settings& settings){
         if (bit_count(comp_2) == 1){
             settings.occupied_comp2 += (ONE << comp_2_index);
         }
-        return 0;
+        return 1;
     }
-    return 1;
+    return 0;
 }
