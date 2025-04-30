@@ -1,21 +1,6 @@
-# Minimally Complex Spinmodels
+# MinCompSpin
 
-## Prerequisites
-
-* The code uses C++ 11.
-* CMake v3.26.4+
-* pybind11 v2.12.0+
-
-## Installation
-
-```
-mkdir build
-cd build
-cmake ..
-make
-```
-
-
-## Usage
-
-The pybinds folder contains a notebook `tutorial.ipynb` containing an example on how the code can be used.
+MinCompSpin is a C++ library with Python bindings for analyzing discrete datasets using Minimally Complex Models (MCMs).
+MCMs are a family of spinmodels that have minimal information-theoretic complexity.
+The analysis using MCMs can uncover community structures in the data while taking into account possible higher-order interactions between the variables.
+At the moment, datasets with up to 128 variables can be used for analysis.
