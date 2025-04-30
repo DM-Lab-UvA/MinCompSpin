@@ -1,29 +1,5 @@
 #include "basis/basis.h"
 
-int count_set_bits(__uint128_t value){
-    int count = 0;
-    while (value){
-        value &= (value - 1);
-        ++count;
-    }
-    return count;
-}
-
-int spin_value(std::vector<__uint128_t>& state, std::vector<__uint128_t>& op, int q){
-    // s = sum(alpha_j * mu_j)
-    int s = 0;
-    int element_j = 1;
-    for (__uint128_t j : op){
-        int element_i = 1;
-        for (__uint128_t i : state){
-            s += element_i * element_j * count_set_bits(i & j);
-            element_i <<= 1;
-        }
-        element_j <<= 1;
-    }
-    return s % q;
-}
-
 void Basis::gt_data_in_place(Data& data) {
     // Check if the number of variables match
     if (this->n != data.n){
@@ -65,10 +41,33 @@ void Basis::gt_data_in_place(Data& data) {
     }
 }
 
-Data Basis::gt_data(Data& data) {
+Data Basis::gt_data(const Data& data) {
     // Copy the given dataset
     Data gt_data = data;
     // Transform the copy in place
     this->gt_data_in_place(gt_data);
     return gt_data;
+}
+
+void Basis::gt_basis_in_place(Basis& basis){
+    // Check if the number of variables match
+    if (this->n != basis.n){
+        throw std::invalid_argument("Number of variables in the two Basis objects doesn't match.");
+    }
+    // Check the value of q
+    if (this->q != basis.q){
+        throw std::invalid_argument("Number of values each variable can take doesn't match the between the two Basis objects.");
+    }
+    
+    std::vector<std::vector<uint8_t>> gt_spin_ops(this->n, std::vector<uint8_t>(this->n));
+    // Matrix matrix multiplication
+    for (int i = 0; i < this->n; ++i){
+        for (int j = 0; j < this->n; ++j){
+            for (int k = 0; k < this->n; ++k){
+                gt_spin_ops[j][i] += basis.basis_ops_matrix[i][k] * this->basis_ops_matrix[k][j];
+            }
+            gt_spin_ops[j][i] %= this->q;
+        }
+    }
+    basis.set_basis_unsafe(gt_spin_ops);
 }
