@@ -64,7 +64,9 @@ void bind_basis_class(py::module &m) {
         .def("gauge_transform", &PyBasis::gt_data)
         .def("gauge_transform_in_place", &PyBasis::gt_data_in_place)
         .def("print_details", &PyBasis::print_details)
-        .def_property("matrix", &PyBasis::get_basis, &PyBasis::set_basis)
-        .def_property_readonly("n", &PyBasis::get_n)
-        .def_property_readonly("q", &PyBasis::get_q);
+        .def_property("matrix", &PyBasis::get_basis, &PyBasis::set_basis, "The matrix representation of basis, with shape (n, n). Each column represents a spin operator."
+        "Each element of a column is a value between 0 and q-1 indicating the power with which the corresponding variable is present in the operator."
+        "The operators are ordered from low to high entropy.")
+        .def_property_readonly("n", &PyBasis::get_n, "The number of variables in the system (read-only).")
+        .def_property_readonly("q", &PyBasis::get_q, "The number of states each variable can take (read-only).");
 }
