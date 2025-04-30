@@ -5,6 +5,7 @@
 
 #include "data/dataset.h"
 #include "independence.h"
+#include "utilities/spin_ops.h"
 #include "utilities/miscellaneous.h"
 
 class Basis {
@@ -39,14 +40,21 @@ public:
     std::vector<std::vector<__uint128_t>> get_basis() {return this->basis_ops;};
     std::vector<std::vector<uint8_t>> get_basis_matrix() {return this->basis_ops_matrix;};
     void set_basis(const std::vector<std::vector<uint8_t>>& spin_ops);
+    void set_basis_unsafe(const std::vector<std::vector<uint8_t>>& spin_ops);
     void set_basis_from_file(std::string& file);
+    void set_basis_default();
+    int set_basis_random();
 
     void gt_data_in_place(Data& data);
-    Data gt_data(Data& data);
+    Data gt_data(const Data& data);
+
+    void gt_basis_in_place(Basis& basis);    
 
     int get_n() {return this->n;};
     int get_q() {return this->q;};
     int get_n_ints() {return this->n_ints;};
+
+    void print_details();
 
 private:
 
@@ -57,6 +65,3 @@ private:
     std::vector<std::vector<__uint128_t>> basis_ops; // Vector of spin operators
     std::vector<std::vector<uint8_t>> basis_ops_matrix; // Matrix representation of the basis 
 };
-
-int count_set_bits(__uint128_t value);
-int spin_value(std::vector<__uint128_t>& state, std::vector<__uint128_t>& op, int q);

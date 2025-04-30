@@ -63,7 +63,7 @@ TEST(basis, init_n){
 
 TEST(basis, init_spin_ops){
     // Declare variables
-    int n ;
+    int n;
     int q;
 
     std::vector<std::vector<__uint128_t>> spin_ops;
@@ -246,7 +246,7 @@ TEST(basis, init_file){
         FAIL () << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(), std::string("The given basis doesn't have n spin operators."));
+        EXPECT_EQ(err.what(), std::string("File contains too many spin operators."));
     }
 
     // Read in file with invalid number of entries for spin op
