@@ -1,0 +1,686 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API &mdash; Minimally Complex Spin Models 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Installation" href="../user_guide/installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Minimally Complex Spin Models
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#mcmpy.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.N"><code class="docutils literal notranslate"><span class="pre">Data.N</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.N_unique"><code class="docutils literal notranslate"><span class="pre">Data.N_unique</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.complexity_geometric"><code class="docutils literal notranslate"><span class="pre">Data.complexity_geometric()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.complexity_geometric_icc"><code class="docutils literal notranslate"><span class="pre">Data.complexity_geometric_icc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.complexity_parametric"><code class="docutils literal notranslate"><span class="pre">Data.complexity_parametric()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.complexity_parametric_icc"><code class="docutils literal notranslate"><span class="pre">Data.complexity_parametric_icc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.entropy"><code class="docutils literal notranslate"><span class="pre">Data.entropy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.log_evidence"><code class="docutils literal notranslate"><span class="pre">Data.log_evidence()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.log_evidence_icc"><code class="docutils literal notranslate"><span class="pre">Data.log_evidence_icc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.log_likelihood"><code class="docutils literal notranslate"><span class="pre">Data.log_likelihood()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.log_likelihood_icc"><code class="docutils literal notranslate"><span class="pre">Data.log_likelihood_icc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.minimum_description_length"><code class="docutils literal notranslate"><span class="pre">Data.minimum_description_length()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.n"><code class="docutils literal notranslate"><span class="pre">Data.n</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data.q"><code class="docutils literal notranslate"><span class="pre">Data.q</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mcmpy.MCM"><code class="docutils literal notranslate"><span class="pre">MCM</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.array"><code class="docutils literal notranslate"><span class="pre">MCM.array</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.array_gray_code"><code class="docutils literal notranslate"><span class="pre">MCM.array_gray_code</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.generate_data_object"><code class="docutils literal notranslate"><span class="pre">MCM.generate_data_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.generate_samples"><code class="docutils literal notranslate"><span class="pre">MCM.generate_samples()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.get_best_log_evidence"><code class="docutils literal notranslate"><span class="pre">MCM.get_best_log_evidence()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.get_best_log_evidence_icc"><code class="docutils literal notranslate"><span class="pre">MCM.get_best_log_evidence_icc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.is_optimized"><code class="docutils literal notranslate"><span class="pre">MCM.is_optimized</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.move_variable"><code class="docutils literal notranslate"><span class="pre">MCM.move_variable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.move_variable_in"><code class="docutils literal notranslate"><span class="pre">MCM.move_variable_in()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.move_variable_out"><code class="docutils literal notranslate"><span class="pre">MCM.move_variable_out()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.n"><code class="docutils literal notranslate"><span class="pre">MCM.n</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.n_icc"><code class="docutils literal notranslate"><span class="pre">MCM.n_icc</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.print_info"><code class="docutils literal notranslate"><span class="pre">MCM.print_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM.rank"><code class="docutils literal notranslate"><span class="pre">MCM.rank</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mcmpy.MCMSearch"><code class="docutils literal notranslate"><span class="pre">MCMSearch</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.exhaustive"><code class="docutils literal notranslate"><span class="pre">MCMSearch.exhaustive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.hierarchical_greedy_merging"><code class="docutils literal notranslate"><span class="pre">MCMSearch.hierarchical_greedy_merging()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.hierarchical_greedy_divisive"><code class="docutils literal notranslate"><span class="pre">MCMSearch.hierarchical_greedy_divisive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.simulated_annealing"><code class="docutils literal notranslate"><span class="pre">MCMSearch.simulated_annealing()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.get_mcm_in"><code class="docutils literal notranslate"><span class="pre">MCMSearch.get_mcm_in()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.get_mcm_out"><code class="docutils literal notranslate"><span class="pre">MCMSearch.get_mcm_out()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.log_evidence_trajectory"><code class="docutils literal notranslate"><span class="pre">MCMSearch.log_evidence_trajectory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.SA_max_iteration"><code class="docutils literal notranslate"><span class="pre">MCMSearch.SA_max_iteration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.SA_temperature_initial"><code class="docutils literal notranslate"><span class="pre">MCMSearch.SA_temperature_initial</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch.SA_temperature_iteration_update"><code class="docutils literal notranslate"><span class="pre">MCMSearch.SA_temperature_iteration_update</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mcmpy.Basis"><code class="docutils literal notranslate"><span class="pre">Basis</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.gauge_transform"><code class="docutils literal notranslate"><span class="pre">Basis.gauge_transform()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.gauge_transform_in_place"><code class="docutils literal notranslate"><span class="pre">Basis.gauge_transform_in_place()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.matrix"><code class="docutils literal notranslate"><span class="pre">Basis.matrix</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.n"><code class="docutils literal notranslate"><span class="pre">Basis.n</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.print_details"><code class="docutils literal notranslate"><span class="pre">Basis.print_details()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.q"><code class="docutils literal notranslate"><span class="pre">Basis.q</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.set_default"><code class="docutils literal notranslate"><span class="pre">Basis.set_default()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.set_from_file"><code class="docutils literal notranslate"><span class="pre">Basis.set_from_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis.set_random"><code class="docutils literal notranslate"><span class="pre">Basis.set_random()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#mcmpy.BasisSearch"><code class="docutils literal notranslate"><span class="pre">BasisSearch</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.BasisSearch.exhaustive"><code class="docutils literal notranslate"><span class="pre">BasisSearch.exhaustive()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.BasisSearch.up_to_order_k_fixed"><code class="docutils literal notranslate"><span class="pre">BasisSearch.up_to_order_k_fixed()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.BasisSearch.up_to_order_k_iterative"><code class="docutils literal notranslate"><span class="pre">BasisSearch.up_to_order_k_iterative()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.BasisSearch.get_basis"><code class="docutils literal notranslate"><span class="pre">BasisSearch.get_basis()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.BasisSearch.print_results"><code class="docutils literal notranslate"><span class="pre">BasisSearch.print_results()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Minimally Complex Spin Models</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/mcmpy.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api">
+<h1>API<a class="headerlink" href="#api" title="Link to this heading"></a></h1>
+<p>This is the C++ extension module built with pybind11.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.Data">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><a class="headerlink" href="#mcmpy.Data" title="Link to this definition"></a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.Data.N">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">N</span></span><a class="headerlink" href="#mcmpy.Data.N" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.Data.N_unique">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">N_unique</span></span><a class="headerlink" href="#mcmpy.Data.N_unique" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.complexity_geometric">
+<span class="sig-name descname"><span class="pre">complexity_geometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.complexity_geometric" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>complexity_geometric(self: mcmpy.Data, arg0: PyMCM) -&gt; float</p></li>
+<li><p>complexity_geometric(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; float</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.complexity_geometric_icc">
+<span class="sig-name descname"><span class="pre">complexity_geometric_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.complexity_geometric_icc" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>complexity_geometric_icc(self: mcmpy.Data, arg0: PyMCM) -&gt; numpy.ndarray</p></li>
+<li><p>complexity_geometric_icc(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; numpy.ndarray</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.complexity_parametric">
+<span class="sig-name descname"><span class="pre">complexity_parametric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.complexity_parametric" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>complexity_parametric(self: mcmpy.Data, arg0: PyMCM) -&gt; float</p></li>
+<li><p>complexity_parametric(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; float</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.complexity_parametric_icc">
+<span class="sig-name descname"><span class="pre">complexity_parametric_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.complexity_parametric_icc" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>complexity_parametric_icc(self: mcmpy.Data, arg0: PyMCM) -&gt; numpy.ndarray</p></li>
+<li><p>complexity_parametric_icc(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; numpy.ndarray</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#mcmpy.Data.entropy" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.log_evidence">
+<span class="sig-name descname"><span class="pre">log_evidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.log_evidence" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>log_evidence(self: mcmpy.Data, arg0: PyMCM) -&gt; float</p></li>
+<li><p>log_evidence(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; float</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.log_evidence_icc">
+<span class="sig-name descname"><span class="pre">log_evidence_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.log_evidence_icc" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>log_evidence_icc(self: mcmpy.Data, arg0: PyMCM) -&gt; numpy.ndarray</p></li>
+<li><p>log_evidence_icc(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; numpy.ndarray</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.log_likelihood">
+<span class="sig-name descname"><span class="pre">log_likelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.log_likelihood" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>log_likelihood(self: mcmpy.Data, arg0: PyMCM) -&gt; float</p></li>
+<li><p>log_likelihood(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; float</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.log_likelihood_icc">
+<span class="sig-name descname"><span class="pre">log_likelihood_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.log_likelihood_icc" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>log_likelihood_icc(self: mcmpy.Data, arg0: PyMCM) -&gt; numpy.ndarray</p></li>
+<li><p>log_likelihood_icc(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; numpy.ndarray</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.minimum_description_length">
+<span class="sig-name descname"><span class="pre">minimum_description_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.minimum_description_length" title="Link to this definition"></a></dt>
+<dd><p>Overloaded function.</p>
+<ol class="arabic simple">
+<li><p>minimum_description_length(self: mcmpy.Data, arg0: typing.Annotated[numpy.typing.ArrayLike, numpy.int8]) -&gt; float</p></li>
+<li><p>minimum_description_length(self: mcmpy.Data, arg0: PyMCM) -&gt; float</p></li>
+</ol>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.Data.n">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#mcmpy.Data.n" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.Data.q">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">q</span></span><a class="headerlink" href="#mcmpy.Data.q" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.MCM">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">MCM</span></span><a class="headerlink" href="#mcmpy.MCM" title="Link to this definition"></a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.MCM.array">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">array</span></span><a class="headerlink" href="#mcmpy.MCM.array" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.MCM.array_gray_code">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">array_gray_code</span></span><a class="headerlink" href="#mcmpy.MCM.array_gray_code" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.generate_data_object">
+<span class="sig-name descname"><span class="pre">generate_data_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></span><a class="headerlink" href="#mcmpy.MCM.generate_data_object" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.generate_samples">
+<span class="sig-name descname"><span class="pre">generate_samples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.MCM.generate_samples" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.get_best_log_evidence">
+<span class="sig-name descname"><span class="pre">get_best_log_evidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#mcmpy.MCM.get_best_log_evidence" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.get_best_log_evidence_icc">
+<span class="sig-name descname"><span class="pre">get_best_log_evidence_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#mcmpy.MCM.get_best_log_evidence_icc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.MCM.is_optimized">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_optimized</span></span><a class="headerlink" href="#mcmpy.MCM.is_optimized" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.move_variable">
+<span class="sig-name descname"><span class="pre">move_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.MCM.move_variable" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.move_variable_in">
+<span class="sig-name descname"><span class="pre">move_variable_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.MCM.move_variable_in" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.move_variable_out">
+<span class="sig-name descname"><span class="pre">move_variable_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.MCM.move_variable_out" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.MCM.n">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#mcmpy.MCM.n" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.MCM.n_icc">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n_icc</span></span><a class="headerlink" href="#mcmpy.MCM.n_icc" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.print_info">
+<span class="sig-name descname"><span class="pre">print_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.MCM.print_info" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.MCM.rank">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rank</span></span><a class="headerlink" href="#mcmpy.MCM.rank" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">MCMSearch</span></span><a class="headerlink" href="#mcmpy.MCMSearch" title="Link to this definition"></a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.exhaustive">
+<span class="sig-name descname"><span class="pre">exhaustive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><span class="pre">mcmpy.MCMSearch</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></span><a class="headerlink" href="#mcmpy.MCMSearch.exhaustive" title="Link to this definition"></a></dt>
+<dd><p>Performs an exhaustive search to find the optimal MCM for a given dataset.</p>
+<p>This function searches over all possible partitions of the variables to find the MCM with the largest log-evidence for the provided dataset.
+The result is returned as an <cite>MCM</cite> object and stored in the internal variable <cite>mcm_out</cite>.
+<strong>Note</strong> that this search is only feasible for small systems (n &lt; 15).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The MCM that has the largest log-evidence for the given dataset.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.hierarchical_greedy_merging">
+<span class="sig-name descname"><span class="pre">hierarchical_greedy_merging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><span class="pre">mcmpy.MCMSearch</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mcm_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></span><a class="headerlink" href="#mcmpy.MCMSearch.hierarchical_greedy_merging" title="Link to this definition"></a></dt>
+<dd><p>Performs a hierarchical greedy merging procedure to find the optimal MCM for a given dataset.</p>
+<p>This search function consists of an iterative merging procedure.
+Because the algorithm doesn’t go through all partitions, there is no guarentee of finding the MCM with the largest log-evidence.
+The result is returned as an <cite>MCM</cite> object and stored in the internal variable <cite>mcm_out</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>mcm_in</strong> (<a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a><em>, </em><em>optional</em>) – An optional MCM object representing the starting partition of the algorithm.
+If not provided, the independent model is used as the default starting partition.</p></li>
+<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – Path to the file where the search details will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The best fitting MCM for the given dataset found by the greedy merging algorithm.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.hierarchical_greedy_divisive">
+<span class="sig-name descname"><span class="pre">hierarchical_greedy_divisive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><span class="pre">mcmpy.MCMSearch</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mcm_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></span><a class="headerlink" href="#mcmpy.MCMSearch.hierarchical_greedy_divisive" title="Link to this definition"></a></dt>
+<dd><p>Performs a hierarchical greedy divisive procedure to find the optimal MCM for a given dataset.</p>
+<p>This search function consists of an iterative division procedure.
+Because the algorithm doesn’t go through all partitions, there is no guarentee of finding the MCM with the largest log-evidence.
+The result is returned as an <cite>MCM</cite> object and stored in the internal variable <cite>mcm_out</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>mcm_in</strong> (<a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a><em>, </em><em>optional</em>) – An optional MCM object representing the starting partition of the algorithm.
+If not provided, the complete model is used as the default starting partition.</p></li>
+<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – Path to the file where the search details will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The best fitting MCM for the given dataset found by the greedy divisive algorithm.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.simulated_annealing">
+<span class="sig-name descname"><span class="pre">simulated_annealing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><span class="pre">mcmpy.MCMSearch</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mcm_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></span><a class="headerlink" href="#mcmpy.MCMSearch.simulated_annealing" title="Link to this definition"></a></dt>
+<dd><p>Performs a simulated annealing algorithm to find the optimal MCM for a given dataset.</p>
+<p>Because the algorithm doesn’t go through all partitions, there is no guarentee of finding the MCM with the largest log-evidence.
+The result is returned as an <cite>MCM</cite> object and stored in the internal variable <cite>mcm_out</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>mcm_in</strong> (<a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a><em>, </em><em>optional</em>) – An optional MCM object representing the starting partition of the algorithm.
+If not provided, the independent model is used as the default starting partition.</p></li>
+<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – Path to the file where the search details will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The best fitting MCM for the given dataset found by the simulated annealing algorithm.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.get_mcm_in">
+<span class="sig-name descname"><span class="pre">get_mcm_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><span class="pre">mcmpy.MCMSearch</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></span><a class="headerlink" href="#mcmpy.MCMSearch.get_mcm_in" title="Link to this definition"></a></dt>
+<dd><p>Returns an MCM object containing the starting partition of the last search.</p>
+<p><strong>Note</strong> that this function can only be called once a search has been run and if the search was not an exhaustive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The MCM that was used as starting point of the last search.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.get_mcm_out">
+<span class="sig-name descname"><span class="pre">get_mcm_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><span class="pre">mcmpy.MCMSearch</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">mcmpy.MCM</span></a></span></span><a class="headerlink" href="#mcmpy.MCMSearch.get_mcm_out" title="Link to this definition"></a></dt>
+<dd><p>Returns an MCM object containing the solution of the last search.</p>
+<p><strong>Note</strong> that this function can only be called once a search has been run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The MCM that was the result of the last search.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Attributes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.log_evidence_trajectory">
+<span class="sig-name descname"><span class="pre">log_evidence_trajectory</span></span><a class="headerlink" href="#mcmpy.MCMSearch.log_evidence_trajectory" title="Link to this definition"></a></dt>
+<dd><p>Read-only array with the log-evidence values.For the simulated annealing, the log-evidence value of the current best solution at every iteration is stored. For the exhaustive search, the log-evidence of all possible partitions is stored.For the hierarchical greedy algorithms, the log-evidence is stored only when an improvement is found.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.SA_max_iteration">
+<span class="sig-name descname"><span class="pre">SA_max_iteration</span></span><a class="headerlink" href="#mcmpy.MCMSearch.SA_max_iteration" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of iterations in the simulated annealing algorithm. The default number of iterations is 50 000.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.SA_temperature_initial">
+<span class="sig-name descname"><span class="pre">SA_temperature_initial</span></span><a class="headerlink" href="#mcmpy.MCMSearch.SA_temperature_initial" title="Link to this definition"></a></dt>
+<dd><p>The initial temperature used in the annealing process. The default temperature is 100.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.SA_temperature_iteration_update">
+<span class="sig-name descname"><span class="pre">SA_temperature_iteration_update</span></span><a class="headerlink" href="#mcmpy.MCMSearch.SA_temperature_iteration_update" title="Link to this definition"></a></dt>
+<dd><p>The number of iterations after which the temperature is updated. The default number of iterations is 100.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.Basis">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">Basis</span></span><a class="headerlink" href="#mcmpy.Basis" title="Link to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.gauge_transform">
+<span class="sig-name descname"><span class="pre">gauge_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></span><a class="headerlink" href="#mcmpy.Basis.gauge_transform" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.gauge_transform_in_place">
+<span class="sig-name descname"><span class="pre">gauge_transform_in_place</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.Basis.gauge_transform_in_place" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.Basis.matrix">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matrix</span></span><a class="headerlink" href="#mcmpy.Basis.matrix" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.Basis.n">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#mcmpy.Basis.n" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.print_details">
+<span class="sig-name descname"><span class="pre">print_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.Basis.print_details" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mcmpy.Basis.q">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">q</span></span><a class="headerlink" href="#mcmpy.Basis.q" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.set_default">
+<span class="sig-name descname"><span class="pre">set_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.Basis.set_default" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.set_from_file">
+<span class="sig-name descname"><span class="pre">set_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">arg0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.Basis.set_from_file" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.set_random">
+<span class="sig-name descname"><span class="pre">set_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#mcmpy.Basis.set_random" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">BasisSearch</span></span><a class="headerlink" href="#mcmpy.BasisSearch" title="Link to this definition"></a></dt>
+<dd><p class="rubric">Methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.exhaustive">
+<span class="sig-name descname"><span class="pre">exhaustive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.BasisSearch" title="mcmpy.BasisSearch"><span class="pre">mcmpy.BasisSearch</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></span><a class="headerlink" href="#mcmpy.BasisSearch.exhaustive" title="Link to this definition"></a></dt>
+<dd><p>Performs a search over all spin operators to find the optimal basis for a given dataset.</p>
+<p>This function searches over all spin operators of the variables and selects the optimal set of <cite>n</cite> linearly independent spin operators with the lowest entropy over the data.
+The result is returned as an <cite>Basis</cite> object and stored in the internal variable <cite>basis</cite>.
+<strong>Note</strong> that this search is only feasible for small systems (n &lt; 15).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – Path to the file where the basis will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The optimal basis for the given dataset found by an exhaustive search.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis">Basis</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.up_to_order_k_fixed">
+<span class="sig-name descname"><span class="pre">up_to_order_k_fixed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.BasisSearch" title="mcmpy.BasisSearch"><span class="pre">mcmpy.BasisSearch</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></span><a class="headerlink" href="#mcmpy.BasisSearch.up_to_order_k_fixed" title="Link to this definition"></a></dt>
+<dd><p>Performs a search over all spin operators up to order k to find the optimal basis for a given dataset.</p>
+<p>This function searches over all spin operators up to order k and selects the set of <cite>n</cite> linearly independent spin operators with the lowest entropy over the data.
+The result is returned as an <cite>Basis</cite> object and stored in the internal variable <cite>basis</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – The maximum interaction order of the spin operators to consider.</p></li>
+<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – Path to the file where the basis will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The optimal basis for the given dataset found by a search up to order k.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis">Basis</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.up_to_order_k_iterative">
+<span class="sig-name descname"><span class="pre">up_to_order_k_iterative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.BasisSearch" title="mcmpy.BasisSearch"><span class="pre">mcmpy.BasisSearch</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><span class="pre">mcmpy.Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SupportsInt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></span><a class="headerlink" href="#mcmpy.BasisSearch.up_to_order_k_iterative" title="Link to this definition"></a></dt>
+<dd><p>Performs an iterative search over all spin operators up to order k to find the optimal basis for a given dataset.</p>
+<p>This function searches iteratively over all spin operators up to order k and selects the set of <cite>n</cite> linearly independent spin operators with the lowest entropy over the data.
+In each iteration the dataset is transformed in the current best basis, and a new optimal basis is searched for.
+This process continues until the optimal basis between two iterations remains unchanged.
+The result is returned as an <cite>Basis</cite> object and stored in the internal variable <cite>basis</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – The maximum interaction order of the spin operators to consider in each iteration.</p></li>
+<li><p><strong>filename</strong> (<em>string</em><em>, </em><em>optional</em>) – Path to the file where the basis will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The optimal basis for the given dataset found by an iterative search up to order k.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis">Basis</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.get_basis">
+<span class="sig-name descname"><span class="pre">get_basis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.BasisSearch" title="mcmpy.BasisSearch"><span class="pre">mcmpy.BasisSearch</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><span class="pre">mcmpy.Basis</span></a></span></span><a class="headerlink" href="#mcmpy.BasisSearch.get_basis" title="Link to this definition"></a></dt>
+<dd><p>Returns a Basis object containing the solution of the last search.</p>
+<p><strong>Note</strong> that this function can only be called once a search has been run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Basis object that was the result of the last search.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis">Basis</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.print_results">
+<span class="sig-name descname"><span class="pre">print_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mcmpy.BasisSearch" title="mcmpy.BasisSearch"><span class="pre">mcmpy.BasisSearch</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mcmpy.BasisSearch.print_results" title="Link to this definition"></a></dt>
+<dd><p>Prints out the results of the last search.</p>
+<p>This function prints the search type, duration and the resulting of the last search.
+For a search up to order k, the maximum interaction order is also printed out.
+For an iterative search, the maximum interaction order and the number of iterations is also printed out.</p>
+</dd></dl>
+
+<p class="rubric">Attributes</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../user_guide/installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aaron De Clercq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
