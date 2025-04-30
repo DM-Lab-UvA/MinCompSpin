@@ -13,13 +13,23 @@
 class Data {
 public:
     /**
-     * Constructs a new Data object.
+     * Constructs a new Data object using a given file.
      * 
      * @param file                  Path to the file.
      * @param n_var                 Number of variables in the system.
      * @param n_states              Number of values each variable can take.
      */
     Data(const std::string& filename, int n_var, int n_states);
+
+    /**
+     * Constructs a new Data object using a given dataset.
+     * 
+     * @param _dataset              Dataset given as a vector of pairs.
+     * @param n_var                 Number of variables in the system.
+     * @param n_states              Number of values each variable can take.
+     * @param n_samples             The number of samples in the dataset.
+     */
+    Data(const std::vector<std::pair<std::vector<__uint128_t>, unsigned int>>& _dataset, int n_var, int n_states, int n_samples);
 
     /**
      * Calculate the entropy of the dataset.

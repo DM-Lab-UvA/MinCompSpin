@@ -5,21 +5,32 @@
 #include <pybind11/numpy.h>
 
 #include "data/dataset.h"
+#include "utilities/spin_ops.h"
+#include "utilities/miscellaneous.h"
 #include "py_mcm.h"
 #include "py_partition.h"
 
 namespace py = pybind11;
 
+std::vector<__uint128_t> convert_spin_op_from_py(const py::array_t<uint8_t>& spin_op, int q, int n_ints);
+
 class PyData {
 public:
     /**
-     * Constructs a new PyData object
+     * Constructs a new PyData object from a file
      * 
      * @param file                  Path to the file.
      * @param n_var                 Number of variables in the system
      * @param n_states              Number of values each variable can take
      */
     PyData(const std::string& filename, int n_var, int n_states) : data(filename, n_var, n_states) {};
+
+    /**
+     * Constructs a new PyData object from a Data object
+     * 
+     * @param _data                 Data object
+     */
+    PyData(const Data& _data) : data(_data.dataset, _data.n, _data.q, _data.N) {};
 
     double calc_property_array(py::array_t<int8_t> partition, std::string property);
     double calc_property_mcm(PyMCM& mcm, std::string property);
@@ -50,6 +61,7 @@ public:
     double calc_mdl_mcm(PyMCM& mcm) {return this->calc_property_mcm(mcm, "mdl");};
     
     double entropy(int base = -1);
+    double entropy_of_spin_op(const py::array_t<int8_t>& op);
 
     int get_n() {return this->data.n;};
     int get_N() {return this->data.N;};

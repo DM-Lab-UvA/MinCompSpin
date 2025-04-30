@@ -1,5 +1,31 @@
 #include "py_dataset.h"
 
+std::vector<__uint128_t> convert_spin_op_from_py(const py::array_t<uint8_t>& spin_op, int q, int n_ints){
+    py::buffer_info buff = spin_op.request();
+
+    // Check if there is only one dimension
+    int ndim = buff.ndim;
+    if (ndim != 1){
+        throw std::invalid_argument("The spin operator should be given as a 1D numpy array.");
+    }
+    // Check if the system size is valid
+    int n = buff.shape[0];
+    if (n > 128){
+        throw std::invalid_argument("The maximum system size is 128.");
+    }
+
+    std::vector<uint8_t> conv_spin_op(n, 0);
+    uint8_t *ptr = static_cast<uint8_t *>(buff.ptr);
+
+    for (int i = 0; i < n; ++i){
+        conv_spin_op[i] = ptr[i];
+    }
+
+    std::vector<__uint128_t> op(n_ints, 0);
+    convert_8bit_vec_to_128bit_vec(op, conv_spin_op, n, q);
+    return op;
+}
+
 double PyData::calc_property_array(py::array_t<int8_t> partition, std::string property){
     std::vector<__uint128_t> conv_partition;
 
@@ -127,6 +153,11 @@ double PyData::entropy(int base){
     return this->data.entropy(base);
 }
 
+double PyData::entropy_of_spin_op(const py::array_t<int8_t>& op){
+    std::vector<__uint128_t> spin_op = convert_spin_op_from_py(op, this->data.q, this->data.n_ints);
+    return calc_entropy_of_spin_op(this->data, spin_op);
+}
+
 
 void bind_data_class(py::module &m) {
     py::class_<PyData>(m, "Data")
@@ -155,6 +186,7 @@ void bind_data_class(py::module &m) {
         .def("minimum_description_length", &PyData::calc_mdl_mcm)
 
         .def("entropy", &PyData::entropy, py::arg("base") = -1)
+        .def("entropy_of_spin_op", &PyData::entropy_of_spin_op, py::arg("spin_op"))
         .def_property_readonly("n", &PyData::get_n)
         .def_property_readonly("q", &PyData::get_q)
         .def_property_readonly("N", &PyData::get_N)

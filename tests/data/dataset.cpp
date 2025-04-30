@@ -68,6 +68,17 @@ TEST(dataset, init){
     EXPECT_EQ(data.n_ints, 2);
     EXPECT_EQ(data.N_unique, 6);
     EXPECT_EQ(data.dataset.size(), 6);
+
+    // Init from dataset
+    Data data2(data.dataset, n, q, data.N);
+
+    EXPECT_EQ(powers, data2.pow_q);
+    EXPECT_EQ(data2.n, n);
+    EXPECT_EQ(data2.q, q);
+    EXPECT_EQ(data2.N, 7);
+    EXPECT_EQ(data2.n_ints, 2);
+    EXPECT_EQ(data2.N_unique, 6);
+    EXPECT_EQ(data2.dataset.size(), 6);
 }
 
 TEST(dataset, entropy){
