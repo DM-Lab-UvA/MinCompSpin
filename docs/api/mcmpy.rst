@@ -8,8 +8,29 @@ This is the C++ extension module built with pybind11.
    :undoc-members:
 
 .. autoclass:: mcmpy.MCM
-   :members:
-   :undoc-members:
+
+   .. rubric:: Methods
+   .. automethod:: mcmpy.MCM.generate_data_file
+   .. automethod:: mcmpy.MCM.generate_data_object
+   .. automethod:: mcmpy.MCM.move_variable_in
+   .. automethod:: mcmpy.MCM.move_variable_out
+   .. automethod:: mcmpy.MCM.move_variable
+
+   .. note::
+
+      The following methods are only available when the :class:`MCM` object is the result of an :class:`MCMSearch` procedure. 
+
+   .. automethod:: mcmpy.MCM.print_info
+   .. automethod:: mcmpy.MCM.get_best_log_evidence
+   .. automethod:: mcmpy.MCM.get_best_log_evidence_icc
+   
+   .. rubric:: Attributes
+   .. autoattribute:: mcmpy.MCM.n
+   .. autoattribute:: mcmpy.MCM.n_icc
+   .. autoattribute:: mcmpy.MCM.rank
+   .. autoattribute:: mcmpy.MCM.array
+   .. autoattribute:: mcmpy.MCM.array_gray_code
+   .. autoattribute:: mcmpy.MCM.is_optimized
 
 .. autoclass:: mcmpy.MCMSearch
 
@@ -71,5 +92,3 @@ This is the C++ extension module built with pybind11.
    .. automethod:: mcmpy.BasisSearch.up_to_order_k_iterative
    .. automethod:: mcmpy.BasisSearch.get_basis
    .. automethod:: mcmpy.BasisSearch.print_results
-
-   .. rubric:: Attributes
