@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "../../include/search/search.h"
+#include "search/mcm_search/mcm_search.h"
 
 TEST(search, init_n) {
     // Initialize

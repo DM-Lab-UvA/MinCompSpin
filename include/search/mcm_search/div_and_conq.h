@@ -1,6 +1,6 @@
 #pragma once
 
-#include "search/search.h"
+#include "mcm_search.h"
 
 /**
  * Helper function for the division procedure that finds the integer representation of the bitstring with only a 1 in the position of the ith bit set to 1 in component.

@@ -4,7 +4,7 @@
 
 #include "data/dataset.h"
 #include "model/mcm.h"
-#include "search/annealing.h"
+#include "annealing.h"
 
 #include "utilities/miscellaneous.h"
 #include "utilities/partition.h"

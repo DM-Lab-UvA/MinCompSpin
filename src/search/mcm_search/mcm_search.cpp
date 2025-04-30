@@ -1,7 +1,7 @@
-#include "search/search.h"
+#include "search/mcm_search/mcm_search.h"
 
-/***************
-* Constructors *
+/**************
+* Constructor *
 ***************/
 
 MCMSearch::MCMSearch() : mcm_in(1), mcm_out(1) {
@@ -13,7 +13,7 @@ MCMSearch::MCMSearch() : mcm_in(1), mcm_out(1) {
 
 /*****************
 * Public methods *
-*****************/
+******************/
 
 MCM MCMSearch::get_mcm_in() {
     // Check if a search has occured

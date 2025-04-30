@@ -1,5 +1,5 @@
-#include "search/search.h"
-#include "search/exhaustive.h"
+#include "search/mcm_search/mcm_search.h"
+#include "search/mcm_search/exhaustive.h"
 
 MCM MCMSearch::exhaustive_search(Data& data) {
     // Clear from previous search

@@ -1,7 +1,6 @@
-#include "search/search.h"
+#include "search/mcm_search/mcm_search.h"
 
 MCM MCMSearch::greedy_search(Data& data, MCM* init_mcm, std::string file_name){
-    std::ofstream file;
     // Assign variables
     int n = data.n;
     this->data = &data;
@@ -44,8 +43,8 @@ MCM MCMSearch::greedy_search(Data& data, MCM* init_mcm, std::string file_name){
         *this->output_file << "Greedy Hierarchical Merging Procedure \n";
         *this->output_file << "===================================== \n\n";
 
-        *this->output_file << "Data statistics: \n";
-        *this->output_file << "---------------- \n\n";
+        *this->output_file << "Data statistics \n";
+        *this->output_file << "--------------- \n\n";
 
         *this->output_file << "Number of variables: " << data.n << "\n";
         *this->output_file << "Number of states per variable: " << data.q << "\n";
@@ -53,8 +52,8 @@ MCM MCMSearch::greedy_search(Data& data, MCM* init_mcm, std::string file_name){
         *this->output_file << "Number of unique datapoint: " << data.N_unique << "\n";
         *this->output_file << "Entropy of the data: " << data.entropy() << " q-its \n\n";
 
-        *this->output_file << "Initial partition: \n";
-        *this->output_file << "------------------ \n\n";
+        *this->output_file << "Initial partition \n";
+        *this->output_file << "----------------- \n\n";
 
         *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N * log(data.q)) << " q-its/datapoint \n\n";
 
@@ -74,8 +73,8 @@ MCM MCMSearch::greedy_search(Data& data, MCM* init_mcm, std::string file_name){
     if (!file_name.empty()){
         double max_log_likelihood = data.calc_log_likelihood(this->mcm_out.partition);
 
-        *this->output_file << "\nFinal partition: \n";
-        *this->output_file << "------------------ \n\n";
+        *this->output_file << "\nFinal partition \n";
+        *this->output_file << "----------------- \n\n";
 
         *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N * log(data.q)) << " q-its/datapoint \n";
         *this->output_file << "Max-Log-likelihood: " << max_log_likelihood << " = " << max_log_likelihood / (data.N * log(data.q)) << " q-its/datapoint \n\n";
@@ -91,8 +90,8 @@ MCM MCMSearch::greedy_search(Data& data, MCM* init_mcm, std::string file_name){
 void MCMSearch::hierarchical_merging(){
     // Output file
     if (this->output_file){
-        *this->output_file << "Start merging: \n";
-        *this->output_file << "-------------- \n\n";
+        *this->output_file << "Start merging \n";
+        *this->output_file << "------------- \n\n";
     }
 
     int n = this->mcm_out.n;
@@ -154,5 +153,10 @@ void MCMSearch::hierarchical_merging(){
                 *this->output_file << "Merging components " << best_i << " and " << best_j << " \t Log-evidence (q-its/datapoint): "<<  (this->mcm_out.log_ev) / (this->data->N * log(this->data->q)) << "\n";
             }
         }
+    }
+    // Output file
+    if (this->output_file){
+        *this->output_file << "\nStop merging \n";
+        *this->output_file << "------------ \n\n";
     }
 }

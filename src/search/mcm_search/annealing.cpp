@@ -1,5 +1,5 @@
-#include "search/search.h"
-#include "search/annealing.h"
+#include "search/mcm_search/mcm_search.h"
+#include "search/mcm_search/annealing.h"
 
 MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_name){
     int n = data.n;
@@ -45,8 +45,8 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
         *this->output_file << "Simulated Annealing Procedure \n";
         *this->output_file << "============================= \n\n";
 
-        *this->output_file << "Data statistics: \n";
-        *this->output_file << "---------------- \n\n";
+        *this->output_file << "Data statistics \n";
+        *this->output_file << "--------------- \n\n";
 
         *this->output_file << "Number of variables: " << data.n << "\n";
         *this->output_file << "Number of states per variable: " << data.q << "\n";
@@ -54,16 +54,16 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
         *this->output_file << "Number of unique datapoint: " << data.N_unique << "\n";
         *this->output_file << "Entropy of the data: " << data.entropy() << " q-its \n\n";
 
-        *this->output_file << "Initial partition: \n";
-        *this->output_file << "------------------ \n\n";
+        *this->output_file << "Initial partition \n";
+        *this->output_file << "----------------- \n\n";
 
         *this->output_file << "Log-evidence: " << mcm_tmp.log_ev << " = " << mcm_tmp.log_ev / (data.N * log(data.q)) << " q-its/datapoint \n\n";
 
         print_partition_details_to_file(*this->output_file, mcm_tmp, data.N, data.q);
         *this->output_file << "\n";
 
-        *this->output_file << "Start annealing: \n";
-        *this->output_file << "---------------- \n\n";
+        *this->output_file << "Start annealing \n";
+        *this->output_file << "--------------- \n\n";
     }
 
     // Initialize a struct containing the SA settings
@@ -73,6 +73,14 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
     int accepted;
     double log_ev;
     int steps_since_improve = 0;
+
+    double total_merge = 0;
+    double total_split = 0;
+    double total_switch = 0;
+
+    int counter_merge = 0;
+    int counter_split = 0;
+    int counter_switch = 0;
 
     for (int i = 0; i < this->SA_max_iter; i++){
         if (mcm_tmp.n_comp == data.n){
@@ -87,12 +95,36 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
 
         if (x == 0){
             accepted = this->merge_partition(mcm_tmp, settings);
+
+            if (accepted == 2){
+                std::cout << "Not merged \n";
+            }
+            else if (accepted == 0){
+                counter_merge++;
+            }
+            total_merge++;
         }
         else if (x == 1){
             accepted = this->split_partition(mcm_tmp, settings);
+
+            if (accepted == 2){
+                std::cout << "Not split \n";
+            }
+            else if (accepted == 0){
+                counter_split++;
+            }
+            total_split++;
         }
         else{
             accepted = this->switch_partition(mcm_tmp, settings);
+        
+            if (accepted == 2){
+                std::cout << "Not switched \n";
+            }
+            else if (accepted == 0){
+                counter_switch++;
+            }
+            total_switch++;
         }
 
         // Update the temperature
@@ -122,7 +154,23 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
             if (this->output_file){
                 *this->output_file << "\nMaximum number of iterations without improvement reached \n\n";
             }
-            break;}
+            break;
+        }
+        
+        if (((i+1) % 1000) == 0){
+            std::cout << "Accepted percentage merges: " << counter_merge << " / " << total_merge << " = " << (counter_merge / total_merge) * 100 << "% \n";
+            std::cout << "Accepted percentage splits: " << counter_split << " / " << total_split << " = " << (counter_split / total_split) * 100 << "% \n";
+            std::cout << "Accepted percentage switches: " << counter_switch << " / " << total_switch << " = " << (counter_switch / total_switch) * 100 << "% \n";
+            std::cout << "Total accepted percentage: " << (counter_merge + counter_split + counter_switch) / 10.0 << "% \n\n";
+
+            counter_merge = 0;
+            counter_split = 0;
+            counter_switch = 0;
+
+            total_merge = 0;
+            total_split = 0;
+            total_switch = 0;
+        }
     }
 
     // Hierarchical merging procedure
@@ -137,8 +185,8 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
     if (!file_name.empty()){
         double max_log_likelihood = data.calc_log_likelihood(this->mcm_out.partition);
 
-        *this->output_file << "\nFinal partition: \n";
-        *this->output_file << "------------------ \n\n";
+        *this->output_file << "\nFinal partition \n";
+        *this->output_file << "----------------- \n\n";
 
         *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N * log(data.q)) << " q-its/datapoint \n";
         *this->output_file << "Max-Log-likelihood: " << max_log_likelihood << " = " << max_log_likelihood / (data.N * log(data.q)) << " q-its/datapoint \n\n";
