@@ -124,13 +124,14 @@ void Basis::set_basis_from_file(std::string& file){
     std::vector<__uint128_t> spin_op(this->n_ints);
     while (getline(myfile, line)){
         // Check if there are at least n characters in a line
-        if (line.size() != this->n){
-            throw std::invalid_argument("File contains invalid spin operator because it does not contain n variables.");
+        if (line.size() < this->n){
+            throw std::invalid_argument("File contains invalid spin operator because it has less than n variables.");
         }
         // Check if there not too many operators given
         if (n_ops == this->n){
             throw std::invalid_argument("File contains too many spin operators.");
         }
+        line = line.substr(0, n);
         // Convert from string of n values between 0 and q-1 to a vector of log2(q) 128bit integers
         convert_string_to_vector(spin_op, line, this->n, this->q);
         this->basis_ops[n_ops] = spin_op;

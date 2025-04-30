@@ -28,9 +28,40 @@ This is the C++ extension module built with pybind11.
    .. autoattribute:: mcmpy.MCMSearch.SA_temperature_iteration_update
 
 .. autoclass:: mcmpy.Basis
-   :members:
-   :undoc-members:
 
+   .. rubric:: Methods
+   .. automethod:: mcmpy.Basis.set_from_file
+   .. automethod:: mcmpy.Basis.set_default
+   .. automethod:: mcmpy.Basis.set_random
+   .. automethod:: mcmpy.Basis.gauge_transform_data
+   .. automethod:: mcmpy.Basis.gauge_transform_data_in_place
+   .. automethod:: mcmpy.Basis.print_details
+   
+   .. rubric:: Attributes
+   .. autoattribute:: mcmpy.Basis.n
+   .. autoattribute:: mcmpy.Basis.q
+   .. autoattribute:: mcmpy.Basis.matrix
+   
+   This attribute can be set using a 2D numpy array where every entry corresponds to a spin operator, and the given set of operators is linearly independent.
+   **Note** that in the matrix the columns represent an operator, which is the transpose of the input.
+
+   .. code-block:: python
+
+      import numpy as np
+      from mcmpy import Basis
+      
+      n = 3
+      q = 5
+      basis = Basis(n, q)
+      basis.matrix = np.array([[1,2,4], [2,3,1], [0,2,1]])
+      print(basis.matrix)
+
+   .. code-block:: text
+      
+      [[1 2 0]
+      [2 3 2]
+      [4 1 1]]
+      
 
 .. autoclass:: mcmpy.BasisSearch
 

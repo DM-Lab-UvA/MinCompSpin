@@ -106,7 +106,7 @@ void bind_search_basis_class(py::module &m) {
             R"pbdoc(
             Prints out the results of the last search.
 
-            This function prints the search type, duration and the resulting of the last search.
+            This function prints the search type, duration and the basis found by the last search.
             For a search up to order k, the maximum interaction order is also printed out.
             For an iterative search, the maximum interaction order and the number of iterations is also printed out.
             )pbdoc");

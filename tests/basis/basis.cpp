@@ -256,17 +256,7 @@ TEST(basis, init_file){
         FAIL () << "Expected std::invalid_argument";
     }
     catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(), std::string("File contains invalid spin operator because it does not contain n variables."));
-    }
-    
-    n = 4;
-    filename = "../tests/basis1.dat";
-    try {
-        Basis basis(n, q, filename);
-        FAIL () << "Expected std::invalid_argument";
-    }
-    catch(std::invalid_argument const & err) {
-        EXPECT_EQ(err.what(), std::string("File contains invalid spin operator because it does not contain n variables."));
+        EXPECT_EQ(err.what(), std::string("File contains invalid spin operator because it has less than n variables."));
     }
 
     // Read in with variables raised to a power larger than q-1

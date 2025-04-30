@@ -21,7 +21,7 @@ public:
     py::array_t<uint8_t> get_basis() {return convert_basis_to_py(this->basis.get_basis_matrix(), this->basis.get_n());};
     void set_basis(py::array_t<uint8_t>& spin_ops) {this->basis.set_basis(convert_basis_from_py(spin_ops));};
     void set_basis_from_file(std::string& filename) {this->basis.set_basis_from_file(filename);};
-    void set_basis_default() {return this->basis.set_basis_default();};
+    void set_basis_default() {this->basis.set_basis_default();};
     int set_basis_random() {return this->basis.set_basis_random();};
 
     void gt_data_in_place(PyData& dataset) {this->basis.gt_data_in_place(dataset.data);};
