@@ -260,6 +260,7 @@ TEST(basis, init_file){
     }
 
     // Read in with variables raised to a power larger than q-1
+    n = 4;
     q = 2;
     filename = "../tests/basis2.dat";
     try {
