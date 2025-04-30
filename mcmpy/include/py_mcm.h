@@ -9,6 +9,9 @@
 
 namespace py = pybind11;
 
+// Forward declaration
+class PyData;
+
 class PyMCM {
 public:
     PyMCM(int n) : mcm(n) {};
@@ -28,6 +31,9 @@ public:
     double get_best_log_ev();
     py::array get_best_log_ev_per_icc();
     void print_info() {return this->mcm.print_info();};
+
+    void generate_samples(int N, PyData& pydata, std::string file_name);
+    PyData generate_data(int N, PyData& pydata, std::string file_name);
 
     int get_n() {return this->mcm.n;};
     int get_n_comp() {return this->mcm.n_comp;};

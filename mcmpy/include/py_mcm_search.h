@@ -4,7 +4,7 @@
 #include <pybind11/stl.h>
 #include <pybind11/numpy.h>
 
-#include "search/search.h"
+#include "search/mcm_search/mcm_search.h"
 #include "py_dataset.h"
 #include "py_mcm.h"
 #include "py_partition.h"

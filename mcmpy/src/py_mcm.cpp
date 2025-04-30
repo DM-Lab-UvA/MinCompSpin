@@ -1,4 +1,5 @@
 #include "py_mcm.h"
+#include "py_dataset.h"
 
 PyMCM::PyMCM(int n, py::array_t<int8_t> partition) : mcm(n) {
     std::vector<__uint128_t> conv_partition;
@@ -124,6 +125,15 @@ py::array PyMCM::get_best_log_ev_per_icc() {
     return py::array(this->mcm.n_comp, ev_per_icc.data());
 }
 
+void PyMCM::generate_samples(int N, PyData& pydata, std::string file_name) {this->mcm.generate_samples(N, pydata.data, file_name);}
+
+PyData PyMCM::generate_data(int N, PyData& pydata, std::string file_name){
+    this->mcm.generate_samples(N, pydata.data, file_name);
+    PyData samples = PyData(file_name, pydata.get_n(), pydata.get_q());
+
+    return samples;
+}
+
 void bind_mcm_class(py::module &m) {
     py::class_<PyMCM>(m, "MCM")
         .def(py::init<int>())
@@ -137,6 +147,8 @@ void bind_mcm_class(py::module &m) {
         .def("get_best_log_evidence", &PyMCM::get_best_log_ev)
         .def("get_best_log_evidence_icc", &PyMCM::get_best_log_ev_per_icc)
         .def("print_info", &PyMCM::print_info)
+        .def("generate_samples", &PyMCM::generate_samples)
+        .def("generate_data_object", &PyMCM::generate_data)
         .def_property_readonly("n", &PyMCM::get_n)
         .def_property_readonly("n_icc", &PyMCM::get_n_comp)
         .def_property_readonly("rank", &PyMCM::get_rank)

@@ -59,8 +59,11 @@ void bind_basis_class(py::module &m) {
         .def(py::init<int, int, py::array_t<uint8_t>&>())
         .def(py::init<int, int, std::string&>())
         .def("set_from_file", &PyBasis::set_basis_from_file)
+        .def("set_default", &PyBasis::set_basis_default)
+        .def("set_random", &PyBasis::set_basis_random)
         .def("gauge_transform", &PyBasis::gt_data)
         .def("gauge_transform_in_place", &PyBasis::gt_data_in_place)
+        .def("print_details", &PyBasis::print_details)
         .def_property("matrix", &PyBasis::get_basis, &PyBasis::set_basis)
         .def_property_readonly("n", &PyBasis::get_n)
         .def_property_readonly("q", &PyBasis::get_q);
