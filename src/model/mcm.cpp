@@ -172,7 +172,7 @@ void MCM::print_info(){
     }
 }
 
-void MCM::generate_samples(int N, const Data& data, const std::string& file_name){
+void MCM::generate_data_file(int N, const Data& data, const std::string& file_name){
     // Check the number of variables
     if (this->n != data.n) {
         throw std::invalid_argument("Number of variables in the MCM doesn't match the number of variables in the given dataset.");
@@ -195,8 +195,7 @@ void MCM::generate_samples(int N, const Data& data, const std::string& file_name
     std::vector<int> weights(data.N_unique);
 
     int i = 0;
-    for (std::pair<std::vector<__uint128_t>, unsigned int> const& datapoint : data.dataset)
-    {
+    for (std::pair<std::vector<__uint128_t>, unsigned int> const& datapoint : data.dataset){
         weights[i] = datapoint.second;
         i++;
     }
@@ -224,11 +223,60 @@ void MCM::generate_samples(int N, const Data& data, const std::string& file_name
     output_file.close();
 }
 
-Data MCM::generate_data(int N, const Data& data, const std::string& file_name){
-    // Generate the samples
-    this->generate_samples(N, data, file_name);
-    // Create data object from the generated file
-    Data samples = Data(file_name, data.n, data.q);
+Data MCM::generate_data_object(int N, const Data& data){
+    // Check the number of variables
+    if (this->n != data.n) {
+        throw std::invalid_argument("Number of variables in the MCM doesn't match the number of variables in the given dataset.");
+    }
+
+    // Create a random device and use it to generate a random seed
+    std::random_device myRandomDevice;
+    unsigned seed = myRandomDevice();
+
+    // Initialize a default_random_engine with the seed
+    std::default_random_engine generator(seed);
+
+    // Build a distribution of the states in the dataset
+    std::vector<int> weights(data.N_unique);
+
+    int i = 0;
+    for (std::pair<std::vector<__uint128_t>, unsigned int> const& datapoint : data.dataset){
+        weights[i] = datapoint.second;
+        i++;
+    }
+    std::discrete_distribution<int> distribution(weights.begin(), weights.end());
+
+    // Store dataset as a map of vectors containing n_ints 128bit integers
+    std::unordered_map<std::vector<__uint128_t>, unsigned int, HashVector128> dataset;
+
+    int state_index;
+    std::vector<__uint128_t> sample_tmp(data.n_ints);
+    std::vector<__uint128_t> sample(data.n_ints, 0);
+    for (int i = 0; i < N; ++i){
+        for (__uint128_t comp : this->partition){
+            // Generate datapoint from the distribution
+            state_index = distribution(generator);
+            sample_tmp = data.dataset[state_index].first;
+
+            // Extract the part of the datapoint that corresponds to the current component
+            for (int j = 0; j < data.n_ints; ++j){
+                sample[j] += sample_tmp[j] & comp;
+            }
+
+        }
+        // Add sample
+        dataset[sample]++;
+        std::fill(sample.begin(), sample.end(), 0);
+    }
+
+    // Store the pairs in a vector
+    std::vector<std::pair<std::vector<__uint128_t>, unsigned int>> sample_data;
+    for (auto &my_pair : dataset) {
+        sample_data.push_back(my_pair);
+    }
+    
+    // Create Data object
+    Data samples = Data(sample_data, data.n, data.q, N);
 
     return samples;
 }

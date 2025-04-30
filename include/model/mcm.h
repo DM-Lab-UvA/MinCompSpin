@@ -83,7 +83,7 @@ public:
      * @param data                  The dataset from which the model parameters are inferred.
      * @param file_name             Path to the file where that will contain the generated data.
      */
-    void generate_samples(int N, const Data& data, const std::string& file_name);
+    void generate_data_file(int N, const Data& data, const std::string& file_name);
 
     /**
      * Generate N samples from this MCM combined with a given dataset.
@@ -91,11 +91,10 @@ public:
      * 
      * @param N                     The number of samples that need to be generated.
      * @param data                  The dataset from which the model parameters are inferred.
-     * @param file_name             Path to the file where that will contain the generated data.
      * 
      * @return samples              Data object containing the generated samples as the dataset.
      */
-    Data generate_data(int N, const Data& data, const std::string& file_name);
+    Data generate_data_object(int N, const Data& data);
 
     int n; // Number of variables present in the system
     int n_comp; // Number of non-empty components in the partition

@@ -125,13 +125,13 @@ py::array PyMCM::get_best_log_ev_per_icc() {
     return py::array(this->mcm.n_comp, ev_per_icc.data());
 }
 
-void PyMCM::generate_samples(int N, PyData& pydata, std::string file_name) {this->mcm.generate_samples(N, pydata.data, file_name);}
+void PyMCM::generate_data_file(int N, PyData& pydata, std::string file_name) {this->mcm.generate_data_file(N, pydata.data, file_name);}
 
-PyData PyMCM::generate_data(int N, PyData& pydata, std::string file_name){
-    this->mcm.generate_samples(N, pydata.data, file_name);
-    PyData samples = PyData(file_name, pydata.get_n(), pydata.get_q());
+PyData PyMCM::generate_data_object(int N, PyData& pydata){
+    Data samples = this->mcm.generate_data_object(N, pydata.data);
+    PyData pysamples = PyData(samples);
 
-    return samples;
+    return pysamples;
 }
 
 void bind_mcm_class(py::module &m) {
@@ -147,10 +147,10 @@ void bind_mcm_class(py::module &m) {
         .def("get_best_log_evidence", &PyMCM::get_best_log_ev)
         .def("get_best_log_evidence_icc", &PyMCM::get_best_log_ev_per_icc)
         .def("print_info", &PyMCM::print_info)
-        .def("generate_samples", &PyMCM::generate_samples)
-        .def("generate_data_object", &PyMCM::generate_data)
-        .def_property_readonly("n", &PyMCM::get_n)
-        .def_property_readonly("n_icc", &PyMCM::get_n_comp)
-        .def_property_readonly("rank", &PyMCM::get_rank)
-        .def_property_readonly("is_optimized", &PyMCM::is_optimized);
+        .def("generate_data_file", &PyMCM::generate_data_file)
+        .def("generate_data_object", &PyMCM::generate_data_object)
+        .def_property_readonly("n", &PyMCM::get_n, "The number of variables in the system (read-only).")
+        .def_property_readonly("n_icc", &PyMCM::get_n_comp, "The number of independent complete components (ICCs) that the MCM has (read-only).")
+        .def_property_readonly("rank", &PyMCM::get_rank, "The number of variables that are present in the MCM (read-only).")
+        .def_property_readonly("is_optimized", &PyMCM::is_optimized, "Boolean value indicating whether the MCM is the result from an MCMSearch procedure (read-only).");
 }

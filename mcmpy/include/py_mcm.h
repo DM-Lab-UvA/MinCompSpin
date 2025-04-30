@@ -32,8 +32,8 @@ public:
     py::array get_best_log_ev_per_icc();
     void print_info() {return this->mcm.print_info();};
 
-    void generate_samples(int N, PyData& pydata, std::string file_name);
-    PyData generate_data(int N, PyData& pydata, std::string file_name);
+    void generate_data_file(int N, PyData& pydata, std::string file_name);
+    PyData generate_data_object(int N, PyData& pydata);
 
     int get_n() {return this->mcm.n;};
     int get_n_comp() {return this->mcm.n_comp;};
