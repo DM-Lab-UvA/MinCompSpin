@@ -167,7 +167,7 @@ void bind_search_mcm_class(py::module &m) {
         .def_property("SA_max_iteration", &PyMCMSearch::get_SA_max_iter, &PyMCMSearch::set_SA_max_iter, "The maximum number of iterations in the simulated annealing algorithm. The default number of iterations is 50 000.")
         .def_property("SA_temperature_initial", &PyMCMSearch::get_SA_init_temp, &PyMCMSearch::set_SA_init_temp, "The initial temperature used in the annealing process. The default temperature is 100.")
         .def_property("SA_temperature_iteration_update", &PyMCMSearch::get_SA_update_schedule, &PyMCMSearch::set_SA_update_schedule, "The number of iterations after which the temperature is updated. The default number of iterations is 100.")
-        .def_property_readonly("log_evidence_trajectory", &PyMCMSearch::return_log_ev_trajectory, "Read-only array with the log-evidence values."
+        .def_property_readonly("log_evidence_trajectory", &PyMCMSearch::return_log_ev_trajectory, "Array with the log-evidence values (read-only)."
             "For the simulated annealing, the log-evidence value of the current best solution at every iteration is stored. For the exhaustive search, the log-evidence of all possible partitions is stored."
             "For the hierarchical greedy algorithms, the log-evidence is stored only when an improvement is found.");
 }
