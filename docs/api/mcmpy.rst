@@ -9,6 +9,9 @@ This is the C++ extension module built with pybind11.
 
 .. autoclass:: mcmpy.MCM
 
+   .. rubric:: Constructors
+   .. autofunction:: mcmpy.MCM.__init__
+
    .. rubric:: Methods
    .. automethod:: mcmpy.MCM.generate_data_file
    .. automethod:: mcmpy.MCM.generate_data_object
@@ -29,10 +32,43 @@ This is the C++ extension module built with pybind11.
    .. autoattribute:: mcmpy.MCM.n_icc
    .. autoattribute:: mcmpy.MCM.rank
    .. autoattribute:: mcmpy.MCM.array
+   
+   This attribute can be set using a 2D numpy array. Each row represents an ICC and each column a variable.
+   If a variable is present in a component, the corresponding element is one and zero otherwise.
+   In the example below, the partition consists of 3 components. Component 1 contains only variable 0.
+   Variables 1 and 3 make up the second component. The last component contains variable 2.
+
+   .. code-block:: python
+
+      import numpy as np
+      from mcmpy import MCM
+      
+      n = 4
+      partition = np.array([[1,0,0,0], [0,1,0,1], [0,0,1,0]])
+      model = MCM(n, partition)
+
    .. autoattribute:: mcmpy.MCM.array_gray_code
+
+   This attribute can be set using a 1D numpy array. 
+   The elements of the array correspond to the component index in which each variable is present. 
+   To indicate that a variable is not present in the model, the component index -1 is used.
+   The same partition as in the example above in this form would be:
+
+   .. code-block:: python
+
+      import numpy as np
+      from mcmpy import MCM
+      
+      n = 4
+      partition = np.array([[0,1,2,1]])
+      model = MCM(n, partition)   
+
    .. autoattribute:: mcmpy.MCM.is_optimized
 
 .. autoclass:: mcmpy.MCMSearch
+
+   .. rubric:: Constructors
+   .. automethod:: mcmpy.MCMSearch.__init__
 
    .. rubric:: Methods
    .. automethod:: mcmpy.MCMSearch.exhaustive
@@ -85,6 +121,9 @@ This is the C++ extension module built with pybind11.
       
 
 .. autoclass:: mcmpy.BasisSearch
+
+   .. rubric:: Constructors
+   .. automethod:: mcmpy.BasisSearch.__init__
 
    .. rubric:: Methods
    .. automethod:: mcmpy.BasisSearch.exhaustive

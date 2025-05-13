@@ -55,7 +55,10 @@ PyMCM PyMCMSearch::simulated_annealing(PyData& pydata, PyMCM* pymcm, std::string
 
 void bind_search_mcm_class(py::module &m) {
     py::class_<PyMCMSearch>(m, "MCMSearch")
-        .def(py::init<>())
+        .def(py::init<>(), 
+        R"pbdoc(
+        Constructs an MCMSearch object that contains several methods to find the best partition.
+        )pbdoc")
         .def("get_mcm_in", &PyMCMSearch::get_mcm_in,
             R"pbdoc(
             Returns an MCM object containing the starting partition of the last search.
@@ -114,6 +117,7 @@ void bind_search_mcm_class(py::module &m) {
             filename : string, optional
                 Path to the file where the search details will be written.
                 If not provided, nothing will be written to a file.
+
             Returns
             -------
             MCM
@@ -137,6 +141,7 @@ void bind_search_mcm_class(py::module &m) {
             filename : string, optional
                 Path to the file where the search details will be written.
                 If not provided, nothing will be written to a file.
+
             Returns
             -------
             MCM
@@ -159,6 +164,7 @@ void bind_search_mcm_class(py::module &m) {
             filename : string, optional
                 Path to the file where the search details will be written.
                 If not provided, nothing will be written to a file.
+
             Returns
             -------
             MCM

@@ -23,7 +23,10 @@ PyBasis PyBasisSearch::get_basis() {
 
 void bind_search_basis_class(py::module &m) {
     py::class_<PyBasisSearch>(m, "BasisSearch")
-        .def(py::init<>())
+        .def(py::init<>(), 
+        R"pbdoc(
+        Construct a BasisSearch object containing methods to find the best basis representation for a dataset.
+        )pbdoc")
         .def("exhaustive", &PyBasisSearch::exhaustive_search, py::arg("data"), py::arg("filename") = "",
         R"pbdoc(
             Performs a search over all spin operators to find the optimal basis for a given dataset.
