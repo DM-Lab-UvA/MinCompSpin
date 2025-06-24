@@ -29,7 +29,7 @@ Currently, the code can analyze datasets with up to 128 variables and is limited
 
 ## Documentation
 
-[Documentation](https://dm-lab-uva.github.io/MinCompSpin/index.html)
+All the information about this package (installation, available objects/functions and how to use them) can be found in the documentation: [Documentation](https://dm-lab-uva.github.io/MinCompSpin/index.html)
 
 ## Requirements
 
