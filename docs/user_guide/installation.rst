@@ -1,7 +1,7 @@
 Installation
 ============
 
-This guide shows you how to build and install the `mcm_py` extension module from source.
+This guide shows you how to build and install `mcmpy`.
 There are two supported installation methods for this project:
 
 1. Installation using Docker
@@ -40,9 +40,10 @@ Local installation using CMake
 
 This method requires some system dependencies. Make sure the following are installed:
 
-- Python >= 3.11
+- C++ compiler with C++ 11 support
 - CMake >= 3.26.4
-- C++ compiler
+- Python >= 3.11
+- NumPy
 
 Clone the GitHub repository and run the installation script:
 
@@ -52,3 +53,37 @@ Clone the GitHub repository and run the installation script:
    cd MinCompSpin
    bash installation.sh
 
+.. note::
+
+   By default, the tests are built but not run.
+   To build the project without the tests, execute the following commands instead: 
+
+.. code-block:: bash
+
+   git clone --recursive git@github.com:DM-Lab-UvA/MinCompSpin.git
+   cd MinCompSpin
+   mkdir -p build && cd build
+   cmake .. -DBUILD_TESTS=OFF
+   make
+   cd mcmpy
+   pip install .
+
+Testing
+-------
+
+After installation, the test suite can be run to verify if the installation was succesful:
+
+.. code-block:: bash
+
+   cd build
+   ctest --output-on-failure
+
+Using MCMPy
+===========
+
+Once `mcmpy` is installed, it can be imported in Python.
+
+.. code-block:: python
+
+   import mcmpy
+   import numpy as np

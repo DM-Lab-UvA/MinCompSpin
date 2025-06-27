@@ -1,11 +1,10 @@
 name: documentation
 
-on: 
-  push:
+on:
+  pull_request:
     paths:
       - 'docs/**'
       - 'mcmpy/**'
-
 
 permissions:
   contents: write
@@ -21,13 +20,13 @@ jobs:
       - name: Install dependencies
         run: |  
           sudo apt-get update
-          sudo apt-get install -y g++ cmake python3
+          sudo apt-get install -y g++ cmake python3 pandoc
       - name: Build project
         run: |
           bash install.sh
       - name: Install sphinx
         run: |
-          pip install sphinx sphinx_rtd_theme myst_parser
+          pip install sphinx sphinx_rtd_theme myst_parser nbsphinx
       - name: Sphinx build
         run: |
           sphinx-build docs _build

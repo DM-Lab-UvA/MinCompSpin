@@ -162,8 +162,8 @@ double PyData::entropy_of_spin_op(const py::array_t<int8_t>& op){
 void bind_data_class(py::module &m) {
     py::class_<PyData>(m, "Data")
         .def(py::init<const std::string&, int, int>())
-        .def("log_evidence_icc", &PyData::calc_log_ev_icc)
-        .def("log_evidence_icc", &PyData::calc_log_ev_icc_array)
+        .def("log_evidence_icc", &PyData::calc_log_ev_icc, py::arg("mcm"))
+        .def("log_evidence_icc", &PyData::calc_log_ev_icc_array, py::arg("partition"))
         .def("log_evidence", &PyData::calc_log_ev_mcm)
         .def("log_evidence", &PyData::calc_log_ev_array)
 
@@ -186,7 +186,7 @@ void bind_data_class(py::module &m) {
         .def("minimum_description_length", &PyData::calc_mdl_mcm)
 
         .def("entropy", &PyData::entropy, py::arg("base") = -1)
-        .def("entropy_of_spin_op", &PyData::entropy_of_spin_op, py::arg("spin_op"))
+        .def("entropy_of_spin_operator", &PyData::entropy_of_spin_op, py::arg("spin_op"))
         .def_property_readonly("n", &PyData::get_n)
         .def_property_readonly("q", &PyData::get_q)
         .def_property_readonly("N", &PyData::get_N)

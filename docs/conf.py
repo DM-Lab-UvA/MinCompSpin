@@ -10,7 +10,7 @@ import os
 import sys
 sys.path.insert(0, os.path.abspath('../build/mcmpy'))
 
-project = 'Minimally Complex Spin Models'
+project = 'MCMPy'
 copyright = '2025, Aaron De Clercq'
 author = 'Aaron De Clercq'
 release = '0.1.0'
@@ -27,6 +27,8 @@ extensions = [
     'sphinx.ext.autodoc',    # This enables the automodule directive
     'sphinx.ext.napoleon',   # Optional: For Google-style or NumPy-style docstrings
     'sphinx.ext.viewcode',   # Optional: Adds "view source" links in HTML
+    'nbsphinx',
+    'sphinx.ext.mathjax',
 ]
 
 
@@ -34,5 +36,6 @@ extensions = [
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
+html_title = 'mcmpy'
 html_theme = 'sphinx_rtd_theme' # or 'furo', 'sphinx_rtd_theme', etc. alabaster
 html_static_path = ['_static']
