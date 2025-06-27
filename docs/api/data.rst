@@ -240,6 +240,13 @@ to infer either the best minimally complex (MCM) or the optimal basis representa
       
       The actual number of datapoints in the dataset (read-only).
 
+   .. py:attribute:: N_assumed
+      :type: int
+
+      The assumed number of datapoints in the dataset.
+
+      This attribute can be changed to perform an analysis of the dataset under the assumption that it is either larger or smaller.
+
    .. py:attribute:: N_unique
       :type: int
       
