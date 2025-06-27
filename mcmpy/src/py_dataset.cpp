@@ -187,8 +187,10 @@ void bind_data_class(py::module &m) {
 
         .def("entropy", &PyData::entropy, py::arg("base") = -1)
         .def("entropy_of_spin_operator", &PyData::entropy_of_spin_op, py::arg("spin_op"))
+
         .def_property_readonly("n", &PyData::get_n)
         .def_property_readonly("q", &PyData::get_q)
         .def_property_readonly("N", &PyData::get_N)
-        .def_property_readonly("N_unique", &PyData::get_N_unique);
+        .def_property_readonly("N_unique", &PyData::get_N_unique)
+        .def_property("N_assumed", &PyData::get_N_assumed, &PyData::set_N_assumed);
 }
