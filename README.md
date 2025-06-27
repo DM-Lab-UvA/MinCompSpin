@@ -38,7 +38,7 @@ The package also allows:
 
 ## Documentation
 
-All the information about this package (installation, available objects/functions and how to use them) can be found in the documentation: [Documentation](https://dm-lab-uva.github.io/MinCompSpin/index.html)
+All the information about this package (installation, available objects/functions and how to use them) can be found in the [documentation](https://dm-lab-uva.github.io/MinCompSpin/index.html).
 
 ## Requirements
 
