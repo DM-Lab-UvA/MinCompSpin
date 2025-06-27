@@ -40,6 +40,8 @@ The package also allows:
 
 All the information about this package (installation, available objects/functions and how to use them) can be found in the [documentation](https://dm-lab-uva.github.io/MinCompSpin/index.html).
 
+The documentation also contains step-by-step examples. The corresponding Jupyter notebooks are available in [docs/examples](https://github.com/DM-Lab-UvA/MinCompSpin/tree/main/docs/examples).
+
 ## Requirements
 
 C++11, Python (version 3.11 or above)
