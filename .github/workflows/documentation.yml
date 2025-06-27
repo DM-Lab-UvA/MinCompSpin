@@ -1,11 +1,14 @@
 name: documentation
 
-on: 
+on:
   push:
     paths:
       - 'docs/**'
       - 'mcmpy/**'
-
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'mcmpy/**'
 
 permissions:
   contents: write
