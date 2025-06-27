@@ -1,0 +1,403 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCM &mdash; mcmpy</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MCMSearch" href="mcm_search.html" />
+    <link rel="prev" title="Data" href="data.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MCMPy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MCM</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCM"><code class="docutils literal notranslate"><span class="pre">MCM</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.__init__"><code class="docutils literal notranslate"><span class="pre">MCM.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.generate_data_file"><code class="docutils literal notranslate"><span class="pre">MCM.generate_data_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.generate_data_object"><code class="docutils literal notranslate"><span class="pre">MCM.generate_data_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.move_variable_in"><code class="docutils literal notranslate"><span class="pre">MCM.move_variable_in()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.move_variable_out"><code class="docutils literal notranslate"><span class="pre">MCM.move_variable_out()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.move_variable"><code class="docutils literal notranslate"><span class="pre">MCM.move_variable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.print_details"><code class="docutils literal notranslate"><span class="pre">MCM.print_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.get_best_log_evidence"><code class="docutils literal notranslate"><span class="pre">MCM.get_best_log_evidence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.get_best_log_evidence_icc"><code class="docutils literal notranslate"><span class="pre">MCM.get_best_log_evidence_icc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.n"><code class="docutils literal notranslate"><span class="pre">MCM.n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.n_icc"><code class="docutils literal notranslate"><span class="pre">MCM.n_icc</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.rank"><code class="docutils literal notranslate"><span class="pre">MCM.rank</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.array"><code class="docutils literal notranslate"><span class="pre">MCM.array</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.array_gray_code"><code class="docutils literal notranslate"><span class="pre">MCM.array_gray_code</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCM.is_optimized"><code class="docutils literal notranslate"><span class="pre">MCM.is_optimized</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mcm_search.html">MCMSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis.html">Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis_search.html">BasisSearch</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MCMPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+      <li class="breadcrumb-item active">MCM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/mcm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mcm">
+<h1>MCM<a class="headerlink" href="#mcm" title="Link to this heading"></a></h1>
+<p>The <a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCM</span></code></a> class represents a Minimally Complex Model (MCM).
+These are a family of maximum entropy models (known as spin models) that have interactions of arbitrarily high order grouped in a community-like structure, which are called independent complete components (ICCs).</p>
+<p>An MCM object can be initialized explicitly using a binary matrix or gray code array, or using standard templates such as “independent”, “complete”, or “random”.
+This class supports flexible manipulation of the model structure through methods that add, remove, or move variables across components. It also provides methods for generating data from a system which has this model structure, either as a data file or a <a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a> object.</p>
+<p>An <a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCM</span></code></a> object is also given as the output of a model selection procedure from the <a class="reference internal" href="mcm_search.html#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCMSearch</span></code></a> class. In such cases, additional methods are available to retrieve information about the optimal model for a given <a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a> object.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.MCM">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">MCM</span></span><a class="headerlink" href="#mcmpy.MCM" title="Link to this definition"></a></dt>
+<dd><p class="rubric">Initialization</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.__init__" title="Link to this definition"></a></dt>
+<dd><p>Constructs a new MCM object with a given number of variables.</p>
+<p>The default partition is the independent model, where each variable is placed in its own component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> (<em>int</em>) – Number of variables in the system.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Constructs a new MCM object with a given number of variables and a specific partition.</p>
+<p>The partition must be given as a 2D binary array or a 1D gray code array.
+See the attributes <a class="reference internal" href="#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a> below for an example.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>In the 2D representation each row represents an ICC and each column a variable. If a variable is present in a component, the corresponding element is one and zero otherwise.</p></li>
+<li><p>In the 1D gray code representation, the elements correspond to the component index in which each variable is present. To indicate that a variable is not present in the model, the component index -1 is used.</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – Number of variables in the system.</p></li>
+<li><p><strong>partition</strong> (<em>numpy.ndarray</em>) – Partition of the MCM</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Constructs a new MCM object with a given number of variables and a partition type.</p>
+<dl class="simple">
+<dt>Valid partition types:</dt><dd><ul class="simple">
+<li><p>“independent” : All variables are placed in separate components.</p></li>
+<li><p>“complete” : All variables are placed in a single component.</p></li>
+<li><p>“random” : Each variable is assigned to a random component.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – Number of variables in the system.</p></li>
+<li><p><strong>partition</strong> (<em>str</em>) – String indicating the type of partition.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.generate_data_file">
+<span class="sig-name descname"><span class="pre">generate_data_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.generate_data_file" title="Link to this definition"></a></dt>
+<dd><p>Generates a file containing N samples from this MCM combined with a given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N_samples</strong> (<em>int</em>) – The number of samples that should be generated.</p></li>
+<li><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset from which the model parameters are inferred.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Path to the file that will contain the generated data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.generate_data_object">
+<span class="sig-name descname"><span class="pre">generate_data_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.generate_data_object" title="Link to this definition"></a></dt>
+<dd><p>Generates a Data object containing N samples from this MCM combined with a given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>N_samples</strong> (<em>int</em>) – The number of samples that should be generated.</p></li>
+<li><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset from which the model parameters are inferred.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Data object containing the generated samples.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data">Data</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.move_variable_in">
+<span class="sig-name descname"><span class="pre">move_variable_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.move_variable_in" title="Link to this definition"></a></dt>
+<dd><p>Adds a variable to a specified component in the partition.</p>
+<p>The variable index must be between 0 and <span class="math notranslate nohighlight">\(n-1\)</span> and refer to a variable that is not currently assigned to any component.
+The component index must also be between 0 and <span class="math notranslate nohighlight">\(n-1\)</span>.
+If the specified component index exceeds the index of the first empty component, the variable will instead be added to the first available empty component.
+<strong>Note</strong> that this function will reset the optimized status of the MCM if it was the result of an MCMSearch before.
+The functions ‘print_info’, ‘get_best_log_evidence’ and ‘get_best_log_evidence_icc’ will no longer be available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_index</strong> (<em>int</em>) – Index of the variable to add.</p></li>
+<li><p><strong>comp_index</strong> (<em>int</em>) – Index of the component to where the variable will move.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.move_variable_out">
+<span class="sig-name descname"><span class="pre">move_variable_out</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.move_variable_out" title="Link to this definition"></a></dt>
+<dd><p>Removes a specific variable from the partition.</p>
+<p>The variable index must be between 0 and <span class="math notranslate nohighlight">\(n-1\)</span> and refer to a variable that is currently assigned to a component in the partition.
+After removal, the variable will no longer be associated with any component.
+<strong>Note</strong> that this function will reset the optimized status of the MCM if it was the result of an MCMSearch before.
+The functions ‘print_info’, ‘get_best_log_evidence’ and ‘get_best_log_evidence_icc’ will no longer be available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>var_index</strong> (<em>int</em>) – Index of the variable to remove.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.move_variable">
+<span class="sig-name descname"><span class="pre">move_variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comp_index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.move_variable" title="Link to this definition"></a></dt>
+<dd><p>Moves a specific variable to another component.</p>
+<p>The variable index should be a value between 0 and <span class="math notranslate nohighlight">\(n-1\)</span> and refer to a variable that is present in the partition.
+The given component index should be a value between 0 and <span class="math notranslate nohighlight">\(n-1\)</span>.
+If the specified component index exceeds the index of the first empty component, the variable will instead be moved to the first available empty component.
+<strong>Note</strong> that this function will reset the optimized status of the MCM if it was the result of an MCMSearch before.
+The functions ‘print_info’, ‘get_best_log_evidence’ and ‘get_best_log_evidence_icc’ will no longer be available.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var_index</strong> (<em>int</em>) – Index of the variable to move.</p></li>
+<li><p><strong>comp_index</strong> (<em>int</em>) – Index of the component to where the variable will move.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following methods are only available when the <a class="reference internal" href="#mcmpy.MCM" title="mcmpy.MCM"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCM</span></code></a> object is the result of an <a class="reference internal" href="mcm_search.html#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCMSearch</span></code></a> procedure.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.print_details">
+<span class="sig-name descname"><span class="pre">print_details</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.print_details" title="Link to this definition"></a></dt>
+<dd><p>Prints out the information about the partition and the log-evidence of the MCM.</p>
+<p>Every component of the MCM is printed out as a binary string combined with its log-evidence.
+Works only after a search for the best mcm has been run for a given dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.get_best_log_evidence">
+<span class="sig-name descname"><span class="pre">get_best_log_evidence</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.get_best_log_evidence" title="Link to this definition"></a></dt>
+<dd><p>Returns the best log-evidence of the MCM.</p>
+<p>Works only after a search for the best mcm has been run for a given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The log-evidence of the MCM.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCM.get_best_log_evidence_icc">
+<span class="sig-name descname"><span class="pre">get_best_log_evidence_icc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCM.get_best_log_evidence_icc" title="Link to this definition"></a></dt>
+<dd><p>Returns the best log-evidence of the partition per component.</p>
+<p>Works only after a search for the best mcm has been run for a given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array containing the log-evidence of every component of the MCM.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Attributes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCM.n">
+<span class="sig-name descname"><span class="pre">n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.MCM.n" title="Link to this definition"></a></dt>
+<dd><p>The number of variables in the system (read-only).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCM.n_icc">
+<span class="sig-name descname"><span class="pre">n_icc</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.MCM.n_icc" title="Link to this definition"></a></dt>
+<dd><p>The number of independent complete components (ICCs) that the MCM has (read-only).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCM.rank">
+<span class="sig-name descname"><span class="pre">rank</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.MCM.rank" title="Link to this definition"></a></dt>
+<dd><p>The number of variables currently assigned to any component in the MCM (read-only).</p>
+</dd></dl>
+
+<dl class="py attribute" id="mcm-array-attribute">
+<dt class="sig sig-object py" id="mcmpy.MCM.array">
+<span class="sig-name descname"><span class="pre">array</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#mcmpy.MCM.array" title="Link to this definition"></a></dt>
+<dd><p>The partition of the MCM represented as a 2D binary array.</p>
+<p>This attribute can be set using a 2D numpy array. Each row represents an ICC and each column corresponds to a variable.
+If a variable is present in a component, the corresponding element is one and zero otherwise.
+In the example below, the partition consists of 3 components. Component 1 contains only variable 0.
+Variables 1 and 3 make up the second component. The last component contains variable 2.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">mcmpy</span> <span class="kn">import</span> <span class="n">MCM</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">partition</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">MCM</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">partition</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute" id="mcm-array-gray-attribute">
+<dt class="sig sig-object py" id="mcmpy.MCM.array_gray_code">
+<span class="sig-name descname"><span class="pre">array_gray_code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#mcmpy.MCM.array_gray_code" title="Link to this definition"></a></dt>
+<dd><p>The partition of the MCM represented as a 1D gray code array.</p>
+<p>This attribute can be set using a 1D numpy array.
+The elements of the array correspond to the component index in which each variable is present.
+To indicate that a variable is not present in the model, the component index -1 is used.
+The same partition as in the example above in gray code form would be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">mcmpy</span> <span class="kn">import</span> <span class="n">MCM</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">partition</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">MCM</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">partition</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCM.is_optimized">
+<span class="sig-name descname"><span class="pre">is_optimized</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">boolean</span></em><a class="headerlink" href="#mcmpy.MCM.is_optimized" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>Boolean value indicating whether the MCM is the result from an MCMSearch procedure (read-only).</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="data.html" class="btn btn-neutral float-left" title="Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mcm_search.html" class="btn btn-neutral float-right" title="MCMSearch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aaron De Clercq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

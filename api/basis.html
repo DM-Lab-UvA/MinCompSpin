@@ -1,0 +1,316 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basis &mdash; mcmpy</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BasisSearch" href="basis_search.html" />
+    <link rel="prev" title="MCMSearch" href="mcm_search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MCMPy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcm.html">MCM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcm_search.html">MCMSearch</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Basis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Basis"><code class="docutils literal notranslate"><span class="pre">Basis</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.__init__"><code class="docutils literal notranslate"><span class="pre">Basis.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.set_from_file"><code class="docutils literal notranslate"><span class="pre">Basis.set_from_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.set_default"><code class="docutils literal notranslate"><span class="pre">Basis.set_default()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.set_random"><code class="docutils literal notranslate"><span class="pre">Basis.set_random()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.gauge_transform_data"><code class="docutils literal notranslate"><span class="pre">Basis.gauge_transform_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.gauge_transform_data_in_place"><code class="docutils literal notranslate"><span class="pre">Basis.gauge_transform_data_in_place()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.print_details"><code class="docutils literal notranslate"><span class="pre">Basis.print_details()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.n"><code class="docutils literal notranslate"><span class="pre">Basis.n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.q"><code class="docutils literal notranslate"><span class="pre">Basis.q</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Basis.matrix"><code class="docutils literal notranslate"><span class="pre">Basis.matrix</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="basis_search.html">BasisSearch</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MCMPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+      <li class="breadcrumb-item active">Basis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/basis.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basis">
+<h1>Basis<a class="headerlink" href="#basis" title="Link to this heading"></a></h1>
+<p>The <a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basis</span></code></a> class defines and manages a set of spin operators that can be used as a basis representation for a discrete dataset.
+The basis is used to transform data between different representations.</p>
+<p>By default, the class initializes the basis as the standard set of one-body field operators.
+However, it also supports initialization using a user-specified or random basis, provided the spin operators form a linearly independent set.</p>
+<p>An <a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basis</span></code></a> object is the output of search algorithms from the <a class="reference internal" href="basis_search.html#mcmpy.BasisSearch" title="mcmpy.BasisSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasisSearch</span></code></a> class, in which case it represents the optimal basis representation of a given dataset.
+The resutling <a class="reference internal" href="#mcmpy.Basis" title="mcmpy.Basis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basis</span></code></a> object can then be used to transform that dataset into the optimal basis representation.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.Basis">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">Basis</span></span><a class="headerlink" href="#mcmpy.Basis" title="Link to this definition"></a></dt>
+<dd><p class="rubric">Initialization</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Basis.__init__" title="Link to this definition"></a></dt>
+<dd><p>Constructs a new Basis object with just a number of variables and a number of states.</p>
+<p>The basis is set to its default which is the <span class="math notranslate nohighlight">\(n\)</span> one-body spin operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The number of variables in the system.</p></li>
+<li><p><strong>q</strong> (<em>int</em>) – The number of states each variable can take.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spin_operators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Constructs a new Basis object with a specif basis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The number of variables in the system.</p></li>
+<li><p><strong>q</strong> (<em>int</em>) – The number of states each variable can take.</p></li>
+<li><p><strong>spin_operators</strong> (<em>numpy.ndarray</em>) – Vector with spin operators defining the basis.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Constructs a new Basis object with a basis specified in a file.</p>
+<p>The basis specified in the given file should satisfy the following constraints to be valid.
+The file should contain <span class="math notranslate nohighlight">\(n\)</span> lines, each representing an operator.
+On each line, the first <span class="math notranslate nohighlight">\(n\)</span> characters should be values between 0 and <span class="math notranslate nohighlight">\(q-1\)</span> which indicate the exponent of each variable in the operator.
+For the basis to be valid, the given set of operators should also be linearly independent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<em>int</em>) – The number of variables in the system.</p></li>
+<li><p><strong>q</strong> (<em>int</em>) – The number of states each variable can take.</p></li>
+<li><p><strong>filename</strong> (<em>str</em>) – Path to the file containing the basis.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.set_from_file">
+<span class="sig-name descname"><span class="pre">set_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Basis.set_from_file" title="Link to this definition"></a></dt>
+<dd><p>Updates the basis using a given file.</p>
+<p>If the given file contains a valid basis, then the object will update its internal basis variable.
+The file should contain <span class="math notranslate nohighlight">\(n\)</span> lines, each representing an operator.
+On each line, the first <span class="math notranslate nohighlight">\(n\)</span> characters should be values between 0 and <span class="math notranslate nohighlight">\(q-1\)</span> which indicate the exponent of each variable in the operator.
+For the basis to be valid, the given set of operators should also be linearly independent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filename</strong> (<em>str</em>) – Path to the file where the basis is written.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.set_default">
+<span class="sig-name descname"><span class="pre">set_default</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Basis.set_default" title="Link to this definition"></a></dt>
+<dd><p>Resets the basis to the default one.</p>
+<p>This function will set the internal basis variable to the default basis.
+The default basis corresponds to the <span class="math notranslate nohighlight">\(n\)</span> field operators on each variable.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.set_random">
+<span class="sig-name descname"><span class="pre">set_random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Basis.set_random" title="Link to this definition"></a></dt>
+<dd><p>Sets the basis to a valid random basis.</p>
+<p>This function will generate random <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n\)</span> matrices with entries between 0 and <span class="math notranslate nohighlight">\(q-1\)</span> until its columns form a linearly independent basis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of matrices generated before finding a linearly independent one.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.gauge_transform_data">
+<span class="sig-name descname"><span class="pre">gauge_transform_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Basis.gauge_transform_data" title="Link to this definition"></a></dt>
+<dd><p>Applies a gauge transformation to the given dataset.</p>
+<p>This function transforms a Data object expressed in the variables <strong>s</strong>
+such that it is expressed in the variables <strong>σ</strong>, where <strong>σ</strong> are the spin operators that make up the internal basis.
+The input data object is not modified.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset expressed in the variables <strong>s</strong> that will be transformed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Data object containing the dataset expressed in the variables <strong>σ</strong>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data">Data</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.gauge_transform_data_in_place">
+<span class="sig-name descname"><span class="pre">gauge_transform_data_in_place</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Basis.gauge_transform_data_in_place" title="Link to this definition"></a></dt>
+<dd><p>Applies a gauge transformation to the given dataset in place.</p>
+<p>This function transforms a Data object expressed in the variables <strong>s</strong>
+such that it is expressed in the variables <strong>σ</strong>, where <strong>σ</strong> are the spin operators that make up the internal basis.
+The input data object is modified and will contain the transformed dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset expressed in the variables <strong>s</strong> that will be transformed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Basis.print_details">
+<span class="sig-name descname"><span class="pre">print_details</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Basis.print_details" title="Link to this definition"></a></dt>
+<dd><p>Prints out the current basis.</p>
+<p>Each line corresponds to an operator in the basis.
+Operators are displayed as a string of <span class="math notranslate nohighlight">\(n\)</span> characters with values between 0 and <span class="math notranslate nohighlight">\(q-1\)</span> which indicate the exponent of each variable in the operator.
+On each line, after the operator string, the indices of the variables that are included in the spin operator are also printed.</p>
+</dd></dl>
+
+<p class="rubric">Attributes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.Basis.n">
+<span class="sig-name descname"><span class="pre">n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.Basis.n" title="Link to this definition"></a></dt>
+<dd><p>The number of variables in the system (read-only).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.Basis.q">
+<span class="sig-name descname"><span class="pre">q</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.Basis.q" title="Link to this definition"></a></dt>
+<dd><p>The number of states each variable can take (read-only).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.Basis.matrix">
+<span class="sig-name descname"><span class="pre">matrix</span></span><a class="headerlink" href="#mcmpy.Basis.matrix" title="Link to this definition"></a></dt>
+<dd><p>The matrix representation of basis, with shape (<span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(n\)</span>). The value at (<span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(j\)</span>) indicates the exponent of variable <span class="math notranslate nohighlight">\(i\)</span> in operator <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>This attribute can be set using a 2D numpy array where every entry corresponds to a spin operator, and the given set of operators is linearly independent.
+<strong>Note</strong> that in the matrix the columns represent an operator, which is the transpose of the input.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">mcmpy</span> <span class="kn">import</span> <span class="n">Basis</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">basis</span> <span class="o">=</span> <span class="n">Basis</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<span class="n">basis</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">basis</span><span class="o">.</span><span class="n">matrix</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[[1 2 0]
+[2 3 2]
+[4 1 1]]
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mcm_search.html" class="btn btn-neutral float-left" title="MCMSearch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basis_search.html" class="btn btn-neutral float-right" title="BasisSearch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aaron De Clercq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

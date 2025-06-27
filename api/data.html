@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data &mdash; mcmpy</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MCM" href="mcm.html" />
+    <link rel="prev" title="API" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MCMPy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.Data"><code class="docutils literal notranslate"><span class="pre">Data</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.__init__"><code class="docutils literal notranslate"><span class="pre">Data.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.log_evidence_icc"><code class="docutils literal notranslate"><span class="pre">Data.log_evidence_icc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.log_evidence"><code class="docutils literal notranslate"><span class="pre">Data.log_evidence()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.log_likelihood_icc"><code class="docutils literal notranslate"><span class="pre">Data.log_likelihood_icc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.log_likelihood"><code class="docutils literal notranslate"><span class="pre">Data.log_likelihood()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.complexity_geometric_icc"><code class="docutils literal notranslate"><span class="pre">Data.complexity_geometric_icc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.complexity_geometric"><code class="docutils literal notranslate"><span class="pre">Data.complexity_geometric()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.complexity_parametric_icc"><code class="docutils literal notranslate"><span class="pre">Data.complexity_parametric_icc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.complexity_parametric"><code class="docutils literal notranslate"><span class="pre">Data.complexity_parametric()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.minimum_description_length"><code class="docutils literal notranslate"><span class="pre">Data.minimum_description_length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.entropy"><code class="docutils literal notranslate"><span class="pre">Data.entropy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.entropy_of_spin_operator"><code class="docutils literal notranslate"><span class="pre">Data.entropy_of_spin_operator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.n"><code class="docutils literal notranslate"><span class="pre">Data.n</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.q"><code class="docutils literal notranslate"><span class="pre">Data.q</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.N"><code class="docutils literal notranslate"><span class="pre">Data.N</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.Data.N_unique"><code class="docutils literal notranslate"><span class="pre">Data.N_unique</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="mcm.html">MCM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcm_search.html">MCMSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis.html">Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis_search.html">BasisSearch</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MCMPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+      <li class="breadcrumb-item active">Data</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/data.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="data">
+<h1>Data<a class="headerlink" href="#data" title="Link to this heading"></a></h1>
+<p>The <a class="reference internal" href="#mcmpy.Data" title="mcmpy.Data"><code class="xref py py-class docutils literal notranslate"><span class="pre">Data</span></code></a> class represents a dataset. Each datapoint consists of a discrete value for each variable and corresponds to a configuration of the system.
+This class supports the computation of key information-theoretic quantities—such as the log-likelihood, log-evidence, entropy, and both geometric and parametric model complexities.
+Additionally, a Data object serves as the input parameter for search algorithms implemented in the <a class="reference internal" href="mcm_search.html#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCMSearch</span></code></a> and <a class="reference internal" href="basis_search.html#mcmpy.BasisSearch" title="mcmpy.BasisSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasisSearch</span></code></a> classes
+to infer either the best minimally complex (MCM) or the optimal basis representation of the system, respectively.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.Data">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">Data</span></span><a class="headerlink" href="#mcmpy.Data" title="Link to this definition"></a></dt>
+<dd><p class="rubric">Initialization</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_var</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_states</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.__init__" title="Link to this definition"></a></dt>
+<dd><p>Constructs a new Data object by loading a dataset from a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – Path to the file.</p></li>
+<li><p><strong>n_var</strong> (<em>int</em>) – Number of variables in the system.</p></li>
+<li><p><strong>n_states</strong> (<em>int</em>) – Number of values each variable can take.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.log_evidence_icc">
+<span class="sig-name descname"><span class="pre">log_evidence_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.log_evidence_icc" title="Link to this definition"></a></dt>
+<dd><p>Computes the log-evidence per ICC of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the log-evidence will be computed per ICC.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The log-evidence per ICC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">log_evidence_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the log-evidence per ICC of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the log-evidence will be computed per ICC.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The log-evidence per ICC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.log_evidence">
+<span class="sig-name descname"><span class="pre">log_evidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.log_evidence" title="Link to this definition"></a></dt>
+<dd><p>Computes the total log-evidence of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the log-evidence will be computed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total log-evidence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">log_evidence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the log-evidence of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the log-evidence will be computed.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total log-evidence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.log_likelihood_icc">
+<span class="sig-name descname"><span class="pre">log_likelihood_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.log_likelihood_icc" title="Link to this definition"></a></dt>
+<dd><p>Computes the log-likelihood per ICC of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the log-likelihood will be computed per ICC.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The log-likelihood per ICC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">log_likelihood_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the log-likelihood per ICC of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the log-likelihood will be computed per ICC.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The log-likelihood per ICC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.log_likelihood">
+<span class="sig-name descname"><span class="pre">log_likelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.log_likelihood" title="Link to this definition"></a></dt>
+<dd><p>Computes the total log-likelihood of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the log-likelihood will be computed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total log-likelihood.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">log_likelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the log-likelihood of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the log-likelihood will be computed.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total log-likelihood.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.complexity_geometric_icc">
+<span class="sig-name descname"><span class="pre">complexity_geometric_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.complexity_geometric_icc" title="Link to this definition"></a></dt>
+<dd><p>Computes the geometric complexity per ICC of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the geometric complexity will be computed per ICC.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The geometric complexity per ICC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">complexity_geometric_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the geometric complexity per ICC of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the geometric complexity will be computed per ICC.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The geometric complexity per ICC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.complexity_geometric">
+<span class="sig-name descname"><span class="pre">complexity_geometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.complexity_geometric" title="Link to this definition"></a></dt>
+<dd><p>Computes the total geometric complexity of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the geometric complexity will be computed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total geometric complexity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">complexity_geometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the geometric complexity of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the geometric complexity will be computed.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total geometric complexity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.complexity_parametric_icc">
+<span class="sig-name descname"><span class="pre">complexity_parametric_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.complexity_parametric_icc" title="Link to this definition"></a></dt>
+<dd><p>Computes the parametric complexity per ICC of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the parametric complexity will be computed per ICC.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parametric complexity per ICC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">complexity_parametric_icc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the parametric complexity per ICC of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the parametric complexity will be computed per ICC.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parametric complexity per ICC.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.complexity_parametric">
+<span class="sig-name descname"><span class="pre">complexity_parametric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.complexity_parametric" title="Link to this definition"></a></dt>
+<dd><p>Computes the total parametric complexity of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the parametric complexity will be computed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total parametric complexity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">complexity_parametric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the parametric complexity of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the parametric complexity will be computed.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The total parametric complexity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.minimum_description_length">
+<span class="sig-name descname"><span class="pre">minimum_description_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mcm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.minimum_description_length" title="Link to this definition"></a></dt>
+<dd><p>Computes the minimum description length of the dataset for a given MCM.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcm</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a>) – The MCM object for which the minimum description length will be computed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The minimum description length.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">minimum_description_length</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partition</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Computes the minimum description length of the dataset for a given partition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>partition</strong> (<em>numpy.ndarray</em>) – The partition of the MCM for which the minimum description length will be computed.
+The required format for this parameter is described in the MCM attributes <a class="reference internal" href="mcm.html#mcm-array-attribute"><span class="std std-ref">array</span></a> and <a class="reference internal" href="mcm.html#mcm-array-gray-attribute"><span class="std std-ref">array_gray_code</span></a>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The minimum description length.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.entropy">
+<span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.entropy" title="Link to this definition"></a></dt>
+<dd><p>Computes the entropy of the dataset using a given base.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>base</strong> (<em>int</em><em>, </em><em>optional</em>) – Optional argument to indicate the base used for the computation of the entropy. The default option is <span class="math notranslate nohighlight">\(q\)</span>.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The entropy of the dataset.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.Data.entropy_of_spin_operator">
+<span class="sig-name descname"><span class="pre">entropy_of_spin_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spin_op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.Data.entropy_of_spin_operator" title="Link to this definition"></a></dt>
+<dd><p>Computes the entropy of a given spin operator applied on the dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>spin_op</strong> (<em>numpy.ndarray</em>) – Spin operator for which the entropy will be computed.
+The spin operator should be given as an array of length <span class="math notranslate nohighlight">\(n\)</span> where each entry represent the exponent of the corresponding variable in the operator.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The entropy of the spin operator when applied on the dataset.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Attributes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.Data.n">
+<span class="sig-name descname"><span class="pre">n</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.Data.n" title="Link to this definition"></a></dt>
+<dd><p>The number of variables in the system (read-only).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.Data.q">
+<span class="sig-name descname"><span class="pre">q</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.Data.q" title="Link to this definition"></a></dt>
+<dd><p>The number of states each variable can take (read-only).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.Data.N">
+<span class="sig-name descname"><span class="pre">N</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.Data.N" title="Link to this definition"></a></dt>
+<dd><p>The actual number of datapoints in the dataset (read-only).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.Data.N_unique">
+<span class="sig-name descname"><span class="pre">N_unique</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.Data.N_unique" title="Link to this definition"></a></dt>
+<dd><blockquote>
+<div><p>The number of unique datapoints in the dataset (read-only).</p>
+</div></blockquote>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mcm.html" class="btn btn-neutral float-right" title="MCM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aaron De Clercq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

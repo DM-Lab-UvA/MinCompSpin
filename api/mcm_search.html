@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MCMSearch &mdash; mcmpy</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basis" href="basis.html" />
+    <link rel="prev" title="MCM" href="mcm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MCMPy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcm.html">MCM</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">MCMSearch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.MCMSearch"><code class="docutils literal notranslate"><span class="pre">MCMSearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.__init__"><code class="docutils literal notranslate"><span class="pre">MCMSearch.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.exhaustive"><code class="docutils literal notranslate"><span class="pre">MCMSearch.exhaustive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.hierarchical_greedy_merging"><code class="docutils literal notranslate"><span class="pre">MCMSearch.hierarchical_greedy_merging()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.hierarchical_greedy_divisive"><code class="docutils literal notranslate"><span class="pre">MCMSearch.hierarchical_greedy_divisive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.simulated_annealing"><code class="docutils literal notranslate"><span class="pre">MCMSearch.simulated_annealing()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.get_mcm_in"><code class="docutils literal notranslate"><span class="pre">MCMSearch.get_mcm_in()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.get_mcm_out"><code class="docutils literal notranslate"><span class="pre">MCMSearch.get_mcm_out()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.log_evidence_trajectory"><code class="docutils literal notranslate"><span class="pre">MCMSearch.log_evidence_trajectory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.SA_max_iteration"><code class="docutils literal notranslate"><span class="pre">MCMSearch.SA_max_iteration</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.SA_temperature_initial"><code class="docutils literal notranslate"><span class="pre">MCMSearch.SA_temperature_initial</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.MCMSearch.SA_temperature_iteration_update"><code class="docutils literal notranslate"><span class="pre">MCMSearch.SA_temperature_iteration_update</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="basis.html">Basis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis_search.html">BasisSearch</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MCMPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+      <li class="breadcrumb-item active">MCMSearch</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/mcm_search.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mcmsearch">
+<h1>MCMSearch<a class="headerlink" href="#mcmsearch" title="Link to this heading"></a></h1>
+<p>The <a class="reference internal" href="#mcmpy.MCMSearch" title="mcmpy.MCMSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCMSearch</span></code></a> class provides multiple search algorithms for identifying the optimal Minimally Complex Model (MCM) for a given dataset.
+The optimal MCM is the MCM that has the largest probability to produce the data integrated over all values of the parameters.</p>
+<p>This class includes the following search algorithms:</p>
+<ul class="simple">
+<li><p><strong>Exhaustive search</strong>: Evaluates all possible partitions and guarantees the global optimum (only feasible for small systems).</p></li>
+<li><p><strong>Hierarchical greedy algorithms</strong>: Merge or divide components iteratively to improve log-evidence, offering faster but approximate solutions.</p></li>
+<li><p><strong>Simulated annealing</strong>: A stochastic optimization method that balances exploration and exploitation to avoid local optima.</p></li>
+</ul>
+<p>Each method returns an <a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCM</span></code></a> object representing the best-found model and stores it internally.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">MCMSearch</span></span><a class="headerlink" href="#mcmpy.MCMSearch" title="Link to this definition"></a></dt>
+<dd><p class="rubric">Initialization</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCMSearch.__init__" title="Link to this definition"></a></dt>
+<dd><p>Constructs an MCMSearch object that provides several methods to find the optimal partition.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.exhaustive">
+<span class="sig-name descname"><span class="pre">exhaustive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCMSearch.exhaustive" title="Link to this definition"></a></dt>
+<dd><p>Performs an exhaustive search to find the optimal MCM for a given dataset.</p>
+<p>This function searches over all possible partitions of the variables to find the MCM with the largest log-evidence for the provided dataset.
+The result is returned as an <a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCM</span></code></a> object and stored in the internal variable <cite>mcm_out</cite>.</p>
+<p><strong>Note</strong> that this search is only feasible for small systems (<span class="math notranslate nohighlight">\(n &lt; 15\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The MCM that has the largest log-evidence for the given dataset.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.hierarchical_greedy_merging">
+<span class="sig-name descname"><span class="pre">hierarchical_greedy_merging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mcm_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCMSearch.hierarchical_greedy_merging" title="Link to this definition"></a></dt>
+<dd><p>Performs a hierarchical greedy merging procedure to find the optimal MCM for a given dataset.</p>
+<p>This search function consists of an iterative merging procedure.
+Since this is a heuristic algorithm, it doesn’t go through all partitions and therefore does not guarantee recovering the MCM with the largest log-evidence.
+The result is returned as an <a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCM</span></code></a> object and stored in the internal variable <cite>mcm_out</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>mcm_in</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a><em>, </em><em>optional</em>) – An optional MCM object representing the starting partition of the algorithm.
+If not provided, the independent model is used as the default starting partition.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the file where the search details will be written.
+If not provided, nfothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The best fitting MCM for the given dataset found by the hierarchical greedy merging algorithm.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.hierarchical_greedy_divisive">
+<span class="sig-name descname"><span class="pre">hierarchical_greedy_divisive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mcm_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCMSearch.hierarchical_greedy_divisive" title="Link to this definition"></a></dt>
+<dd><p>Performs a hierarchical greedy divisive procedure to find the optimal MCM for a given dataset.</p>
+<p>This search function consists of an iterative division procedure.
+Since this is a heuristic algorithm, it doesn’t go through all partitions and therefore does not guarantee recovering the MCM with the largest log-evidence.
+The result is returned as an <a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCM</span></code></a> object and stored in the internal variable <cite>mcm_out</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>mcm_in</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a><em>, </em><em>optional</em>) – An optional MCM object representing the starting partition of the algorithm.
+If not provided, the complete model is used as the default starting partition.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the file where the search details will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The best fitting MCM for the given dataset found by the hierarchical greedy divisive algorithm.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.simulated_annealing">
+<span class="sig-name descname"><span class="pre">simulated_annealing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mcm_in</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><span class="pre">MCM</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCMSearch.simulated_annealing" title="Link to this definition"></a></dt>
+<dd><p>Performs a simulated annealing algorithm to find the optimal MCM for a given dataset.</p>
+<p>Since this is a heuristic algorithm, it doesn’t go through all partitions and therefore does not guarantee recovering the MCM with the largest log-evidence.
+The result is returned as an <a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><code class="xref py py-class docutils literal notranslate"><span class="pre">MCM</span></code></a> object and stored in the internal variable <cite>mcm_out</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal MCM will be determined.</p></li>
+<li><p><strong>mcm_in</strong> (<a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM"><em>MCM</em></a><em>, </em><em>optional</em>) – An optional MCM object representing the starting partition of the algorithm.
+If not provided, the independent model is used as the default starting partition.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the file where the search details will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The best fitting MCM for the given dataset found by the simulated annealing algorithm.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.get_mcm_in">
+<span class="sig-name descname"><span class="pre">get_mcm_in</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCMSearch.get_mcm_in" title="Link to this definition"></a></dt>
+<dd><p>Returns an MCM object containing the starting partition of the last search.</p>
+<p><strong>Note</strong> that this function can only be called once a search has been run and if the search was not an exhaustive.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The MCM that was used as starting point of the last search.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.get_mcm_out">
+<span class="sig-name descname"><span class="pre">get_mcm_out</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.MCMSearch.get_mcm_out" title="Link to this definition"></a></dt>
+<dd><p>Returns an MCM object containing the solution of the last search.</p>
+<p><strong>Note</strong> that this function can only be called once a search has been run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The MCM that was the result of the last search.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="mcm.html#mcmpy.MCM" title="mcmpy.MCM">MCM</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Attributes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.log_evidence_trajectory">
+<span class="sig-name descname"><span class="pre">log_evidence_trajectory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#mcmpy.MCMSearch.log_evidence_trajectory" title="Link to this definition"></a></dt>
+<dd><p>Array with the log-evidence values encountered during the last search (read-only).</p>
+<ul class="simple">
+<li><p>Exhaustive search: the log-evidence of all possible partitions is stored.</p></li>
+<li><p>Simulated annealing: the log-evidence value of the current best solution at every iteration is stored.</p></li>
+<li><p>Hierarchical greedy algorithms: the log-evidence is stored only when an improvement is found.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.SA_max_iteration">
+<span class="sig-name descname"><span class="pre">SA_max_iteration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.MCMSearch.SA_max_iteration" title="Link to this definition"></a></dt>
+<dd><p>The maximum number of iterations in the simulated annealing algorithm.
+The default number of iterations is 50 000.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.SA_temperature_initial">
+<span class="sig-name descname"><span class="pre">SA_temperature_initial</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.MCMSearch.SA_temperature_initial" title="Link to this definition"></a></dt>
+<dd><p>The initial temperature used in the annealing process.
+The default temperature is 100.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mcmpy.MCMSearch.SA_temperature_iteration_update">
+<span class="sig-name descname"><span class="pre">SA_temperature_iteration_update</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#mcmpy.MCMSearch.SA_temperature_iteration_update" title="Link to this definition"></a></dt>
+<dd><p>The number of iterations after which the temperature is updated.
+The default number of iterations is 100.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mcm.html" class="btn btn-neutral float-left" title="MCM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="basis.html" class="btn btn-neutral float-right" title="Basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aaron De Clercq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

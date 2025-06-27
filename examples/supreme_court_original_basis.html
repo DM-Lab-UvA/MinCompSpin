@@ -1,0 +1,245 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Supreme court: Analysis in the original basis &mdash; mcmpy</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Supreme court: Analysis in the best basis" href="supreme_court_best_basis.html" />
+    <link rel="prev" title="Examples" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MCMPy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Supreme court: Analysis in the original basis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Initialization">Initialization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Search-for-the-optimal-MCM">Search for the optimal MCM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Analysis">Analysis</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Log-evidence">Log-evidence</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="supreme_court_best_basis.html">Supreme court: Analysis in the best basis</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">API</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MCMPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Examples</a></li>
+      <li class="breadcrumb-item active">Supreme court: Analysis in the original basis</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/supreme_court_original_basis.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Supreme-court:-Analysis-in-the-original-basis">
+<h1>Supreme court: Analysis in the original basis<a class="headerlink" href="#Supreme-court:-Analysis-in-the-original-basis" title="Link to this heading"></a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Imports
+from mcmpy import Data, MCM, MCMSearch
+</pre></div>
+</div>
+</div>
+<section id="Initialization">
+<h2>Initialization<a class="headerlink" href="#Initialization" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Data object
+
+n = 9   # Number of variables
+q = 2   # Number of states
+data = Data(&#39;../../input/US_SupremeCourt_n9_N895.dat&#39;, n, q)
+
+print(&quot;The dataset contains %i datapoints, of which %i different ones.&quot; %(data.N, data.N_unique))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The dataset contains 895 datapoints, of which 128 different ones.
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># MCMSearch object
+searcher = MCMSearch()
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Search-for-the-optimal-MCM">
+<h2>Search for the optimal MCM<a class="headerlink" href="#Search-for-the-optimal-MCM" title="Link to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># The system is small enough to perform an exhaustive search
+opt_mcm = searcher.exhaustive(data)
+opt_mcm.print_details()
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MCM contains 9 variables divided into 2 components
+Total log-evidence: -3300.4
+Component 0 :   101110100        Size: 5         Log-evidence: -1754.41
+Component 1 :   010001011        Size: 4         Log-evidence: -1545.98
+</pre></div></div>
+</div>
+</section>
+<section id="Analysis">
+<h2>Analysis<a class="headerlink" href="#Analysis" title="Link to this heading"></a></h2>
+<section id="Log-evidence">
+<h3>Log-evidence<a class="headerlink" href="#Log-evidence" title="Link to this heading"></a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># Writing the partition as a 1D gray code array
+print(&quot;The log-evidence of the complete model: &quot;, data.log_evidence([0,0,0,0,0,0,0,0,0]))       # All variables in component 0
+print(&quot;The log-evidence of the independent model: &quot;, data.log_evidence([0,1,2,3,4,5,6,7,8]))    # All variables in a different component
+
+print(&quot;The log-evidence of the optimal MCM: &quot;, data.log_evidence(opt_mcm))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The log-evidence of the complete model:  -3305.546575913696
+The log-evidence of the independent model:  -5258.100240438084
+The log-evidence of the optimal MCM:  -3300.395469673639
+</pre></div></div>
+</div>
+<p><strong>Note</strong> that it is advised to used MCM objects as input parameters as there is no check if a given array is a valid partition. The same results can be obtained in the following way:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(&quot;The log-evidence of the complete model: &quot;, data.log_evidence(MCM(n, &quot;complete&quot;)))
+print(&quot;The log-evidence of the independent model: &quot;, data.log_evidence(MCM(n, &quot;independent&quot;)))
+
+print(&quot;The log-evidence of the optimal MCM: &quot;, data.log_evidence(opt_mcm))
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The log-evidence of the complete model:  -3305.546575913696
+The log-evidence of the independent model:  -5258.100240438084
+The log-evidence of the optimal MCM:  -3300.395469673639
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="supreme_court_best_basis.html" class="btn btn-neutral float-right" title="Supreme court: Analysis in the best basis" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aaron De Clercq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BasisSearch &mdash; mcmpy</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Basis" href="basis.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MCMPy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="data.html">Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcm.html">MCM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mcm_search.html">MCMSearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basis.html">Basis</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">BasisSearch</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#mcmpy.BasisSearch"><code class="docutils literal notranslate"><span class="pre">BasisSearch</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.BasisSearch.__init__"><code class="docutils literal notranslate"><span class="pre">BasisSearch.__init__()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.BasisSearch.exhaustive"><code class="docutils literal notranslate"><span class="pre">BasisSearch.exhaustive()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.BasisSearch.up_to_order_k_fixed"><code class="docutils literal notranslate"><span class="pre">BasisSearch.up_to_order_k_fixed()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.BasisSearch.up_to_order_k_iterative"><code class="docutils literal notranslate"><span class="pre">BasisSearch.up_to_order_k_iterative()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.BasisSearch.get_basis"><code class="docutils literal notranslate"><span class="pre">BasisSearch.get_basis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcmpy.BasisSearch.print_result"><code class="docutils literal notranslate"><span class="pre">BasisSearch.print_result()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MCMPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API</a></li>
+      <li class="breadcrumb-item active">BasisSearch</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/basis_search.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="basissearch">
+<h1>BasisSearch<a class="headerlink" href="#basissearch" title="Link to this heading"></a></h1>
+<p>The <a class="reference internal" href="#mcmpy.BasisSearch" title="mcmpy.BasisSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasisSearch</span></code></a> class provides methods to uncover the optimal basis representation for a discrete dataset.
+The optimal basis representation is the one for which the set of the <span class="math notranslate nohighlight">\(n\)</span> one-body spin operators model in that basis has the largest log-evidence.</p>
+<p>This class includes the following search algorithms:</p>
+<ul class="simple">
+<li><p><strong>Exhaustive search</strong>: Considers all spin operators to find the optimal basis, which is only feasible for small systems</p></li>
+<li><p><strong>up_to_order_k_fixed</strong>: Considers all spin operators up to interaction-order <span class="math notranslate nohighlight">\(k\)</span> to find the optimal basis.</p></li>
+<li><p><strong>up_to_order_k_iterative</strong>: Considers all spin operators up to interaction-order <span class="math notranslate nohighlight">\(k\)</span> in an interative procedure to find the optimal basis.</p></li>
+</ul>
+<p>Each method returns a <a class="reference internal" href="basis.html#mcmpy.Basis" title="mcmpy.Basis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basis</span></code></a> object representing the best-found basis and stores it internally.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mcmpy.</span></span><span class="sig-name descname"><span class="pre">BasisSearch</span></span><a class="headerlink" href="#mcmpy.BasisSearch" title="Link to this definition"></a></dt>
+<dd><p class="rubric">Initialization</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.BasisSearch.__init__" title="Link to this definition"></a></dt>
+<dd><p>Constructs a BasisSearch object containing methods to find the best basis representation for a dataset.</p>
+</dd></dl>
+
+<p class="rubric">Methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.exhaustive">
+<span class="sig-name descname"><span class="pre">exhaustive</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.BasisSearch.exhaustive" title="Link to this definition"></a></dt>
+<dd><p>Performs a search over all spin operators to find the optimal basis for a given dataset.</p>
+<p>This function searches over all spin operators of the variables and selects the optimal set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent spin operators with the lowest entropy over the data.
+The result is returned as an <a class="reference internal" href="basis.html#mcmpy.Basis" title="mcmpy.Basis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basis</span></code></a> object and stored in the internal variable <cite>basis</cite>.
+<strong>Note</strong> that this search is only feasible for small systems (<span class="math notranslate nohighlight">\(n &lt; 15\)</span>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal basis representation will be determined.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the file where the basis will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The optimal basis for the given dataset found by an exhaustive search.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="basis.html#mcmpy.Basis" title="mcmpy.Basis">Basis</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.up_to_order_k_fixed">
+<span class="sig-name descname"><span class="pre">up_to_order_k_fixed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.BasisSearch.up_to_order_k_fixed" title="Link to this definition"></a></dt>
+<dd><p>Performs a search over all spin operators up to order <span class="math notranslate nohighlight">\(k\)</span> to find the optimal basis for a given dataset.</p>
+<p>This function searches over all spin operators up to order <span class="math notranslate nohighlight">\(k\)</span> and selects the set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent spin operators with the lowest entropy over the data.
+The result is returned as an <a class="reference internal" href="basis.html#mcmpy.Basis" title="mcmpy.Basis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basis</span></code></a> object and stored in the internal variable <cite>basis</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal basis representation will be determined.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – The maximum interaction order of the spin operators to consider.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the file where the basis will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The optimal basis for the given dataset found by a search up to order k.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="basis.html#mcmpy.Basis" title="mcmpy.Basis">Basis</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.up_to_order_k_iterative">
+<span class="sig-name descname"><span class="pre">up_to_order_k_iterative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><span class="pre">Data</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.BasisSearch.up_to_order_k_iterative" title="Link to this definition"></a></dt>
+<dd><p>Performs an iterative search over all spin operators up to order <span class="math notranslate nohighlight">\(k\)</span> to find the optimal basis for a given dataset.</p>
+<p>This function searches iteratively over all spin operators up to order <span class="math notranslate nohighlight">\(k\)</span> and selects the set of <span class="math notranslate nohighlight">\(n\)</span> linearly independent spin operators with the lowest entropy over the data.
+In each iteration the dataset is transformed using the current best basis, and a new optimal basis is searched for.
+This process continues until the optimal basis remains unchanged between two iterations.
+The result is returned as an <a class="reference internal" href="basis.html#mcmpy.Basis" title="mcmpy.Basis"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basis</span></code></a> object and stored in the internal variable <cite>basis</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference internal" href="data.html#mcmpy.Data" title="mcmpy.Data"><em>Data</em></a>) – The dataset for which the optimal basis representation will be determined.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – The maximum interaction order of the spin operators to consider in each iteration.</p></li>
+<li><p><strong>filename</strong> (<em>str</em><em>, </em><em>optional</em>) – Path to the file where the basis will be written.
+If not provided, nothing will be written to a file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The optimal basis for the given dataset found by an iterative search up to order k.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="basis.html#mcmpy.Basis" title="mcmpy.Basis">Basis</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.get_basis">
+<span class="sig-name descname"><span class="pre">get_basis</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.BasisSearch.get_basis" title="Link to this definition"></a></dt>
+<dd><p>Returns a Basis object containing the solution of the last search.</p>
+<p><strong>Note</strong> that this function can only be called once a search has been run.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The Basis object that was the result of the last search.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="basis.html#mcmpy.Basis" title="mcmpy.Basis">Basis</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mcmpy.BasisSearch.print_result">
+<span class="sig-name descname"><span class="pre">print_result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mcmpy.BasisSearch.print_result" title="Link to this definition"></a></dt>
+<dd><p>Prints out the result of the last search.</p>
+<p>This function prints the search type, duration and the basis found by the last search.
+For a search up to order k, the maximum interaction order is also printed out.
+For an iterative search, the maximum interaction order and the number of iterations is also printed out.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="basis.html" class="btn btn-neutral float-left" title="Basis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Aaron De Clercq.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
