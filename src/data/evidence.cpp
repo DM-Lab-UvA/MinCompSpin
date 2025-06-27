@@ -5,7 +5,8 @@ double Data::calc_log_ev_icc(__uint128_t component){
     double log_evidence = 0;
     // Determine the size of the component
     int r = bit_count(component);
-    double alpha = this->N_synthetic / this->N;
+    double N_syn = this->N_synthetic;
+    double alpha = N_syn / this->N;
     // Contributions from the datapoint frequencies
     std::unordered_map<std::vector<__uint128_t>, unsigned int, HashVector128> counts = build_histogram(*this, component);
     std::unordered_map<std::vector<__uint128_t>, unsigned int, HashVector128>::iterator count_iter = counts.begin();

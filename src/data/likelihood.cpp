@@ -4,7 +4,7 @@
 double Data::calc_log_likelihood_icc(__uint128_t component){
     double log_likelihood = 0;
     double N_datapoints = this->N;
-    double alpha = this->N_synthetic / this->N;
+    double alpha = this->N_synthetic / N_datapoints;
     // Determine the size of the component
     int r = bit_count(component);
     // Get the datapoint frequencies
