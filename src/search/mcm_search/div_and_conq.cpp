@@ -50,16 +50,16 @@ MCM MCMSearch::divide_and_conquer(Data& data, MCM* init_mcm, std::string file_na
         *this->output_file << "Number of variables: " << data.n << "\n";
         *this->output_file << "Number of states per variable: " << data.q << "\n";
         *this->output_file << "Number of datapoints: " << data.N << "\n";
-        *this->output_file << "Number of assumed datapoints: " << data.N_assumed << "\n";
+        *this->output_file << "Number of synthetic datapoints: " << data.N_synthetic << "\n";
         *this->output_file << "Number of unique datapoint: " << data.N_unique << "\n";
         *this->output_file << "Entropy of the data: " << data.entropy() << " q-its \n\n";
 
         *this->output_file << "Initial partition \n";
         *this->output_file << "----------------- \n\n";
 
-        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N_assumed * log(data.q)) << " q-its/datapoint \n\n";
+        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N_synthetic * log(data.q)) << " q-its/datapoint \n\n";
 
-        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N_assumed, data.q);
+        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N_synthetic, data.q);
         *this->output_file << "\n";
     
         *this->output_file << "Start dividing \n";
@@ -84,10 +84,10 @@ MCM MCMSearch::divide_and_conquer(Data& data, MCM* init_mcm, std::string file_na
         *this->output_file << "\nFinal partition \n";
         *this->output_file << "----------------- \n\n";
 
-        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N_assumed * log(data.q)) << " q-its/datapoint \n";
-        *this->output_file << "Max-Log-likelihood: " << max_log_likelihood << " = " << max_log_likelihood / (data.N_assumed * log(data.q)) << " q-its/datapoint \n\n";
+        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N_synthetic * log(data.q)) << " q-its/datapoint \n";
+        *this->output_file << "Max-Log-likelihood: " << max_log_likelihood << " = " << max_log_likelihood / (data.N_synthetic * log(data.q)) << " q-its/datapoint \n\n";
 
-        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N_assumed, data.q);
+        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N_synthetic, data.q);
         *this->output_file << "\n";
         this->output_file.reset();
     }
@@ -175,7 +175,7 @@ int MCMSearch::division(int move_from, int move_to){
     this->log_evidence_trajectory.push_back(this->mcm_out.log_ev);
 
     if (this->output_file){
-        *this->output_file << "Splitting component " << move_from << "\t Log-evidence (q-its/datapoint): " << this->mcm_out.log_ev / (this->data->N_assumed * log(this->data->q)) << "\n";
+        *this->output_file << "Splitting component " << move_from << "\t Log-evidence (q-its/datapoint): " << this->mcm_out.log_ev / (this->data->N_synthetic * log(this->data->q)) << "\n";
         *this->output_file << "\t Component " << move_from << " : \t" + int_to_string(this->mcm_out.partition[move_from], this->mcm_out.n) << "\n";
         *this->output_file << "\t Component " << move_to << " : \t" + int_to_string(this->mcm_out.partition[move_to], this->mcm_out.n) << "\n\n";
     }

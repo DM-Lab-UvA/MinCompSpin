@@ -17,7 +17,7 @@ Data::Data(const std::string& filename, int n_var, int n_states){
     this->n_ints = ceil(log2(q));
     // Process the dataset
     this->N = processing(filename, n_var, n_ints, n_states, dataset);
-    this->N_assumed = this->N;
+    this->N_synthetic = this->N;
     this->N_unique = dataset.size();
 
     // Precompute the powers of q to speed up the calculation of the evidence (q^r)
@@ -35,7 +35,7 @@ Data::Data(const std::vector<std::pair<std::vector<__uint128_t>, unsigned int>>&
     this->q = n_states;
     this->dataset = _dataset;
     this->N = n_samples;
-    this->N_assumed = this->N;
+    this->N_synthetic = this->N;
     this->N_unique = _dataset.size();
 
     // Calculate the number of integers necessary to represent the data
@@ -50,12 +50,12 @@ Data::Data(const std::vector<std::pair<std::vector<__uint128_t>, unsigned int>>&
     }
 }
 
-void Data::set_N_assumed(int n_datapoints){
+void Data::set_N_synthetic(int n_datapoints){
     // Check if the given number of datapoints is valid
     if (n_datapoints < 1){
         throw std::invalid_argument("The number of datapoints should be a positive number.");
     }
-    this->N_assumed = n_datapoints;
+    this->N_synthetic = n_datapoints;
 }
 
 double Data::entropy(int base){

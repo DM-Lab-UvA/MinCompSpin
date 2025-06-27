@@ -4,7 +4,7 @@
 double Data::calc_log_likelihood_icc(__uint128_t component){
     double log_likelihood = 0;
     double N_datapoints = this->N;
-    double alpha = this->N_assumed / this->N;
+    double alpha = this->N_synthetic / this->N;
     // Determine the size of the component
     int r = bit_count(component);
     // Get the datapoint frequencies
@@ -29,7 +29,7 @@ double Data::calc_log_likelihood(std::vector<__uint128_t>& partition){
         }
     }
     // Contribution from variables not in the model
-    log_likelihood -= this->N_assumed * (this->n - r) * log(this->q);
+    log_likelihood -= this->N_synthetic * (this->n - r) * log(this->q);
     
     return log_likelihood;
 }

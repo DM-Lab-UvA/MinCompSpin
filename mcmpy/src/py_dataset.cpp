@@ -192,5 +192,5 @@ void bind_data_class(py::module &m) {
         .def_property_readonly("q", &PyData::get_q)
         .def_property_readonly("N", &PyData::get_N)
         .def_property_readonly("N_unique", &PyData::get_N_unique)
-        .def_property("N_assumed", &PyData::get_N_assumed, &PyData::set_N_assumed);
+        .def_property("N_synthetic", &PyData::get_N_synthetic, &PyData::set_N_synthetic);
 }

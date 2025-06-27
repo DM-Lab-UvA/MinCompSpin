@@ -5,7 +5,7 @@ double Data::calc_log_ev_icc(__uint128_t component){
     double log_evidence = 0;
     // Determine the size of the component
     int r = bit_count(component);
-    double alpha = this->N_assumed / this->N;
+    double alpha = this->N_synthetic / this->N;
     // Contributions from the datapoint frequencies
     std::unordered_map<std::vector<__uint128_t>, unsigned int, HashVector128> counts = build_histogram(*this, component);
     std::unordered_map<std::vector<__uint128_t>, unsigned int, HashVector128>::iterator count_iter = counts.begin();
@@ -17,10 +17,10 @@ double Data::calc_log_ev_icc(__uint128_t component){
     // Calculate prefactor
     if (r > 25){
         // Approximate for large components because lgamma overflows
-        log_evidence -= (r * log(this->q) * this->N_assumed);
+        log_evidence -= (r * log(this->q) * this->N_synthetic);
     }
     else{
-        log_evidence += lgamma(this->pow_q[r]/2.) - lgamma(this->N_assumed + pow_q[r]/2.);
+        log_evidence += lgamma(this->pow_q[r]/2.) - lgamma(this->N_synthetic + pow_q[r]/2.);
     }
     
     return log_evidence;
@@ -38,7 +38,7 @@ double Data::calc_log_ev(std::vector<__uint128_t>& partition){
         }
     }
     // Contribution from variables not in the model
-    log_ev -= this->N_assumed * (this->n - r) * log(this->q);
+    log_ev -= this->N_synthetic * (this->n - r) * log(this->q);
 
     return log_ev;
 }
