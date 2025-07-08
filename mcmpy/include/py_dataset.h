@@ -12,7 +12,7 @@
 
 namespace py = pybind11;
 
-std::vector<__uint128_t> convert_spin_op_from_py(const py::array_t<uint8_t>& spin_op, int q, int n_ints);
+std::vector<__uint128_t> convert_spin_op_from_py(const py::array_t<uint8_t>& spin_op, int q, int n_ints, int n);
 
 class PyData {
 public:
