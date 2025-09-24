@@ -26,11 +26,26 @@ public:
     PyData(const std::string& filename, int n_var, int n_states) : data(filename, n_var, n_states) {};
 
     /**
+     * Constructs a new PyData object from a numpy array
+     * 
+     * @param array                 Numpy array
+     * @param n_var                 Number of variables in the system
+     * @param n_states              Number of values each variable can take
+     */
+    PyData(py::array_t<int> array, int n_var, int n_states);
+
+    /**
      * Constructs a new PyData object from a Data object
      * 
      * @param _data                 Data object
      */
     PyData(const Data& _data) : data(_data.dataset, _data.n, _data.q, _data.N) {};
+
+    int processing_numpy(py::array_t<int> input_array,
+                                int n_var,
+                                int n_ints,
+                                int n_states,
+                                std::vector<std::pair<std::vector<__uint128_t>, unsigned int>>& data);
 
     double calc_property_array(py::array_t<int8_t> partition, std::string property);
     double calc_property_mcm(PyMCM& mcm, std::string property);
