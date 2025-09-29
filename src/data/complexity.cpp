@@ -22,7 +22,7 @@ double Data::calc_param_complexity_icc(__uint128_t component){
     // Determine the size of the component
     int r = bit_count(component);
     __uint128_t n_param = this->pow_q[r] - 1;
-    return (n_param / 2.) * log(this->N / (2 * M_PI));
+    return (n_param / 2.) * log(this->N_synthetic / (2 * M_PI));
 }
 
 double Data::calc_param_complexity(std::vector<__uint128_t>& partition){

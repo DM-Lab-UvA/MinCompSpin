@@ -65,8 +65,11 @@ public:
 
     int get_n() {return this->data.n;};
     int get_N() {return this->data.N;};
+    int get_N_synthetic() {return this->data.N_synthetic;};
     int get_N_unique() {return this->data.N_unique;};
     int get_q() {return this->data.q;};
+
+    void set_N_synthetic(int n_datapoints) {this->data.set_N_synthetic(n_datapoints);};
 
     Data data;
 };

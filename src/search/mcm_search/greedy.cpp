@@ -49,15 +49,16 @@ MCM MCMSearch::greedy_search(Data& data, MCM* init_mcm, std::string file_name){
         *this->output_file << "Number of variables: " << data.n << "\n";
         *this->output_file << "Number of states per variable: " << data.q << "\n";
         *this->output_file << "Number of datapoints: " << data.N << "\n";
+        *this->output_file << "Number of synthetic datapoints: " << data.N_synthetic << "\n";
         *this->output_file << "Number of unique datapoint: " << data.N_unique << "\n";
         *this->output_file << "Entropy of the data: " << data.entropy() << " q-its \n\n";
 
         *this->output_file << "Initial partition \n";
         *this->output_file << "----------------- \n\n";
 
-        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N * log(data.q)) << " q-its/datapoint \n\n";
+        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N_synthetic * log(data.q)) << " q-its/datapoint \n\n";
 
-        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N, data.q);
+        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N_synthetic, data.q);
         *this->output_file << "\n";
     }
 
@@ -76,10 +77,10 @@ MCM MCMSearch::greedy_search(Data& data, MCM* init_mcm, std::string file_name){
         *this->output_file << "\nFinal partition \n";
         *this->output_file << "----------------- \n\n";
 
-        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N * log(data.q)) << " q-its/datapoint \n";
-        *this->output_file << "Max-Log-likelihood: " << max_log_likelihood << " = " << max_log_likelihood / (data.N * log(data.q)) << " q-its/datapoint \n\n";
+        *this->output_file << "Log-evidence: " << this->mcm_out.log_ev << " = " << this->mcm_out.log_ev / (data.N_synthetic * log(data.q)) << " q-its/datapoint \n";
+        *this->output_file << "Max-Log-likelihood: " << max_log_likelihood << " = " << max_log_likelihood / (data.N_synthetic * log(data.q)) << " q-its/datapoint \n\n";
 
-        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N, data.q);
+        print_partition_details_to_file(*this->output_file, this->mcm_out, data.N_synthetic, data.q);
         *this->output_file << "\n";
         this->output_file.reset();
     }
@@ -150,7 +151,7 @@ void MCMSearch::hierarchical_merging(){
 
             // Write to the output file
             if (this->output_file){
-                *this->output_file << "Merging components " << best_i << " and " << best_j << " \t Log-evidence (q-its/datapoint): "<<  (this->mcm_out.log_ev) / (this->data->N * log(this->data->q)) << "\n";
+                *this->output_file << "Merging components " << best_i << " and " << best_j << " \t Log-evidence (q-its/datapoint): "<<  (this->mcm_out.log_ev) / (this->data->N_synthetic * log(this->data->q)) << "\n";
             }
         }
     }
