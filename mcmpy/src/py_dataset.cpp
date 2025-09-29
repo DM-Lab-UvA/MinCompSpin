@@ -1,5 +1,121 @@
 #include "py_dataset.h"
 
+PyData::PyData(py::array_t<int> input_array, int n_var, int n_states)
+    : data(std::vector<std::pair<std::vector<__uint128_t>, unsigned int>>(),
+           n_var, n_states, 0)
+{
+    // Check if the given number of variables is valid
+    if (n_var > 128) {
+        throw std::invalid_argument("The maximum system size is 128 variables.");
+    }
+    if (n_var < 1) {
+        throw std::invalid_argument("The system size should be at least 1.");
+    }
+    
+    // Assign variables
+    this->data.n = n_var;
+    this->data.q = n_states;
+    
+    // Calculate the number of integers necessary to represent the data
+    this->data.n_ints = ceil(log2(this->data.q));
+    
+    // Process the dataset from NumPy array
+    this->data.N = processing_numpy(
+                input_array,
+                n_var,
+                this->data.n_ints,
+                n_states,
+                this->data.dataset
+            );
+    this->data.N_unique = this->data.dataset.size();
+    
+    // Precompute the powers of q to speed up the calculation of the evidence (q^r)
+    this->data.pow_q.assign(data.n+1, 0);
+    __uint128_t element = 1;
+    for(int i = 0; i < data.n+1; i++){
+        this->data.pow_q[i] = element;
+        element *= this->data.q;
+    }
+}
+
+int PyData::processing_numpy(py::array_t<int> input_array, int n_var, int n_ints, int n_states, 
+                            std::vector<std::pair<std::vector<__uint128_t>, unsigned int>>& data) {
+    
+    py::buffer_info buf = input_array.request();
+    
+    // Check array dimensionality
+    if (buf.ndim != 2) {
+        throw std::invalid_argument("Input array must be 2-dimensional");
+    }
+    
+    int num_rows = buf.shape[0];
+    int num_cols = buf.shape[1];
+    
+    // Check array has enough rows
+    if (num_rows == 0) {
+        throw std::invalid_argument("Array must have at least one row");
+    }
+    
+    // Check array has enough columns for n_var
+    if (num_cols < n_var) {
+        throw std::invalid_argument("Array must have at least " + std::to_string(n_var) + 
+                                  " columns (n_var=" + std::to_string(n_var) + 
+                                  "), but got " + std::to_string(num_cols) + " columns");
+    }
+    
+    // Pre-validate all values are in valid range [0, n_states-1]
+    int* ptr = static_cast<int*>(buf.ptr);
+    for (int row = 0; row < num_rows; row++) {
+        for (int col = 0; col < n_var; col++) {
+            int value = ptr[row * num_cols + col];
+            if (value < 0 || value >= n_states) {
+                throw std::invalid_argument("Array value " + std::to_string(value) + 
+                                          " at position [" + std::to_string(row) + 
+                                          ", " + std::to_string(col) + 
+                                          "] is out of valid range [0, " + 
+                                          std::to_string(n_states - 1) + "] for n_states=" + 
+                                          std::to_string(n_states));
+            }
+        }
+    }
+    
+    std::unordered_map<std::vector<__uint128_t>, unsigned int, HashVector128> dataset_map;
+    int N = 0;
+    std::vector<__uint128_t> observation(n_ints);
+    
+    // Process each row (values are already validated)
+    for (int row = 0; row < num_rows; row++) {
+        // Reset observation vector
+        std::fill(observation.begin(), observation.end(), 0);
+        __uint128_t element = 1;
+        
+        for (int i = 0; i < n_var; i++) {
+            int value = ptr[row * num_cols + i];
+            
+            // Convert value to binary representation
+            int bit = 0;
+            while (value) {
+                if (value & 1) {
+                    observation[bit] += element;
+                }
+                ++bit;
+                value >>= 1;
+            }
+            element <<= 1;
+        }
+        
+        dataset_map[observation]++;
+        N++;
+    }
+    
+    // Convert map to vector
+    for (auto &my_pair : dataset_map) {
+        data.push_back(my_pair);
+    }
+    
+    return N;
+}
+
 std::vector<__uint128_t> convert_spin_op_from_py(const py::array_t<uint8_t>& spin_op, int q, int n_ints){
     py::buffer_info buff = spin_op.request();
 
@@ -162,6 +278,7 @@ double PyData::entropy_of_spin_op(const py::array_t<int8_t>& op){
 void bind_data_class(py::module &m) {
     py::class_<PyData>(m, "Data")
         .def(py::init<const std::string&, int, int>())
+        .def(py::init<py::array_t<int>, int, int>())
         .def("log_evidence_icc", &PyData::calc_log_ev_icc, py::arg("mcm"))
         .def("log_evidence_icc", &PyData::calc_log_ev_icc_array, py::arg("partition"))
         .def("log_evidence", &PyData::calc_log_ev_mcm)
