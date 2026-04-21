@@ -10,7 +10,7 @@ The best MCM for a given dataset is found by optimising the marginal likelihood 
 The package can be used to analyse datasets with **up to n = 128 random variables** and is limited to **variables that can take up to q=10 different values** (though it was extensively tested only up to q=5).
 
 [1] *Bayesian inference of minimally complex models with interactions of arbitrary order*, C. de Mulatier and M. Marsili, [Phys. Rev. E 111, 054307](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.111.054307) ([arXiv:2008.00520](https://arxiv.org/abs/2008.00520))<br>
-[2] *Modeling higher-order interactions in discrete data with maximum entropy models*, A. de Clercq and C. de Mulatier, arxiv (coming soon)
+[2] *Modeling higher-order interactions in discrete data with maximum entropy models*, A. de Clercq, M. Moody and C. de Mulatier, arxiv (coming soon)
 
 
 ## General information
