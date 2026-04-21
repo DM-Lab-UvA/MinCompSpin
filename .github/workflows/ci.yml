@@ -19,6 +19,11 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Install dependencies (Linux)
         if: runner.os == 'Linux'
         run: |  
@@ -28,6 +33,7 @@ jobs:
       - name: Install dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
+          python3 -m pip install --upgrade pip
           python3 -m pip install pytest
       
       - name : Build project
