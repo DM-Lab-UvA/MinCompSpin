@@ -1,6 +1,6 @@
 #include "py_dataset.h"
 
-std::vector<__uint128_t> convert_spin_op_from_py(const py::array_t<uint8_t>& spin_op, int q, int n_ints){
+std::vector<__uint128_t> convert_spin_op_from_py(const py::array_t<uint8_t>& spin_op, int q, int n_ints, int n){
     py::buffer_info buff = spin_op.request();
 
     // Check if there is only one dimension
@@ -9,9 +9,9 @@ std::vector<__uint128_t> convert_spin_op_from_py(const py::array_t<uint8_t>& spi
         throw std::invalid_argument("The spin operator should be given as a 1D numpy array.");
     }
     // Check if the system size is valid
-    int n = buff.shape[0];
-    if (n > 128){
-        throw std::invalid_argument("The maximum system size is 128.");
+    int n_entries = buff.shape[0];
+    if (n_entries != n){
+        throw std::invalid_argument("The given spin operator doesn't contain n elements.");
     }
 
     std::vector<uint8_t> conv_spin_op(n, 0);
@@ -154,7 +154,7 @@ double PyData::entropy(int base){
 }
 
 double PyData::entropy_of_spin_op(const py::array_t<int8_t>& op){
-    std::vector<__uint128_t> spin_op = convert_spin_op_from_py(op, this->data.q, this->data.n_ints);
+    std::vector<__uint128_t> spin_op = convert_spin_op_from_py(op, this->data.q, this->data.n_ints, this->data.n);
     return calc_entropy_of_spin_op(this->data, spin_op);
 }
 

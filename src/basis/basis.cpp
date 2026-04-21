@@ -156,6 +156,10 @@ void Basis::set_basis_default() {
     // Set the default base: s1, s2, ..., sn
     __uint128_t element = 1;
     for (int i = 0; i < this->n; i++){
+        // Reset operator
+        std::fill(this->basis_ops[i].begin(), this->basis_ops[i].end(), 0);
+        std::fill(this->basis_ops_matrix[i].begin(), this->basis_ops_matrix[i].end(), 0);
+
         // log2(q) 128 bit integer representation
         this->basis_ops[i][0] = element;
         element <<= 1;
@@ -185,7 +189,7 @@ void Basis::print_details() {
     std::string op_string;
     for (std::vector<__uint128_t> op : this->basis_ops){
         op_string = convert_128bit_vec_to_string(op, this->n);
-        std::cout << "Operator " << i << ": \t" << op_string << "\t Indices: ";
+        std::cout << "Operator " << i << ": \t" << op_string << "\t Indices of variables involved: ";
         // Find the indices of the variables present in the spin operator
         for (size_t j = 0; j < this->n; ++j){
             if (op_string[j] != '0') {std::cout << j << "\t";}
