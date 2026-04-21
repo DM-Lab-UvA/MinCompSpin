@@ -18,6 +18,7 @@ class TestMCMSearch:
         scotus_data = Data("../../input/US_SupremeCourt_n9_N895.dat", 9, 2)
         self.searcher = MCMSearch()
 
+        # MCM used as starting partition in the hierarchical greedy merging algorithm
         mcm_in_merging = MCM(9, [0,1,0,3,4,5,6,7,8])
 
         self.opt_mcms = {}
@@ -108,7 +109,7 @@ class TestMCMSearch:
         assert self.mcms_in["hierarchical_greedy_divisive"].is_optimized is False
 
     def test_mcm_in_greedy_merging(self):
-        # mcm_in used is defined in the setup
+        # mcm_in used is defined in the setup (mcm_in_merging)
         assert self.mcms_in["hierarchical_greedy_merging"].n == 9
         assert self.mcms_in["hierarchical_greedy_merging"].n_icc == 8
         assert self.mcms_in["hierarchical_greedy_merging"].rank == 9
