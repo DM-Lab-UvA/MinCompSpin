@@ -30,3 +30,8 @@ jobs:
         run: |
           cd build
           ctest --output-on-failure
+
+     - name : Test python module
+       run: |
+          cd mcmpy/tests
+          pytest
