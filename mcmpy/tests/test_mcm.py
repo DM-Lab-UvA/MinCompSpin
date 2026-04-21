@@ -115,7 +115,6 @@ def test_data_object(scotus_data_q2, opt_mcm_scotus_q2):
 
 def test_data_file(scotus_data_q2, opt_mcm_scotus_q2, tmp_path):
     filepath = str(tmp_path / "test.dat")
-    print(type(filepath))
     opt_mcm_scotus_q2.generate_data_file(10_000, scotus_data_q2, filepath)
     # Create data object from file
     data = Data(filepath, scotus_data_q2.n, scotus_data_q2.q)
@@ -124,4 +123,3 @@ def test_data_file(scotus_data_q2, opt_mcm_scotus_q2, tmp_path):
     assert data.N_synthetic == 10_000
     assert data.q == scotus_data_q2.q
     assert data.n == scotus_data_q2.n
-
