@@ -49,13 +49,10 @@ TEST(basis, init_n){
     Basis basis(n, q);
 
     exp_spin_ops = {{1,0,0}, {2,0,0}, {4,0,0}};
-    spin_ops = basis.get_basis();
-
     exp_spin_ops_array = {{1,0,0}, {0,1,0}, {0,0,1}};
-    spin_ops_array = basis.get_basis_matrix();
 
-    EXPECT_EQ(exp_spin_ops, spin_ops);
-    EXPECT_EQ(exp_spin_ops_array, spin_ops_array);
+    EXPECT_EQ(exp_spin_ops, basis.get_basis());
+    EXPECT_EQ(exp_spin_ops_array, basis.get_basis_matrix());
     EXPECT_EQ(basis.get_n(), n);
     EXPECT_EQ(basis.get_q(), q);
     EXPECT_EQ(basis.get_n_ints(), 3);
@@ -186,6 +183,14 @@ TEST(basis, init_spin_ops){
     catch(std::invalid_argument const & err) {
         EXPECT_EQ(err.what(), std::string("Given basis is not linearly independent."));
     }
+
+    // Reset to default basis
+    exp_spin_ops = {{1,0}, {2,0}, {4,0}, {8,0}};
+    exp_matrix = {{1,0,0,0}, {0,1,0,0}, {0,0,1,0}, {0,0,0,1}};
+    basis.set_basis_default();
+
+    EXPECT_EQ(basis.get_basis(), exp_spin_ops);
+    EXPECT_EQ(basis.get_basis_matrix(), exp_matrix);
 }
 
 TEST(basis, init_file){

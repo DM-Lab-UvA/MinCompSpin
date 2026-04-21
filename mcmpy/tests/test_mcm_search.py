@@ -180,6 +180,3 @@ def test_scotus_q_5(mcm_searcher, scotus_data_q5):
 
     # MCM log-evidence
     assert np.allclose(log_ev, -4261.89)
-
-
-
