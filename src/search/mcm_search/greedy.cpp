@@ -85,6 +85,9 @@ MCM MCMSearch::greedy_search(Data& data, MCM* init_mcm, std::string file_name){
         this->output_file.reset();
     }
 
+    // Clear the storage of log-evidences
+    this->evidence_storage.clear();
+
     return this->mcm_out;
 }
 
