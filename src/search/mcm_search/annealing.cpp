@@ -169,6 +169,9 @@ MCM MCMSearch::simulated_annealing(Data& data, MCM* init_mcm, std::string file_n
         *this->output_file << "\n";
         this->output_file.reset();
     }
+    
+    // Clear the storage of log-evidences
+    this->evidence_storage.clear();
 
     return this->mcm_out;
 }
