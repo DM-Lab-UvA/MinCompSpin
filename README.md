@@ -1,6 +1,6 @@
 # MinCompSpin (`mcmpy`)
 
-MinCompSpin is a C++ library with Python bindings for analyzing discrete datasets using Minimally Complex Models (MCMs). 
+MinCompSpin is a C++ library with Python bindings for analyzing discrete datasets using Minimally Complex Models (MCMs). Once compiled, it creates the Python package `mcmpy`.
 
 MCMs are a family of maximum entropy models (known as spin models) that have interactions of arbitrarily high order grouped in a community-like structure. Compared to other spin models, they have minimal information-theoretic complexity. 
 The analysis using MCMs can uncover (robust) community structures in the data while taking into account possible higher-order interactions between the variables. 
@@ -23,7 +23,7 @@ Running the best MCM search in the original basis of the data can be thought of 
 The most likely basis for the optimal factorisation can be found with this package using one of the “best basis”  search algorithms:
  - exhaustive search  (recommended up to $n=12$ variables max for quick runs; For $q=2$, running it for $n=20-25$ variable will of the order of a week);
  - exhaustive search among basis elements up to a fixed order $k$;
- - iterative search (computational time similar to fixed order $k$, but will explore basis elements of higher order via an iterative search). **Note** This algorithm has been verfied on a small toy system but has not been formally tested on a real-world dataset.
+ - iterative search (computational time similar to fixed order $k$, but will explore basis elements of higher order via an iterative search). **Note** This algorithm has been verified on a small toy system but has not been formally tested on a real-world dataset.
 
 Within a given basis, the optimal factorisation can be found using one of the “best MCM” search algorithms:
 
@@ -38,7 +38,7 @@ The package also allows:
 
 ## Documentation
 
-All the information about this package (installation, available objects/functions and how to use them) can be found in the [documentation](https://dm-lab-uva.github.io/MinCompSpin/index.html).
+All the information about this package (installation, available objects/functions, and how to use them) can be found in the [documentation](https://dm-lab-uva.github.io/MinCompSpin/index.html).
 
 The documentation also contains step-by-step examples. The corresponding Jupyter notebooks are available in the folder [docs/examples](https://github.com/DM-Lab-UvA/MinCompSpin/tree/main/docs/examples).
 
