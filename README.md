@@ -1,4 +1,4 @@
-# MinCompSpin
+# MinCompSpin (`mcmpy`)
 
 MinCompSpin is a C++ library with Python bindings for analyzing discrete datasets using Minimally Complex Models (MCMs). 
 
