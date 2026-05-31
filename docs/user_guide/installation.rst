@@ -1,7 +1,7 @@
 Installation
 ============
 
-This guide shows you how to build and install `mcmpy`.
+This guide shows you how to build and install ``mcmpy``.
 There are two supported installation methods for this project:
 
 1. Installation using Docker
@@ -12,7 +12,7 @@ Installation using Docker
 -------------------------
 
 First `install Docker <https://docs.docker.com/get-started/get-docker/>`_.
-Create or navigate to the folder that contains all input files necessary for the data analysis and save the following block of code as a file named `docker-compose.yml`:
+Create or navigate to the folder that contains all input files necessary for the data analysis and save the following block of code as a file named ``docker-compose.yml``:
 
 .. code-block:: yaml
 
@@ -33,7 +33,7 @@ To launch the container environment, open a terminal in your directory and execu
 
 When running the command for the first time, it will download the pre-built Docker image and automatically start a jupyter server.
 This returns a link beginning with ``127.0.0.1``, which can be opened in a local browser.
-Next times, it will not download the latest Docker image but just launch a container with this downloaded version.
+Next times, it will not download the latest Docker image but just launch a container with the latest downloaded version.
 If a newer version of the image exists, run the following command first:
 
 .. code-block:: bash
