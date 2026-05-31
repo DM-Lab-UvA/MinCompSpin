@@ -1,32 +1,6 @@
 #include "utilities/partition.h"
 #include "utilities/miscellaneous.h"
 
-/*
-std::vector<int> generate_random_partition(int n){
-    // Check if the number of variables is a valid number
-    if (n > 128){
-        throw std::domain_error("The maximum system size is 128 variables.");
-    }
-    if (n < 0){
-        throw std::domain_error("The number of variables should be a positive number.");
-    }
-
-    std::vector<int> growth_string(n, 0);
-
-    int index;
-    int max_index = 2;
-    for (int i = 1; i < n; i++){
-        index = rand()/(RAND_MAX/max_index);
-        growth_string[i] = index;
-
-        if (index == (max_index-1)){
-            max_index += 1;
-        }
-    }
-
-    return growth_string;
-}*/
-
 std::vector<__uint128_t> generate_random_partition(int n){
     // Check if the number of variables is a valid number
     if (n > 128){

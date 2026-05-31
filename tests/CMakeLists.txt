@@ -7,7 +7,7 @@ target_link_libraries(test_data gtest_main ${PROJECT_NAME})
 add_test(NAME test_data COMMAND test_data)
 set_tests_properties(test_data PROPERTIES WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests)
 
-add_executable(test_basis basis/basis.cpp basis/independence.cpp)
+add_executable(test_basis basis/basis.cpp basis/independence.cpp basis/gauge_transform.cpp)
 target_link_libraries(test_basis gtest_main ${PROJECT_NAME})
 add_test(NAME test_basis COMMAND test_basis)
 set_tests_properties(test_basis PROPERTIES WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/tests)

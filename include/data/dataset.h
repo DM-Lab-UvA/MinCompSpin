@@ -32,6 +32,14 @@ public:
     Data(const std::vector<std::pair<std::vector<__uint128_t>, unsigned int>>& _dataset, int n_var, int n_states, int n_samples);
 
     /**
+     * Change the value for the number of datapoints in the dataset that is used for analysis.
+     * This can be changed to perform an analysis of the dataset as if it is larger or smaller.
+     * 
+     * @param n_datapoints          The synthetic number of datapoints in the dataset.
+     */
+    void set_N_synthetic(int n_datapoints);
+
+    /**
      * Calculate the entropy of the dataset.
      * 
      * @param base                  Base of the logarithm used (default is q).
@@ -128,6 +136,7 @@ public:
     int N; // Number of datapoints
     int N_unique; // Number of different datapoints
     int n_ints; // Number of 128bit integers necessary to represent the data
+    int N_synthetic; // The synthetic number of datapoints in the dataset
 
     std::vector<__uint128_t> pow_q; // Vector containing the first n powers of q used to speed up the calculation of the evidence
 };

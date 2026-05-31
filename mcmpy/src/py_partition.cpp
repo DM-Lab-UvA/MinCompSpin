@@ -76,6 +76,9 @@ std::vector<__uint128_t> convert_partition_from_py_2d_array(py::array_t<int8_t>&
         element = 1;
         for (int j = 0; j < n; j++){
             if(ptr[i*n + j]){
+                if(ptr[i*n + j] != 1){
+                    throw std::invalid_argument("Entries of the 2D array should be either 0 or 1.");
+                }
                 partition[i] += element;
             }
             element <<= 1;

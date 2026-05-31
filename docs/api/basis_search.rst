@@ -64,6 +64,8 @@ Each method returns a :class:`Basis <mcmpy.Basis>` object representing the best-
       This process continues until the optimal basis remains unchanged between two iterations.
       The result is returned as an :class:`Basis <mcmpy.Basis>` object and stored in the internal variable `basis`.
 
+      **Note** This algorithm has been verfied on a small toy system but has not been formally tested on a real-world dataset.
+
       :param data: The dataset for which the optimal basis representation will be determined.
       :type data: Data
       :param k: The maximum interaction order of the spin operators to consider in each iteration.
