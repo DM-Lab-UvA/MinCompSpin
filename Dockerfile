@@ -25,7 +25,7 @@ COPY . .
 
 RUN mkdir build && cd build && \
     cmake .. && \
-    make
+    make -j$(nproc)
 
 RUN cd build/mcmpy && \
     /opt/venv/bin/pip install .

@@ -12,28 +12,33 @@ Installation using Docker
 -------------------------
 
 First `install Docker <https://docs.docker.com/get-started/get-docker/>`_.
-Then clone the GitHub repository and build the Docker image.
+Create or navigate to the folder that contains all input files necessary for the data analysis and save the following block of code as a file named `docker-compose.yml`:
+
+.. code-block:: yaml
+
+   services:
+      mincompspin:
+        image: ghcr.io/dm-lab-uva/mincompspin:latest
+        ports:
+          - "8888:8888"
+        volumes:
+          - .:/MinCompSpin
+        command: jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
+
+To launch the container environment, open a terminal in your directory and execute the following command:
 
 .. code-block:: bash
 
-   git clone --recursive git@github.com:DM-Lab-UvA/MinCompSpin.git
-   cd MinCompSpin
-   docker build -t mincompspin .
+   docker compose up
 
-After building the image, you can run the container:
-
-.. code-block:: bash
-
-   docker run -p 8888:8888 -it mincompspin
-
-To run a Jupyter notebook in the Docker container
-
-.. code-block:: bash
-
-    jupyter notebook --ip=0.0.0.0 --no-browser --allow-root
-
+When running the command for the first time, it will download the pre-built Docker image and automatically start a jupyter server.
 This returns a link beginning with ``127.0.0.1``, which can be opened in a local browser.
+Next times, it will not download the latest Docker image but just launch a container with this downloaded version.
+If a newer version of the image exists, run the following command first:
 
+.. code-block:: bash
+
+    docker compose pull
 
 Local installation using CMake
 ------------------------------
