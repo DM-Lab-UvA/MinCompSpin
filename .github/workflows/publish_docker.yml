@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches: 
-      - 'main'
 
 env:
   REGISTRY: ghcr.io
@@ -43,7 +40,6 @@ jobs:
         tags: |
           type=ref,event=branch,enable=${{ github.ref == 'refs/heads/main' }}
           type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' }}
-          type=ref,event=pr
       
      - name: Set up QEMU
        uses: docker/setup-qemu-action@v3
