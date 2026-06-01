@@ -53,7 +53,7 @@ C++11, Python (version 3.11 or above)
 **Installation:** using CMake (version 3.26.4) or using Docker
 
 ## To cite this repository
-A. De Clercq, C. de Mulatier (2025). *MinCompSpin: Python package for analyzing discrete datasets with minimally complex models*. Zenodo. https://github.com/DM-Lab-UvA/MinCompSpin.
+A. De Clercq, C. de Mulatier (2026). *MinCompSpin (mcmpy): a package for model selection among Minimally Complex Models for discrete data*. Zenodo. https://doi.org/10.5281/zenodo.20490992.
 
 ## Related previous repositories
 
