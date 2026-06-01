@@ -1,0 +1,34 @@
+
+cff-version: 1.2.0
+title: "MinCompSpin (mcmpy): a package for model selection among Minimally Complex Models for discrete data"
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Aaron 
+    family-names: De Clercq
+    email: a.de.clercq@fz-juelich.de
+    affiliation: >-
+      Helmholtz Institute Erlangen-Nürnberg for Renewable Energy
+  - given-names: Clelia 
+    family-names: de Mulatier
+    email: c.m.c.demulatier@uva.nl
+    affiliation: >-
+      University of Amsterdam
+    orcid: 'https://orcid.org/0000-0003-3578-5453'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20490992
+repository-code: 'https://github.com/DM-Lab-UvA/MinCompSpin'
+abstract: >+
+  MinCompSpin is a C++ library with Python bindings for analyzing discrete datasets using Minimally Complex Models (MCMs). Once compiled, it creates the Python package mcmpy.
+
+keywords:
+  - statistical-inference
+  - discrete-data
+  - maximum-entropy
+  - vector-potts-model
+  - high-order-interactions
+version: 1.0.0
+date-released: '2026-06-01'
