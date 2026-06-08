@@ -1,6 +1,7 @@
 # MinCompSpin (`mcmpy`)
 
-[![DOI](https://zenodo.org/badge/950501216.svg)](https://doi.org/10.5281/zenodo.20490992)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20490992-blue)](https://doi.org/10.5281/zenodo.20490992)
+[![docs](https://img.shields.io/badge/docs-dm--lab--uva.github.io-brightgreen)](https://dm-lab-uva.github.io/MinCompSpin/index.html)
 
 MinCompSpin is a C++ library with Python bindings for analyzing discrete datasets using Minimally Complex Models (MCMs). Once compiled, it creates the Python package `mcmpy`.
 
