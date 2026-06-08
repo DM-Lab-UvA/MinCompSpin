@@ -1,5 +1,8 @@
 # MinCompSpin (`mcmpy`)
 
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.20490992-blue)](https://doi.org/10.5281/zenodo.20490992)
+[![docs](https://img.shields.io/badge/docs-dm--lab--uva.github.io-brightgreen)](https://dm-lab-uva.github.io/MinCompSpin/index.html)
+
 MinCompSpin is a C++ library with Python bindings for analyzing discrete datasets using Minimally Complex Models (MCMs). Once compiled, it creates the Python package `mcmpy`.
 
 MCMs are a family of maximum entropy models (known as spin models) that have interactions of arbitrarily high order grouped in a community-like structure. Compared to other spin models, they have minimal information-theoretic complexity. 
@@ -10,7 +13,7 @@ The best MCM for a given dataset is found by optimising the marginal likelihood 
 The package can be used to analyse datasets with **up to n = 128 random variables** and is limited to **variables that can take up to q=10 different values** (though it was extensively tested only up to q=5).
 
 [1] *Bayesian inference of minimally complex models with interactions of arbitrary order*, C. de Mulatier and M. Marsili, [Phys. Rev. E 111, 054307](https://journals.aps.org/pre/abstract/10.1103/PhysRevE.111.054307) ([arXiv:2008.00520](https://arxiv.org/abs/2008.00520))<br>
-[2] *Modeling higher-order interactions in discrete data with maximum entropy models*, A. De Clercq, M. Moody and C. de Mulatier, arxiv (coming soon)
+[2] *Modeling Discrete Data with High-Order Vector Potts Models*, A. De Clercq, M. Moody and C. de Mulatier, [arXiv:2606.03429](https://arxiv.org/abs/2606.03429)
 
 
 ## General information
@@ -51,7 +54,7 @@ C++11, Python (version 3.11 or above)
 **Installation:** using CMake (version 3.26.4) or using Docker
 
 ## To cite this repository
-A. De Clercq, C. de Mulatier (2025). *MinCompSpin: Python package for analyzing discrete datasets with minimally complex models*. Zenodo. https://github.com/DM-Lab-UvA/MinCompSpin.
+A. De Clercq, C. de Mulatier (2026). *MinCompSpin (mcmpy): a package for modeling discrete datasets with minimally complex models*. Zenodo. DOI [10.5281/zenodo.20490992](https://doi.org/10.5281/zenodo.20490992).
 
 ## Related previous repositories
 
