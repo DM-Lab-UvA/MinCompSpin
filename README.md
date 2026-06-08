@@ -1,5 +1,7 @@
 # MinCompSpin (`mcmpy`)
 
+[![DOI](https://zenodo.org/badge/950501216.svg)](https://doi.org/10.5281/zenodo.20490992)
+
 MinCompSpin is a C++ library with Python bindings for analyzing discrete datasets using Minimally Complex Models (MCMs). Once compiled, it creates the Python package `mcmpy`.
 
 MCMs are a family of maximum entropy models (known as spin models) that have interactions of arbitrarily high order grouped in a community-like structure. Compared to other spin models, they have minimal information-theoretic complexity. 
