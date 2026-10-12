@@ -18,7 +18,8 @@ double Data::calc_log_ev_icc(__uint128_t component){
     // Calculate prefactor
     if (r > 25){
         // Approximate for large components because lgamma overflows
-        log_evidence -= (r * log(this->q) * this->N_synthetic);
+        log_evidence -= N_syn * (r * log(this->q) - log(2.0));
+        log_evidence -= N_syn * (N_syn - 1.0) / static_cast<double>(this->pow_q[r]);
     }
     else{
         log_evidence += lgamma(this->pow_q[r]/2.) - lgamma(this->N_synthetic + pow_q[r]/2.);
